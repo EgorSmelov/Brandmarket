@@ -7,7 +7,7 @@ function App(): JSX.Element {
     <>
       <NavBar />
       <Container maxWidth="lg" sx={{ p: 2, display: 'flex', justifyContent: 'center' }}>
-        Тут роутинг
+        Тут роутинг, мак длина lg
       </Container>
     </>
   );
