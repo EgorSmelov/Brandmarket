@@ -13,6 +13,7 @@ export default function NavBar(): JSX.Element {
         <Grid container justifyContent="space-around">
           <Grid item display="flex">
             <Typography variant="h6">Привет, Ежик</Typography>
+            <Typography variant="h6">Привет, Ежик</Typography>
           </Grid>
           <Grid item>
             <Button color="inherit" component={NavLink} to="/">
