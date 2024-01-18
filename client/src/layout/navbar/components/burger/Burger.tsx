@@ -66,7 +66,7 @@ export default function Burger(): JSX.Element {
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       {(['left'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <MenuIcon onClick={toggleDrawer(anchor, true)} />
+          <MenuIcon fontSize='large' onClick={toggleDrawer(anchor, true)} />
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
           </Drawer>

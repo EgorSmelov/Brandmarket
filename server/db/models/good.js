@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Brand, {
         foreignKey: "brandId",
       });
+      this.belongsTo(models.Good, {
+        foreignKey: "userId",
+      });
       this.belongsTo(models.Gender, {
         foreignKey: "genderId",
       });
@@ -44,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       categoryId: DataTypes.INTEGER,
       genderId: DataTypes.INTEGER,
       brandId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
