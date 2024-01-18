@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Grid } from '@mui/material';
-import DropDownList from './drop-down-list/DropDownList';
-import Burger from './burger/Burger';
+import DropDownList from './components/drop-down-list/DropDownList';
+import Burger from './components/burger/Burger';
 
 export default function NavBar(): JSX.Element {
   return (
