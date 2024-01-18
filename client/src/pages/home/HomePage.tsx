@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Home(): JSX.Element {
+function HomePage(): JSX.Element {
   return <div>Hello</div>;
 }
 
-export default Home;
+export default HomePage;
