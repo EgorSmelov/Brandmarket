@@ -1,4 +1,5 @@
 const express = require("express");
+const { Op } = require("sequelize");
 const verifyAccessToken = require("../middlewares/verifyAccessToken");
 // const multer = require('multer');
 
@@ -13,7 +14,7 @@ const verifyAccessToken = require("../middlewares/verifyAccessToken");
 // });
 
 // const upload = multer({ storage });
-const { Good } = require("../../db/models");
+const { Good, GoodsInfo } = require("../../db/models");
 
 const apiGoodsRouter = express.Router();
 
@@ -22,8 +23,14 @@ apiGoodsRouter
   .get(async (req, res) => {
     try {
       const goods = await Good.findAll({
-        order: [["createdAt", "DESC"]],
+        include: [
+          {
+            model: GoodsInfo,
+            where: { quantity: { [Op.gt]: 0 } },
+          },
+        ],
       });
+
       return res.json(goods);
     } catch (error) {
       return res.status(500).json(error);
@@ -100,7 +107,9 @@ apiGoodsRouter.delete("/:id", verifyAccessToken, async (req, res) => {
 
 apiGoodsRouter.get("/:id", async (req, res) => {
   try {
-    const product = await Good.findByPk(req.params.id);
+    const product = await Good.findByPk(req.params.id, {
+      include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
+    });
     res.json(product);
   } catch (error) {
     return res.status(500).json(error);
