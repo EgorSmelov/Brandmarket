@@ -9,7 +9,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 
 type Anchor = 'left';
 
@@ -61,30 +60,6 @@ export default function Burger(): JSX.Element {
       </List>
     </Box>
   );
-
-  //   return (
-  //     <div>
-  //       {(['left'] as const).map((anchor) => (
-  //         <React.Fragment key={anchor}>
-  //           <button
-  //             type="button"
-  //             style={{
-  //               border: 'none',
-  //               backgroundColor: 'transparent',
-  //               fontSize: '20px',
-  //               color: 'transparent',
-  //             }}
-  //             onClick={toggleDrawer(anchor, true)}
-  //           >
-  //             {anchor}
-  //           </button>
-  //           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-  //             {list(anchor)}
-  //           </Drawer>
-  //         </React.Fragment>
-  //       ))}
-  //     </div>
-  //   );
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
