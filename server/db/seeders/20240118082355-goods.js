@@ -15,6 +15,16 @@ module.exports = {
           brandId: 1,
         },
         {
+          title: "Футболка",
+          price: 500,
+          image: "футболка.jpg",
+          description: "Классическая футболка",
+          color: "Черный",
+          categoryId: 1,
+          genderId: 1,
+          brandId: 1,
+        },
+        {
           title: "Джинсы",
           price: 1500,
           image: "джинсы.jpg",

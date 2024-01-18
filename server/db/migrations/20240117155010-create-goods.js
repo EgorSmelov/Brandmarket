@@ -25,12 +25,30 @@ module.exports = {
       },
       categoryId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Categories",
+          },
+          key: "id",
+        },
       },
       genderId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Genders",
+          },
+          key: "id",
+        },
       },
       brandId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Brands",
+          },
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
