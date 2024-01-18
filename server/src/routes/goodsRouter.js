@@ -13,7 +13,7 @@ const verifyAccessToken = require("../middlewares/verifyAccessToken");
 // });
 
 // const upload = multer({ storage });
-const { Goods } = require("../../db/models");
+const { Good } = require("../../db/models");
 
 const apiGoodsRouter = express.Router();
 
@@ -21,7 +21,7 @@ apiGoodsRouter
   .route("/")
   .get(async (req, res) => {
     try {
-      const goods = await Goods.findAll({
+      const goods = await Good.findAll({
         order: [["createdAt", "DESC"]],
       });
       return res.json(goods);
@@ -43,7 +43,7 @@ apiGoodsRouter
         genderId,
         brandId,
       } = req.body;
-      const newGood = await Goods.create({
+      const newGood = await Good.create({
         title,
         price: Number(price),
         image: req.file?.filename || image,
@@ -61,7 +61,7 @@ apiGoodsRouter
 
 apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
   try {
-    const goods = await Goods.findAll({
+    const goods = await Good.findAll({
       where: { genderId: req.params.genderId },
       order: [["createdAt", "DESC"]],
     });
@@ -75,7 +75,7 @@ apiGoodsRouter.get(
   "/genders/:genderId/categories/:categoryId",
   async (req, res) => {
     try {
-      const goods = await Goods.findAll({
+      const goods = await Good.findAll({
         where: {
           genderId: req.params.genderId,
           categoryId: req.params.categoryId,
@@ -91,7 +91,7 @@ apiGoodsRouter.get(
 
 apiGoodsRouter.delete("/:id", verifyAccessToken, async (req, res) => {
   try {
-    await Goods.destroy({ where: { id: req.params.id } });
+    await Good.destroy({ where: { id: req.params.id } });
     res.sendStatus(200);
   } catch (error) {
     return res.status(500).json(error);
@@ -100,7 +100,7 @@ apiGoodsRouter.delete("/:id", verifyAccessToken, async (req, res) => {
 
 apiGoodsRouter.get("/:id", async (req, res) => {
   try {
-    const product = await Goods.findByPk(req.params.id);
+    const product = await Good.findByPk(req.params.id);
     res.json(product);
   } catch (error) {
     return res.status(500).json(error);
@@ -122,7 +122,7 @@ apiGoodsRouter.patch("/:id", verifyAccessToken, async (req, res) => {
       brandId,
     } = req.body;
 
-    const good = await Goods.findByPk(req.params.id);
+    const good = await Good.findByPk(req.params.id);
     good.title = title;
     good.price = price;
     good.image = req.file?.filename || image;

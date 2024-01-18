@@ -11,9 +11,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      goodId: {
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
