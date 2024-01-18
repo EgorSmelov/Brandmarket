@@ -56,7 +56,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Grid } from '@mui/material';
-import DropDownList from './dropDownList/DropDownList';
+import DropDownList from './drop-down-list/DropDownList';
 import Burger from './burger/Burger';
 
 export default function NavBar(): JSX.Element {

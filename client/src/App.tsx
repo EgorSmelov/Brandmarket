@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Container } from '@mui/material';
 import NavBar from './layout/navbar/NavBar';
+import Footer from './layout/footer/Footer';
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function App(): JSX.Element {
       >
         Тут роутинг, мак длина lg
       </Container>
+      <Footer />
     </>
   );
 }
