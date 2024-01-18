@@ -15,8 +15,6 @@ import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../redux/hooks';
 import { registrationHandlerThunk } from '../../redux/slices/auth/authThunks';
 
-
-
 const defaultTheme = createTheme();
 
 export default function SignUpPage(): JSX.Element {
