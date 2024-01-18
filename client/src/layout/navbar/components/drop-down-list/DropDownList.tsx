@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function BasicMenu(): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -37,9 +38,12 @@ export default function BasicMenu(): JSX.Element {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/seller/add">
+          Добавить товар
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/seller/goods">
+          Мои товары
+        </MenuItem>
       </Menu>
     </Box>
   );

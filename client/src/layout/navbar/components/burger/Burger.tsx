@@ -9,6 +9,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
 
 type Anchor = 'left';
 
@@ -65,57 +66,7 @@ export default function Burger(): JSX.Element {
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       {(['left'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <button
-            type="button"
-            style={{
-              border: 'none',
-              backgroundColor: 'transparent',
-              fontSize: '20px',
-              position: 'relative',
-              cursor: 'pointer',
-              padding: '10px',
-            }}
-            onClick={toggleDrawer(anchor, true)}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                height: '3px',
-                width: '24px',
-                backgroundColor: 'white',
-                display: 'block',
-                top: '10%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
-            />
-            <span
-              style={{
-                position: 'absolute',
-                height: '3px',
-                width: '24px',
-                backgroundColor: 'white',
-                display: 'block',
-                top: '10%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                marginTop: '8px',
-              }}
-            />
-            <span
-              style={{
-                position: 'absolute',
-                height: '3px',
-                width: '24px',
-                backgroundColor: 'white',
-                display: 'block',
-                top: '10%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                marginTop: '16px',
-              }}
-            />
-          </button>
+          <MenuIcon onClick={toggleDrawer(anchor, true)} />
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
           </Drawer>
