@@ -1,58 +1,9 @@
-// import * as React from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import { Grid } from '@mui/material';
-// import { NavLink } from 'react-router-dom';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-// import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-
-// export default function NavBar(): JSX.Element {
-//   return (
-//     <AppBar position="static">
-//       <Toolbar>
-//         <Grid container justifyContent="space-around">
-//           <Grid item display="flex">
-//             <Typography variant="h6">Brandmarket</Typography>
-//             <Button color="inherit" component={NavLink} to="/">
-//               burger
-//             </Button>
-//           </Grid>
-//           <Grid item>
-//             <Button color="inherit" component={NavLink} to="/">
-//               Продавец
-//             </Button>
-//             <Button color="inherit" component={NavLink} to="/">
-//               регистрация
-//             </Button>
-//             <Button color="inherit" component={NavLink} to="/">
-//               авторизация
-//             </Button>
-//             <Button color="inherit" component={NavLink} to="/">
-//               <FavoriteIcon />
-//             </Button>
-//             <Button color="inherit" component={NavLink} to="/">
-//               <LocalGroceryStoreIcon />
-//             </Button>
-//             <Button color="inherit" component={NavLink} to="/">
-//               Выйти
-//             </Button>
-//           </Grid>
-//         </Grid>
-//       </Toolbar>
-//     </AppBar>
-//   );
-// }
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Grid } from '@mui/material';
