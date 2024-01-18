@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import { Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Grid, Link } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+
 import DropDownList from './components/drop-down-list/DropDownList';
 import Burger from './components/burger/Burger';
 import { useAppDispatch } from '../../redux/hooks';
@@ -15,6 +16,7 @@ import { logoutHandlerThunk } from '../../redux/slices/auth/authThunks';
 
 export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -24,16 +26,18 @@ export default function NavBar(): JSX.Element {
               <Button color="inherit">
                 <Burger />
               </Button>
-              <Typography variant="h6" component="div">
-                Brandmarket
-              </Typography>
+              <Link color="inherit" underline="none" component={NavLink} to="/">
+                <Typography variant="h6" component="div">
+                  Brandmarket
+                </Typography>
+              </Link>
             </Grid>
             <Grid display="flex">
               <DropDownList />
-              <Button color="inherit" component={Link} to="/auth/registration">
+              <Button color="inherit" component={NavLink} to="/auth/registration">
                 Регистрация
               </Button>
-              <Button color="inherit" component={Link} to="/auth/login">
+              <Button color="inherit" component={NavLink} to="/auth/login">
                 Войти
               </Button>
               <Button color="inherit">
