@@ -10,13 +10,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       goodId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       size: {
         type: Sequelize.STRING
       },
       quantity: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       price: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
       },
       image: {
         type: Sequelize.STRING,
@@ -24,21 +24,23 @@ module.exports = {
         type: Sequelize.STRING,
       },
       categoryId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
       },
       genderId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
       },
       brandId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now"),
       },
     });
   },

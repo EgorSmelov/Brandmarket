@@ -10,13 +10,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       orderPrice: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       goodId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

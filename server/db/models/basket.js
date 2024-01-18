@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Basket.init({
-    goodId: DataTypes.NUMBER,
-    userId: DataTypes.NUMBER
+    goodId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Basket',

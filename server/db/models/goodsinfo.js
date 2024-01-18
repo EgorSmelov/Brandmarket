@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   GoodsInfo.init({
-    goodId: DataTypes.NUMBER,
+    goodId: DataTypes.INTEGER,
     size: DataTypes.STRING,
-    quantity: DataTypes.NUMBER
+    quantity: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'GoodsInfo',
