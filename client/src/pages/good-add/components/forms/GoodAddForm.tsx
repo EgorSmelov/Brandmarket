@@ -1,16 +1,23 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {
-  Button,
-  Checkbox,
-  Container,
-  CssBaseline,
-  FormControlLabel,
-  Typography,
-} from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-export default function GoodAddForm() {
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
+
+export default function GoodAddForm(): JSX.Element {
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -26,7 +33,9 @@ export default function GoodAddForm() {
         </Typography>
         <Box
           component="form"
-          //   onSubmit={(e) => void loginHandlerThunk(e, dispatch)}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
           noValidate
           sx={{ mt: 1 }}
         >
@@ -87,8 +96,31 @@ export default function GoodAddForm() {
             type="text"
             autoFocus
           />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="standard-textarea"
+            label="Количество"
+            name="quantity"
+            autoComplete="quantity"
+            type="number"
+            autoFocus
+          />
+          <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
+            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+              Загрузить изображение
+              <VisuallyHiddenInput
+                type="file"
+                accept="image/*"
+                // onChange={(e) => {
+                //   setFile(e.target.files[0]);
+                // }}
+              />
+            </Button>
+          </Box>
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign In
+            Добавить
           </Button>
         </Box>
       </Box>
