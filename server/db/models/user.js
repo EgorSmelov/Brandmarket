@@ -9,14 +9,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Role, {
-        foreignKey: 'roleId',
-     });
-     this.belongsToMany(models.Good, { through: 'Favorites', foreignKey: 'userId' });
-     this.belongsToMany(models.Good, { through: 'Baskets', foreignKey: 'userId' });
-     this.belongsToMany(models.Good, { through: 'Purchases', foreignKey: 'userId' });
-
-
-        }
+        foreignKey: "roleId",
+      });
+      this.hasMany(models.Good, {
+        foreignKey: "userId",
+      });
+      this.belongsToMany(models.Good, {
+        through: "Favorites",
+        foreignKey: "userId",
+      });
+      this.belongsToMany(models.Good, {
+        through: "Baskets",
+        foreignKey: "userId",
+      });
+      this.belongsToMany(models.Good, {
+        through: "Purchases",
+        foreignKey: "userId",
+      });
+    }
   }
   User.init(
     {
