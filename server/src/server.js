@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const apiProductsRouter = require("./routes/productsRouter");
+const apiGoodsRouter = require("./routes/goodsRouter");
 const tokensRouter = require("./routes/tokensRouter");
 const authRouter = require("./routes/authRouter");
 require("dotenv").config();
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.use("/api/v1/products", apiProductsRouter);
+app.use("/api/v1/goods/", apiGoodsRouter);
 app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/auth", authRouter);
 
