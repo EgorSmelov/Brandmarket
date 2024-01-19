@@ -1,6 +1,6 @@
-const express = require("express");
-const { Op } = require("sequelize");
-const verifyAccessToken = require("../middlewares/verifyAccessToken");
+const express = require('express');
+const { Op } = require('sequelize');
+const verifyAccessToken = require('../middlewares/verifyAccessToken');
 // const multer = require('multer');
 
 // const storage = multer.diskStorage({
@@ -14,12 +14,12 @@ const verifyAccessToken = require("../middlewares/verifyAccessToken");
 // });
 
 // const upload = multer({ storage });
-const { Good, GoodsInfo } = require("../../db/models");
+const { Good, GoodsInfo } = require('../../db/models');
 
 const apiGoodsRouter = express.Router();
 
 apiGoodsRouter
-  .route("/")
+  .route('/')
   .get(async (req, res) => {
     try {
       const goods = await Good.findAll({
@@ -38,18 +38,8 @@ apiGoodsRouter
   })
   .post(/* upload.single('img'), */ verifyAccessToken, async (req, res) => {
     try {
-      if (!req.body?.title)
-        return res.status(500).json({ message: "Empty reqbody" });
-      const {
-        title,
-        price,
-        image,
-        description,
-        color,
-        categoryId,
-        genderId,
-        brandId,
-      } = req.body;
+      if (!req.body?.title) return res.status(500).json({ message: 'Empty reqbody' });
+      const { title, price, image, description, color, categoryId, genderId, brandId } = req.body;
       const newGood = await Good.create({
         title,
         price: Number(price),
@@ -66,11 +56,11 @@ apiGoodsRouter
     }
   });
 
-apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
+apiGoodsRouter.get('/genders/:genderId', async (req, res) => {
   try {
     const goods = await Good.findAll({
       where: { genderId: req.params.genderId },
-      order: [["createdAt", "DESC"]],
+      order: [['createdAt', 'DESC']],
     });
     return res.json(goods);
   } catch (error) {
@@ -78,34 +68,32 @@ apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
   }
 });
 
-apiGoodsRouter.get(
-  "/genders/:genderId/categories/:categoryId",
-  async (req, res) => {
-    try {
-      const goods = await Good.findAll({
-        where: {
-          genderId: req.params.genderId,
-          categoryId: req.params.categoryId,
-        },
-        order: [["createdAt", "DESC"]],
-      });
-      return res.json(goods);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
-  }
-);
-
-apiGoodsRouter.delete("/:id", verifyAccessToken, async (req, res) => {
+apiGoodsRouter.get('/genders/:genderId/categories/:categoryId', async (req, res) => {
   try {
-    await Good.destroy({ where: { id: req.params.id } });
-    res.sendStatus(200);
+    const goods = await Good.findAll({
+      where: {
+        genderId: req.params.genderId,
+        categoryId: req.params.categoryId,
+      },
+      order: [['createdAt', 'DESC']],
+    });
+    return res.json(goods);
   } catch (error) {
     return res.status(500).json(error);
   }
 });
 
-apiGoodsRouter.get("/:id", async (req, res) => {
+apiGoodsRouter.delete('/:id', verifyAccessToken, async (req, res) => {
+  try {
+    await Good.destroy({ where: { id: req.params.id } });
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
+
+apiGoodsRouter.get('/:id', async (req, res) => {
   try {
     const product = await Good.findByPk(req.params.id, {
       include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
@@ -116,20 +104,10 @@ apiGoodsRouter.get("/:id", async (req, res) => {
   }
 });
 
-apiGoodsRouter.patch("/:id", verifyAccessToken, async (req, res) => {
+apiGoodsRouter.patch('/:id', verifyAccessToken, async (req, res) => {
   try {
-    if (!req.body?.title)
-      return res.status(500).json({ message: "Empty reqbody" });
-    const {
-      title,
-      price,
-      image,
-      description,
-      color,
-      categoryId,
-      genderId,
-      brandId,
-    } = req.body;
+    if (!req.body?.title) return res.status(500).json({ message: 'Empty reqbody' });
+    const { title, price, image, description, color, categoryId, genderId, brandId } = req.body;
 
     const good = await Good.findByPk(req.params.id);
     good.title = title;

@@ -12,10 +12,18 @@ export default function SellerPage(): JSX.Element {
       .catch((err) => console.error(err));
   }, []);
 
+  const deleteHandler = (goodId: number): void => {
+    GoodsService.deleteGood(goodId)
+      .then(() => {
+        goodsSetState((prev) => prev.filter((good) => good.id !== goodId));
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <>
       <div>SellerPage</div>
-      <GoodTableList goods={goodsState} />
+      <GoodTableList goods={goodsState} deleteHandler={deleteHandler} />
     </>
   );
 }

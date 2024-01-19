@@ -12,6 +12,12 @@ class GoodsService {
     if (response.status === 200) return response.data;
     return [];
   }
+
+  static async deleteGood(id: GoodType['id']): Promise<void> {
+    const response = await apiGoodsService.delete(`/${id}`);
+    if (response.status === 200) return;
+    return Promise.reject(new Error(`Server error deleting product id ${id}`));
+  }
 }
 
 export default GoodsService;
