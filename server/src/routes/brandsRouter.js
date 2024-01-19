@@ -5,7 +5,9 @@ const brandsRouter = express.Router();
 
 brandsRouter.get("/", async (req, res) => {
   try {
-    const categories = await Brand.findAll();
+    const categories = await Brand.findAll({
+      order: [["name", "ASC"]],
+    });
     return res.json(categories);
   } catch (error) {
     return res.status(500).json(error);

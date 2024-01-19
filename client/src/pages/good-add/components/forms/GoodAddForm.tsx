@@ -1,11 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Container, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import getAllCategoriesThunk from '../../../../redux/slices/categories/categoryThunks';
+import getAllBrandsThunk from '../../../../redux/slices/brands/brandThunks';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -24,6 +35,15 @@ export default function GoodAddForm(): JSX.Element {
   const [imgPreview, setImgPreview] = useState<string>('');
   const navigate = useNavigate();
 
+  const { categories } = useAppSelector((state) => state.categories);
+  const { brands } = useAppSelector((state) => state.brands);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(getAllCategoriesThunk());
+    void dispatch(getAllBrandsThunk());
+  }, [dispatch]);
+
   useEffect(() => {
     if (!img) {
       return;
@@ -37,6 +57,7 @@ export default function GoodAddForm(): JSX.Element {
     const formData = new FormData(e.currentTarget);
     formData.append('file', img);
     const data = Object.fromEntries(formData);
+    console.log(data);
     const response = await axios
       .post('http://localhost:3000/api/v1/goods/', data, {
         headers: {
@@ -61,7 +82,55 @@ export default function GoodAddForm(): JSX.Element {
         <Typography component="h1" variant="h5">
           Добавление товара
         </Typography>
-        <Box component="form" onSubmit={(e) => addHandler(e)}>
+        <Box component="form" onSubmit={(e) => void addHandler(e)}>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="demo-simple-select-label">Бренд</InputLabel>
+            <Select
+              name="brandId"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Бренд"
+              required
+            >
+              {brands.map((brand) => (
+                <MenuItem key={brand.id} value={brand.id}>
+                  {brand.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="demo-simple-select-label">Категория</InputLabel>
+            <Select
+              name="categoryId"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Категории"
+              required
+            >
+              {categories.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="demo-simple-select-label">Пол</InputLabel>
+            <Select
+              name="genderId"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Пол"
+              required
+            >
+              {categories.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             margin="normal"
             required
@@ -82,17 +151,6 @@ export default function GoodAddForm(): JSX.Element {
             name="price"
             autoComplete="price"
             type="number"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Изображение"
-            name="image"
-            autoComplete="image"
-            type="text"
             autoFocus
           />
           <TextField

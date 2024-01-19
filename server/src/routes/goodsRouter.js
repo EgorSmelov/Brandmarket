@@ -14,6 +14,7 @@ apiGoodsRouter
         include: [
           {
             model: GoodsInfo,
+            user: { where: { userId: res.locals.id } },
             where: { quantity: { [Op.gt]: 0 } },
           },
         ],
@@ -97,10 +98,10 @@ apiGoodsRouter.delete("/:id", verifyAccessToken, async (req, res) => {
 
 apiGoodsRouter.get("/:id", async (req, res) => {
   try {
-    const product = await Good.findByPk(req.params.id, {
+    const good = await Good.findByPk(req.params.id, {
       include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
     });
-    res.json(product);
+    res.json(good);
   } catch (error) {
     return res.status(500).json(error);
   }
