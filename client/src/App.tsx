@@ -27,7 +27,6 @@ function App(): JSX.Element {
           p: 2,
           display: 'flex',
           justifyContent: 'center',
-          paddingBottom: '50px',
         }}
       >
         <Routes>
