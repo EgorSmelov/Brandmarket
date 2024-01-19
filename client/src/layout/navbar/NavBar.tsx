@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import { Grid, Link } from '@mui/material';
+import { Grid, IconButton, Link } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import DropDownList from './components/drop-down-list/DropDownList';
@@ -23,9 +23,9 @@ export default function NavBar(): JSX.Element {
         <Toolbar>
           <Grid container justifyContent="space-between">
             <Grid display="flex" alignItems="center">
-              <Button color="inherit">
+              <IconButton color="inherit">
                 <Burger />
-              </Button>
+              </IconButton>
               <Link color="inherit" underline="none" component={NavLink} to="/">
                 <Typography variant="h6" component="div">
                   Brandmarket
@@ -40,12 +40,12 @@ export default function NavBar(): JSX.Element {
               <Button color="inherit" component={NavLink} to="/auth/login">
                 Войти
               </Button>
-              <Button color="inherit" component={NavLink} to="/favorites">
+              <IconButton color="inherit" component={NavLink} to="/favorites">
                 <FavoriteIcon />
-              </Button>
-              <Button color="inherit" component={NavLink} to="/basket">
+              </IconButton>
+              <IconButton color="inherit" component={NavLink} to="/basket">
                 <LocalGroceryStoreIcon />
-              </Button>
+              </IconButton>
               <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
                 Выйти
               </Button>
