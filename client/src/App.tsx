@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './layout/navbar/NavBar';
@@ -12,8 +12,16 @@ import BasketPage from './pages/basket/BasketPage';
 import FavoritesPage from './pages/favorites/FavoritesPage';
 import GoodEditPage from './pages/edit/GoodEditPage';
 import GoodSoloPage from './components/good-solo-card/GoodSoloPage';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { userCheckThunk } from './redux/slices/auth/authThunks';
 
 function App(): JSX.Element {
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    void dispatch(userCheckThunk());
+  }, [dispatch]);
+
   return (
     <Box
       sx={{
