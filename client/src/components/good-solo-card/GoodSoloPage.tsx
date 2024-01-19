@@ -5,7 +5,10 @@ import GoodSoloDesc from './good-solo/GoodSoloDesc';
 
 export default function GoodSoloPage(): JSX.Element {
   return (
-    <Grid container >
+    <Grid
+      container
+      sx={{ justifyContent: 'space-around', alignItems: 'center', flexWrap: 'nowrap', gap: '40px' }}
+    >
       <GoodSoloImage />
       <GoodSoloDesc />
     </Grid>
