@@ -1,21 +1,8 @@
 const express = require("express");
 const { Op } = require("sequelize");
-const multer = require("multer");
-const mime = require("mime-types");
 const verifyAccessToken = require("../middlewares/verifyAccessToken");
 const { Good, GoodsInfo } = require("../../db/models");
-
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, "./public/img");
-  },
-  filename(req, file, cb) {
-    const ext = mime.extension(file.mimetype);
-    cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
-  },
-});
-
-const upload = multer({ storage });
+const uploadMiddleware = require("../middlewares/uploadFile");
 
 const apiGoodsRouter = express.Router();
 
@@ -37,14 +24,13 @@ apiGoodsRouter
       return res.status(500).json(error);
     }
   })
-  .post(upload.single("file"), async (req, res) => {
+  .post(uploadMiddleware.single("file"), async (req, res) => {
     try {
       if (!req.body?.title)
         return res.status(500).json({ message: "Empty reqbody" });
       const {
         title,
         price,
-        image,
         description,
         color,
         categoryId,
@@ -54,7 +40,7 @@ apiGoodsRouter
       const newGood = await Good.create({
         title,
         price: Number(price),
-        image: req.file?.filename || image,
+        image: req.file.path.replace("public", ""),
         description,
         color,
         categoryId: 1,

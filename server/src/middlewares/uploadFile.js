@@ -1,3 +1,6 @@
+const multer = require("multer");
+const mime = require("mime-types");
+
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, "./public/img");
@@ -8,4 +11,4 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+module.exports = multer({ storage });
