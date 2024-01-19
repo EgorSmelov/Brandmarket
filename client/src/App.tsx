@@ -11,6 +11,7 @@ import SellerPage from './pages/seller/SellerPage';
 import BasketPage from './pages/basket/BasketPage';
 import FavoritesPage from './pages/favorites/FavoritesPage';
 import GoodEditPage from './pages/edit/GoodEditPage';
+import GoodSoloPage from './components/good-solo-card/GoodSoloPage';
 
 function App(): JSX.Element {
   return (
@@ -40,6 +41,7 @@ function App(): JSX.Element {
           <Route path="/basket" element={<BasketPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/good/:id/edit" element={<GoodEditPage />} />
+          <Route path="/goods/:id" element={<GoodSoloPage />} />
         </Routes>
       </Container>
       <Footer />
