@@ -7,7 +7,7 @@ module.exports = {
         {
           title: "Футболка",
           price: 500,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Классическая футболка",
           color: "Белый",
           categoryId: 1,
@@ -17,7 +17,7 @@ module.exports = {
         {
           title: "Футболка",
           price: 500,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Классическая футболка",
           color: "Черный",
           categoryId: 1,
@@ -27,7 +27,7 @@ module.exports = {
         {
           title: "Джинсы",
           price: 1500,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Стандартные джинсы",
           color: "Синий",
           categoryId: 2,
@@ -37,7 +37,7 @@ module.exports = {
         {
           title: "Платье",
           price: 2000,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Стильное платье для вечеринок",
           color: "Красный",
           categoryId: 3,
@@ -47,7 +47,7 @@ module.exports = {
         {
           title: "Куртка",
           price: 3000,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Теплая зимняя куртка",
           color: "Черный",
           categoryId: 4,
@@ -57,7 +57,7 @@ module.exports = {
         {
           title: "Юбка",
           price: 1000,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Повседневная юбка",
           color: "Серый",
           categoryId: 5,
@@ -67,7 +67,7 @@ module.exports = {
         {
           title: "Рубашка",
           price: 800,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Простая рубашка для делового стиля",
           color: "Белый",
           categoryId: 6,
@@ -77,7 +77,7 @@ module.exports = {
         {
           title: "Блузка",
           price: 1200,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Стильная блузка с акцентами",
           color: "Розовый",
           categoryId: 7,
@@ -87,7 +87,7 @@ module.exports = {
         {
           title: "Спортивные штаны",
           price: 900,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Удобные спортивные штаны",
           color: "Черный",
           categoryId: 8,
@@ -97,7 +97,7 @@ module.exports = {
         {
           title: "Шапка",
           price: 300,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Теплая вязаная шапка",
           color: "Серый",
           categoryId: 9,
@@ -107,7 +107,7 @@ module.exports = {
         {
           title: "Ботинки",
           price: 2500,
-          image: "https://img.brandshop.ru/cache/products/d/ddrbs-000_1104x1104.jpg",
+          image: "/img/ddrbs-000.jpg",
           description: "Кожаные ботинки на каждый день",
           color: "Коричневый",
           categoryId: 10,
