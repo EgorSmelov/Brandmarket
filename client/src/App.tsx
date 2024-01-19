@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './layout/navbar/NavBar';
 import SignInPage from './pages/signin/SignInPage';
@@ -13,7 +13,13 @@ import FavoritesPage from './pages/favorites/FavoritesPage';
 
 function App(): JSX.Element {
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100%',
+      }}
+    >
       <NavBar />
       <Container
         maxWidth="lg"
@@ -34,7 +40,7 @@ function App(): JSX.Element {
         </Routes>
       </Container>
       <Footer />
-    </>
+    </Box>
   );
 }
 
