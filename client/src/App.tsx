@@ -17,7 +17,7 @@ function App(): JSX.Element {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100%',
+        minHeight: '100vh',
       }}
     >
       <NavBar />
@@ -28,6 +28,7 @@ function App(): JSX.Element {
           display: 'flex',
           justifyContent: 'center',
         }}
+        component="main"
       >
         <Routes>
           <Route path="/" element={<HomePage />} />

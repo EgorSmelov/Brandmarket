@@ -18,7 +18,7 @@ export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box >
       <AppBar position="static">
         <Toolbar>
           <Grid container justifyContent="space-between">
