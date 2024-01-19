@@ -32,20 +32,15 @@ export default function SignInForm(): JSX.Element {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Войти
         </Typography>
-        <Box
-          component="form"
-          onSubmit={(e) => void loginHandlerThunk(e, dispatch)}
-          noValidate
-          sx={{ mt: 1 }}
-        >
+        <Box component="form" onSubmit={(e) => void loginHandlerThunk(e, dispatch)} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email адрес"
             name="email"
             autoComplete="email"
             autoFocus
@@ -55,27 +50,18 @@ export default function SignInForm(): JSX.Element {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Пароль"
             type="password"
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign In
+            Войти
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="/" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link href="/auth/registration" variant="body2">
-                Dont have an account? Sign Up
+                Нет аккаунта? Зарегистрируйтесь
               </Link>
             </Grid>
           </Grid>

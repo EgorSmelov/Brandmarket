@@ -32,11 +32,10 @@ export default function SignUpForm(): JSX.Element {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Регистрация
         </Typography>
         <Box
           component="form"
-          noValidate
           onSubmit={(e) => void registrationHandlerThunk(e, dispatch)}
           sx={{ mt: 3 }}
         >
@@ -46,7 +45,7 @@ export default function SignUpForm(): JSX.Element {
                 required
                 fullWidth
                 id="name"
-                label="Your name"
+                label="Ваше имя"
                 name="name"
                 autoComplete="family-name"
               />
@@ -56,7 +55,7 @@ export default function SignUpForm(): JSX.Element {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email адрес"
                 name="email"
                 autoComplete="email"
               />
@@ -66,26 +65,20 @@ export default function SignUpForm(): JSX.Element {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Пароль"
                 type="password"
                 id="password"
                 autoComplete="new-password"
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign Up
+            Зарегистрироваться
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/auth/login" variant="body2">
-                Already have an account? Sign in
+                Уже есть аккаунт? Войдите
               </Link>
             </Grid>
           </Grid>
