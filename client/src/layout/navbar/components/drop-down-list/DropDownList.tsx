@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function BasicMenu(): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -26,6 +27,7 @@ export default function BasicMenu(): JSX.Element {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
           sx={{ color: 'white' }}
+          startIcon={<PersonIcon />}
         >
           Продавец
           <ArrowDropDownIcon />

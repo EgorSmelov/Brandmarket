@@ -34,6 +34,41 @@ module.exports = {
           size: 44,
           quantity: 0,
         },
+        {
+          goodId: 2,
+          size: 44,
+          quantity: 3,
+        },
+        {
+          goodId: 3,
+          size: 44,
+          quantity: 3,
+        },
+        {
+          goodId: 4,
+          size: 44,
+          quantity: 4,
+        },
+        {
+          goodId: 5,
+          size: 44,
+          quantity: 5,
+        },
+        {
+          goodId: 6,
+          size: 44,
+          quantity: 6,
+        },
+        {
+          goodId: 7,
+          size: 44,
+          quantity: 7,
+        },
+        {
+          goodId: 8,
+          size: 44,
+          quantity: 8,
+        },
       ],
       {}
     );
