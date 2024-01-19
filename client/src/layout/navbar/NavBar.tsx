@@ -32,7 +32,7 @@ export default function NavBar(): JSX.Element {
                 </Typography>
               </Link>
             </Grid>
-            <Grid display="flex">
+            <Grid display="flex" alignItems="center">
               <DropDownList />
               <Button color="inherit" component={NavLink} to="/auth/registration">
                 Регистрация
@@ -40,10 +40,10 @@ export default function NavBar(): JSX.Element {
               <Button color="inherit" component={NavLink} to="/auth/login">
                 Войти
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" component={NavLink} to="/favorites">
                 <FavoriteIcon />
               </Button>
-              <Button color="inherit">
+              <Button color="inherit" component={NavLink} to="/basket">
                 <LocalGroceryStoreIcon />
               </Button>
               <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
