@@ -6,16 +6,21 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import TableRow from '@mui/material/TableRow';
 import { IconButton, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import type { GoodType } from '../../../types/good';
 
-export default function GoodItem(): JSX.Element {
+type GoodItemPropsType = {
+  good: GoodType;
+};
+
+export default function GoodItem({ good }: GoodItemPropsType): JSX.Element {
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableBody>
         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
           <TableCell component="th" scope="row">
-            title
+            {good.title}
           </TableCell>
-          <TableCell align="right">price</TableCell>
+          <TableCell align="right">{good.price}</TableCell>
           <TableCell align="right">
             <Tooltip title="Edit">
               <IconButton>

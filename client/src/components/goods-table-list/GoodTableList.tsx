@@ -1,12 +1,22 @@
 import * as React from 'react';
-import { TableContainer } from '@mui/material';
+import { Box, TableContainer } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import GoodItem from './good-item/GoodItem';
+import type { GoodType } from '../../types/good';
 
-export default function GoodTableList(): JSX.Element {
+type GoodsListType = {
+  goods: GoodType[];
+};
+
+export default function GoodTableList({ goods }: GoodsListType): JSX.Element {
+  console.log(goods);
   return (
     <TableContainer component={Paper}>
-      <GoodItem />
+      {goods?.map((good) => (
+        <div key={good.id}>
+          <GoodItem good={good} />
+        </div>
+      ))}
     </TableContainer>
   );
 }
