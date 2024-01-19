@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Goods", {
+    await queryInterface.createTable('Goods', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -27,51 +27,59 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Categories",
+            tableName: 'Categories',
           },
-          key: "id",
+          key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       genderId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Genders",
+            tableName: 'Genders',
           },
-          key: "id",
+          key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       brandId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Brands",
+            tableName: 'Brands',
           },
-          key: "id",
+          key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       userId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Users",
+            tableName: 'Users',
           },
-          key: "id",
+          key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("now"),
+        defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("now"),
+        defaultValue: Sequelize.fn('now'),
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Goods");
+    await queryInterface.dropTable('Goods');
   },
 };

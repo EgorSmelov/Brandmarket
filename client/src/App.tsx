@@ -10,6 +10,7 @@ import GoodAddPage from './pages/good-add/GoodAddPage';
 import SellerPage from './pages/seller/SellerPage';
 import BasketPage from './pages/basket/BasketPage';
 import FavoritesPage from './pages/favorites/FavoritesPage';
+import GoodEditPage from './pages/edit/GoodEditPage';
 
 function App(): JSX.Element {
   return (
@@ -38,6 +39,7 @@ function App(): JSX.Element {
           <Route path="/seller/goods" element={<SellerPage />} />
           <Route path="/basket" element={<BasketPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/good/:id/edit" element={<GoodEditPage />} />
         </Routes>
       </Container>
       <Footer />
