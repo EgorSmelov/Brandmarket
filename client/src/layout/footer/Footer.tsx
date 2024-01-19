@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Footer(): JSX.Element {
   return (
-    <Box sx={{ width: '100%', position: 'absolute', bottom: 0 }}>
+    <Box component="footer" sx={{ mt: 'auto', width: '100%', position: 'absolute', bottom: 0 }}>
       <AppBar position="static">
         <Toolbar>
           <Box display="flex" alignItems="center">
