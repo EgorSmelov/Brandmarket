@@ -16,7 +16,7 @@ export default function GoodCardsList(): JSX.Element {
   return (
     <Grid container spacing={4}>
       {goods.map((good) => (
-        <GoodCardItem key={good} good={good} />
+        <GoodCardItem key={good.id} good={good} />
       ))}
     </Grid>
   );
