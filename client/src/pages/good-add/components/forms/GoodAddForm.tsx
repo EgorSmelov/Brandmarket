@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Container, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import axios from 'axios';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -18,6 +19,22 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function GoodAddForm(): JSX.Element {
+  const [img, setImg] = useState();
+
+  const addHandler = async (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    formData.append('file', img);
+    const data = Object.fromEntries(formData);
+    const response = await axios.post('http://localhost:3000/api/v1/goods/', data, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+    const dataresponse = await response.json();
+    console.log(response);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -31,14 +48,7 @@ export default function GoodAddForm(): JSX.Element {
         <Typography component="h1" variant="h5">
           Добавление товара
         </Typography>
-        <Box
-          component="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-          noValidate
-          sx={{ mt: 1 }}
-        >
+        <Box component="form" onSubmit={(e) => addHandler(e)}>
           <TextField
             margin="normal"
             required
@@ -113,9 +123,9 @@ export default function GoodAddForm(): JSX.Element {
               <VisuallyHiddenInput
                 type="file"
                 accept="image/*"
-                // onChange={(e) => {
-                //   setFile(e.target.files[0]);
-                // }}
+                onChange={(e) => {
+                  setImg(e.target.files[0]);
+                }}
               />
             </Button>
           </Box>

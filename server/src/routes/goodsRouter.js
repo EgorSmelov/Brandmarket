@@ -1,21 +1,21 @@
 const express = require("express");
 const { Op } = require("sequelize");
+const multer = require("multer");
+const mime = require("mime-types");
 const verifyAccessToken = require("../middlewares/verifyAccessToken");
-// const multer = require('multer');
-
-// const storage = multer.diskStorage({
-//   destination(req, file, cb) {
-//     cb(null, './public/img');
-//   },
-//   filename(req, file, cb) {
-//     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-//     cb(null, `${file.fieldname}-${uniqueSuffix}`);
-//   },
-// });
-
-// const upload = multer({ storage });
-
 const { Good, GoodsInfo } = require("../../db/models");
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, "./public/img");
+  },
+  filename(req, file, cb) {
+    const ext = mime.extension(file.mimetype);
+    cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
+  },
+});
+
+const upload = multer({ storage });
 
 const apiGoodsRouter = express.Router();
 
@@ -37,32 +37,25 @@ apiGoodsRouter
       return res.status(500).json(error);
     }
   })
-  .post(/* upload.single('img'), */ verifyAccessToken, async (req, res) => {
+  .post(upload.single("file"), async (req, res) => {
     try {
       if (!req.body?.title)
         return res.status(500).json({ message: "Empty reqbody" });
-      const {
-        title,
-        price,
-        image,
-        description,
-        color,
-        categoryId,
-        genderId,
-        brandId,
-      } = req.body;
+      const { title, price, image, description, color } = req.body;
       const newGood = await Good.create({
         title,
         price: Number(price),
         image: req.file?.filename || image,
         description,
         color,
-        categoryId: Number(categoryId),
-        genderId: Number(genderId),
-        brandId: Number(brandId),
+        categoryId: 1,
+        genderId: 1,
+        brandId: 1,
+        userId: res.locals.userId,
       });
       return res.status(201).json(newGood);
     } catch (error) {
+      console.error(error);
       return res.status(500).json(error);
     }
   });
