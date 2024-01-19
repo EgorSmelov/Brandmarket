@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Container, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -19,20 +20,32 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function GoodAddForm(): JSX.Element {
-  const [img, setImg] = useState();
+  const [img, setImg] = useState<File | null>(null);
+  const [imgPreview, setImgPreview] = useState<string>('');
+  const navigate = useNavigate();
 
-  const addHandler = async (e: React.FormEvent<HTMLFormElement>): void => {
+  useEffect(() => {
+    if (!img) {
+      return;
+    }
+
+    setImgPreview(URL.createObjectURL(img));
+  }, [img]);
+
+  const addHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.append('file', img);
     const data = Object.fromEntries(formData);
-    const response = await axios.post('http://localhost:3000/api/v1/goods/', data, {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    });
-    const dataresponse = await response.json();
-    console.log(response);
+    const response = await axios
+      .post('http://localhost:3000/api/v1/goods/', data, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      })
+      .then(() => {
+        navigate('/');
+      });
   };
 
   return (
@@ -116,16 +129,29 @@ export default function GoodAddForm(): JSX.Element {
             autoComplete="quantity"
             type="number"
             autoFocus
-          />
+          />{' '}
+          <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
+            <Box
+              component="img"
+              sx={{
+                objectFit: 'cover',
+                height: 200,
+                width: 200,
+                borderRadius: 8,
+              }}
+              alt={img?.name}
+              src={imgPreview || '/img/upload-icon.svg'}
+            />
+          </Box>
           <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
             <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
               Загрузить изображение
               <VisuallyHiddenInput
                 type="file"
                 accept="image/*"
-                onChange={(e) => {
-                  setImg(e.target.files[0]);
-                }}
+                autoFocus
+                required
+                onChange={(e) => void setImg(e.target.files[0])}
               />
             </Button>
           </Box>
