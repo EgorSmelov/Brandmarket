@@ -29,7 +29,7 @@ export default function BasicMenu(): JSX.Element {
           sx={{ color: 'white' }}
           startIcon={<PersonIcon />}
         >
-          Продавец
+          Личный кабинет
           <ArrowDropDownIcon />
         </Button>
       </MenuItem>
