@@ -6,7 +6,7 @@ import SignInPage from './pages/signin/SignInPage';
 import SignUpPage from './pages/signin/SignUpPage';
 import Footer from './layout/footer/Footer';
 import HomePage from './pages/home/HomePage';
-import GoodAddPage from './pages/good-add/GoodAddPage';
+import GoodAddPage from './pages/goodAdd/GoodAddPage';
 import SellerPage from './pages/seller/SellerPage';
 import BasketPage from './pages/basket/BasketPage';
 import FavoritesPage from './pages/favorites/FavoritesPage';

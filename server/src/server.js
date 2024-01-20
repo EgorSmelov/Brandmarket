@@ -8,6 +8,7 @@ const authRouter = require("./routes/authRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
 const brandsRouter = require("./routes/brandsRouter");
 const gendersRouter = require("./routes/gendersRouter");
+const resLocals = require("./middlewares/resLocals");
 require("dotenv").config();
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(resLocals);
 
 app.use("/api/v1/goods", apiGoodsRouter);
 app.use("/api/v1/tokens", tokensRouter);

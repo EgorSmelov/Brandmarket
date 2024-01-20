@@ -36,6 +36,7 @@ export default function GoodAddForm(): JSX.Element {
   const { categories } = useAppSelector((state) => state.categories);
   const { brands } = useAppSelector((state) => state.brands);
   const { genders } = useAppSelector((state) => state.genders);
+  const { user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (!img) {
@@ -49,6 +50,7 @@ export default function GoodAddForm(): JSX.Element {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.append('file', img);
+    formData.append('userId', user.id);
     const data = Object.fromEntries(formData);
     const response = await axios
       .post('http://localhost:3000/api/v1/goods/', data, {
