@@ -10,6 +10,7 @@ function resLocals(req, res, next) {
     res.locals.user = user;
     next();
   } catch (error) {
+    console.error(error);
     next();
   }
 }
