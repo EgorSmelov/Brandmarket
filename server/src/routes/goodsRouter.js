@@ -1,7 +1,7 @@
 const express = require("express");
 const { Op } = require("sequelize");
 const verifyAccessToken = require("../middlewares/verifyAccessToken");
-const { Good, GoodsInfo } = require("../../db/models");
+const { Good, GoodsInfo, Favorite } = require("../../db/models");
 const uploadMiddleware = require("../middlewares/uploadFile");
 
 const apiGoodsRouter = express.Router();
@@ -9,7 +9,6 @@ const apiGoodsRouter = express.Router();
 apiGoodsRouter
   .route("/")
   .get(async (req, res) => {
-    console.log(res.locals.user);
     try {
       const goods = await Good.findAll({
         include: [
@@ -113,6 +112,43 @@ apiGoodsRouter.get(
     }
   }
 );
+// ------------ //
+
+// Избранное
+apiGoodsRouter
+  .route("/favorites/:goodId")
+  .get(async (req, res) => {
+    try {
+      const good = await Favorite.findAll(req.params.id, {
+        include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
+      });
+      res.json(good);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  })
+  .post(async (req, res) => {
+    try {
+      const { goodId } = req.params;
+      const good = await Good.create({
+        goodId,
+        userId: res.locals.user.id,
+      });
+      res.json(good);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  })
+  .delete(async (req, res) => {
+    try {
+      const { goodId } = req.params;
+      await Good.destroy({ where: { id: goodId, userId: res.locals.user.id } });
+      res.sendStatus(200);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json(error);
+    }
+  });
 // ------------ //
 
 // Один товар
