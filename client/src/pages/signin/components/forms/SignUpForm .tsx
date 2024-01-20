@@ -75,7 +75,7 @@ export default function SignUpForm(): JSX.Element {
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Зарегистрироваться
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent="center">
             <Grid item>
               <Link href="/auth/login" variant="body2">
                 Уже есть аккаунт? Войдите

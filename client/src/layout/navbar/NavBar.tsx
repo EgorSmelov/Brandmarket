@@ -11,14 +11,15 @@ import { NavLink } from 'react-router-dom';
 
 import DropDownList from './components/drop-down-list/DropDownList';
 import Burger from './components/burger/Burger';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutHandlerThunk } from '../../redux/slices/auth/authThunks';
 
 export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   return (
-    <Box >
+    <Box>
       <AppBar position="static">
         <Toolbar>
           <Grid container justifyContent="space-between">
@@ -32,23 +33,33 @@ export default function NavBar(): JSX.Element {
                 </Typography>
               </Link>
             </Grid>
+
             <Grid display="flex" alignItems="center">
-              <DropDownList />
-              <Button color="inherit" component={NavLink} to="/auth/registration">
-                Регистрация
-              </Button>
-              <Button color="inherit" component={NavLink} to="/auth/login">
-                Войти
-              </Button>
+              {user.status === 'authenticated' && <DropDownList />}
+
+              {user.status !== 'authenticated' && (
+                <>
+                  <Button color="inherit" component={NavLink} to="/auth/registration">
+                    Регистрация
+                  </Button>
+                  <Button color="inherit" component={NavLink} to="/auth/login">
+                    Войти
+                  </Button>
+                </>
+              )}
+
               <IconButton color="inherit" component={NavLink} to="/favorites">
                 <FavoriteIcon />
               </IconButton>
               <IconButton color="inherit" component={NavLink} to="/basket">
                 <LocalGroceryStoreIcon />
               </IconButton>
-              <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
-                Выйти
-              </Button>
+
+              {user.status === 'authenticated' && (
+                <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
+                  Выйти
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Toolbar>
