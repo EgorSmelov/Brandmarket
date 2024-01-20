@@ -1,7 +1,7 @@
 const jwtConfig = {
   access: {
     name: 'accessToken',
-    expiresIn: `${1000 * 5}`,
+    expiresIn: `${1000 * 5 }`,
   },
   refresh: {
     name: 'refreshToken',
