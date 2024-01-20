@@ -14,12 +14,31 @@ import GoodEditPage from './pages/edit/GoodEditPage';
 import GoodSoloPage from './components/good-solo-card/GoodSoloPage';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { userCheckThunk } from './redux/slices/auth/authThunks';
+import getAllCategoriesThunk from './redux/slices/categories/categoryThunks';
+import getAllBrandsThunk from './redux/slices/brands/brandThunks';
+import getAllGendersThunk from './redux/slices/genders/genderThunks';
 
 function App(): JSX.Element {
-  const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+  const { categories } = useAppSelector((state) => state.categories);
+  const { brands } = useAppSelector((state) => state.brands);
+  const { genders } = useAppSelector((state) => state.genders);
+
   useEffect(() => {
     void dispatch(userCheckThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(getAllCategoriesThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(getAllBrandsThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(getAllGendersThunk());
   }, [dispatch]);
 
   return (

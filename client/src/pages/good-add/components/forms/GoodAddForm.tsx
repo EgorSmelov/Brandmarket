@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {
@@ -14,9 +14,7 @@ import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import getAllCategoriesThunk from '../../../../redux/slices/categories/categoryThunks';
-import getAllBrandsThunk from '../../../../redux/slices/brands/brandThunks';
+import { useAppSelector } from '../../../../redux/hooks';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -37,12 +35,7 @@ export default function GoodAddForm(): JSX.Element {
 
   const { categories } = useAppSelector((state) => state.categories);
   const { brands } = useAppSelector((state) => state.brands);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    void dispatch(getAllCategoriesThunk());
-    void dispatch(getAllBrandsThunk());
-  }, [dispatch]);
+  const { genders } = useAppSelector((state) => state.genders);
 
   useEffect(() => {
     if (!img) {
@@ -57,14 +50,13 @@ export default function GoodAddForm(): JSX.Element {
     const formData = new FormData(e.currentTarget);
     formData.append('file', img);
     const data = Object.fromEntries(formData);
-    console.log(data);
     const response = await axios
       .post('http://localhost:3000/api/v1/goods/', data, {
         headers: {
           'content-type': 'multipart/form-data',
         },
       })
-      .then(() => {
+      .finally(() => {
         navigate('/');
       });
   };
@@ -124,9 +116,9 @@ export default function GoodAddForm(): JSX.Element {
               label="Пол"
               required
             >
-              {categories.map((category) => (
-                <MenuItem key={category.id} value={category.id}>
-                  {category.name}
+              {genders.map((gender) => (
+                <MenuItem key={gender.id} value={gender.id}>
+                  {gender.name}
                 </MenuItem>
               ))}
             </Select>
@@ -182,12 +174,23 @@ export default function GoodAddForm(): JSX.Element {
             required
             fullWidth
             id="standard-textarea"
+            label="Размер"
+            name="size"
+            autoComplete="size"
+            type="text"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="standard-textarea"
             label="Количество"
             name="quantity"
             autoComplete="quantity"
             type="number"
             autoFocus
-          />{' '}
+          />
           <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
             <Box
               component="img"
