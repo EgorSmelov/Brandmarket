@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/auth/authSlice';
 import categorySlice from './slices/categories/categorySlice';
 import brandSlice from './slices/brands/brandSlice';
+import genderSlice from './slices/genders/genderSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     categories: categorySlice,
     brands: brandSlice,
+    genders: genderSlice,
   },
 });
 

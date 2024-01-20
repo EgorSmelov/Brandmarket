@@ -7,6 +7,7 @@ const tokensRouter = require("./routes/tokensRouter");
 const authRouter = require("./routes/authRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
 const brandsRouter = require("./routes/brandsRouter");
+const gendersRouter = require("./routes/gendersRouter");
 require("dotenv").config();
 
 const app = express();
@@ -28,5 +29,6 @@ app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
+app.use("/api/v1/genders", gendersRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

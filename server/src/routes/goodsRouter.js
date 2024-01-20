@@ -27,6 +27,7 @@ apiGoodsRouter
   })
   .post(uploadMiddleware.single("file"), async (req, res) => {
     try {
+      console.log(req.body);
       if (!req.body?.title)
         return res.status(500).json({ message: "Empty reqbody" });
       const {
@@ -34,22 +35,33 @@ apiGoodsRouter
         price,
         description,
         color,
+        size,
+        quantity,
         categoryId,
         genderId,
         brandId,
       } = req.body;
-      const newGood = await Good.create({
+
+      const good = await Good.create({
         title,
         price: Number(price),
         image: req.file.path.replace("public", ""),
         description,
         color,
-        categoryId: 1,
-        genderId: 1,
-        brandId: 1,
+        categoryId,
+        genderId,
+        brandId,
         userId: res.locals.userId,
+      }).then((data) => {
+        GoodsInfo.create({
+          goodId: data.id,
+          size,
+          quantity,
+        });
       });
-      return res.status(201).json(newGood);
+      return res
+        .status(201)
+        .responce({ message: "The good has been successfully added" });
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
@@ -86,7 +98,7 @@ apiGoodsRouter.get(
   }
 );
 
-apiGoodsRouter.delete("/:id", verifyAccessToken, async (req, res) => {
+apiGoodsRouter.delete("/:id", async (req, res) => {
   try {
     await Good.destroy({ where: { id: req.params.id } });
     res.sendStatus(200);
