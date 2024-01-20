@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
 
@@ -19,6 +19,8 @@ type PropsCard = {
 };
 
 export default function GoodCardItem({ good }: PropsCard): JSX.Element {
+  const { id } = useParams();
+
   return (
     <Grid className="wrapper" item xs={12} sm={6} md={4}>
       <Card

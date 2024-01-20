@@ -7,6 +7,14 @@ export const getAllGoodsThunk = createAsyncThunk('good/getAllGoodsThunk', async 
   return data;
 });
 
+export const getOneGoodThunk = createAsyncThunk(
+  'good/getOneGoodThunk',
+  async (id: GoodType['id']) => {
+    const data = await GoodsService.getOneGood(id);
+    return data;
+  },
+);
+
 export const deleteGoodHandlerThunk = createAsyncThunk(
   'good/deleteGoodHandlerThunk',
   async (id: GoodType['id']) => {

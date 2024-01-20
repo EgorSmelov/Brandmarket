@@ -1,15 +1,20 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
+import type { GoodType } from '../../../types/good';
 
-export default function GoodSoloDesc(): JSX.Element {
+type GoodTypeProps = {
+  good: GoodType;
+};
+
+export default function GoodSoloDesc({ good }: GoodTypeProps): JSX.Element {
   return (
-    <Grid item >
+    <Grid item>
       <Typography gutterBottom variant="h5" component="h2">
-        gfdgdgfdfg
+        {good.title}
       </Typography>
-      <Typography sx={{ color: 'gray' }}>dfgdfgdfg</Typography>
-      <Typography sx={{ color: 'gray' }}>dfgdfgdfgdf</Typography>
-      <Typography>dfgdfgdfg ₽</Typography>
+      <Typography sx={{ color: 'gray' }}>{good.description}</Typography>
+      <Typography sx={{ color: 'gray' }}>{good.color}</Typography>
+      <Typography>{good.price} ₽</Typography>
     </Grid>
   );
 }

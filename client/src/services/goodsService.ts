@@ -13,10 +13,16 @@ class GoodsService {
     return [];
   }
 
+  static async getOneGood(id: GoodType['id']): Promise<GoodType> {
+    const response = await apiGoodsService.get<GoodType>(`/${id}`);
+    if (response.status === 200) return response.data;
+    return Promise.reject(new Error('Server error getting good'));
+  }
+
   static async deleteGood(id: GoodType['id']): Promise<void> {
     const response = await apiGoodsService.delete(`/${id}`);
     if (response.status === 200) return;
-    return Promise.reject(new Error(`Server error deleting product id ${id}`));
+    return Promise.reject(new Error(`Server error deleting good id ${id}`));
   }
 }
 
