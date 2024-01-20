@@ -7,3 +7,7 @@ export type GoodType = {
   image: string;
 };
 
+export type GoodState = {
+  goods: GoodType[];
+  good: GoodType | null;
+};
