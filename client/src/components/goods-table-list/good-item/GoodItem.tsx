@@ -8,13 +8,16 @@ import { IconButton, Link, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
+import { useAppDispatch } from '../../../redux/hooks';
+import { deleteGoodHandlerThunk } from '../../../redux/slices/goods/goodThunk';
 
 type GoodItemPropsType = {
   good: GoodType;
-  deleteHandler: (id: GoodType['id']) => void;
 };
 
-export default function GoodItem({ good, deleteHandler }: GoodItemPropsType): JSX.Element {
+export default function GoodItem({ good }: GoodItemPropsType): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableBody>
@@ -34,7 +37,7 @@ export default function GoodItem({ good, deleteHandler }: GoodItemPropsType): JS
           </TableCell>
           <TableCell align="right">
             <Tooltip title="Delete">
-              <IconButton onClick={() => deleteHandler(good.id)}>
+              <IconButton onClick={() => void dispatch(deleteGoodHandlerThunk(good.id))}>
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
