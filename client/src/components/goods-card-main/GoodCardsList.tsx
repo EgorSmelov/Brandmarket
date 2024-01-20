@@ -1,16 +1,15 @@
 import { Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import GoodCardItem from './good-card/GoodCardItem';
-import GoodsService from '../../services/goodsService';
-import type { GoodType } from '../../types/good';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getAllGoodsThunk } from '../../redux/slices/goods/goodThunk';
 
 export default function GoodCardsList(): JSX.Element {
-  const [goods, setGoods] = useState<GoodType[]>([]);
+  const dispatch = useAppDispatch();
+  const { goods } = useAppSelector((state) => state.goods);
 
   useEffect(() => {
-    GoodsService.getGoods()
-      .then((goodsarr) => setGoods(goodsarr))
-      .catch((err) => console.log(err));
+    void dispatch(getAllGoodsThunk());
   }, []);
 
   return (
