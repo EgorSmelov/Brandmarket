@@ -58,7 +58,7 @@ export default function SignInForm(): JSX.Element {
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Войти
           </Button>
-          <Grid container>
+          <Grid container justifyContent="center">
             <Grid item>
               <Link href="/auth/registration" variant="body2">
                 Нет аккаунта? Зарегистрируйтесь

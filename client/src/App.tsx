@@ -17,13 +17,14 @@ import { userCheckThunk } from './redux/slices/auth/authThunks';
 import getAllCategoriesThunk from './redux/slices/categories/categoryThunks';
 import getAllBrandsThunk from './redux/slices/brands/brandThunks';
 import getAllGendersThunk from './redux/slices/genders/genderThunks';
+import PrivateRouter from './routes/privateRouter/PrivateRouter';
+import Loader from './components/Loader';
+import RegRouter from './components/routing/RegRouter';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+
   const { user } = useAppSelector((state) => state.auth);
-  const { categories } = useAppSelector((state) => state.categories);
-  const { brands } = useAppSelector((state) => state.brands);
-  const { genders } = useAppSelector((state) => state.genders);
 
   useEffect(() => {
     void dispatch(userCheckThunk());
@@ -42,37 +43,45 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-      }}
-    >
-      <NavBar />
-      <Container
-        maxWidth="lg"
+    <Loader isLoading={user.status === 'pending'}>
+      <Box
         sx={{
-          p: 2,
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          minHeight: '100vh',
         }}
-        component="main"
       >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/auth/login" element={<SignInPage />} />
-          <Route path="/auth/registration" element={<SignUpPage />} />
-          <Route path="/seller/add" element={<GoodAddPage />} />
-          <Route path="/seller/goods" element={<SellerPage />} />
-          <Route path="/basket" element={<BasketPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/good/:id/edit" element={<GoodEditPage />} />
-          <Route path="/goods/:id" element={<GoodSoloPage />} />
-        </Routes>
-      </Container>
-      <Footer />
-    </Box>
+        <NavBar />
+        <Container
+          maxWidth="lg"
+          sx={{
+            p: 2,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+          component="main"
+        >
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route element={<PrivateRouter isAllowed={user.status !== 'authenticated'} />}>
+              <Route path="/auth/login" element={<SignInPage />} />
+              <Route path="/auth/registration" element={<SignUpPage />} />
+            </Route>
+            <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
+              <Route path="/good/:id/edit" element={<GoodEditPage />} />
+              <Route path="/goods/:id" element={<GoodSoloPage />} />
+            </Route>
+            <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>
+              <Route path="/basket" element={<BasketPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/seller/add" element={<GoodAddPage />} />
+              <Route path="/seller/goods" element={<SellerPage />} />
+            </Route>
+          </Routes>
+        </Container>
+        <Footer />
+      </Box>
+    </Loader>
   );
 }
 
