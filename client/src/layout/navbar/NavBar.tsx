@@ -28,9 +28,15 @@ export default function NavBar(): JSX.Element {
                 <Burger />
               </IconButton>
               <Link color="inherit" underline="none" component={NavLink} to="/">
-                <Typography variant="h6" component="div">
-                  Brandmarket
-                </Typography>
+                <Box
+                  component="img"
+                  sx={{
+                    height: 45,
+                    width: 200,
+                  }}
+                  alt="logo"
+                  src="/img/wiotqupl.png"
+                />
               </Link>
             </Grid>
 

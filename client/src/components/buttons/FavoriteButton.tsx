@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { IconButton } from '@mui/material';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addFavoritesThunk, delFavoritesThunk } from '../../redux/slices/favorites/favoritesThunks';
 import type { GoodType } from '../../types/good';
@@ -33,8 +36,8 @@ export default function FavoriteButton({ userId, goodId }: FavoriteButtonPropsTy
   };
 
   return (
-    <button type="button" onClick={() => addFavoritesHandler()}>
-      {isFavorite ? 'Удалить из избр' : 'Добавить в избр'}
-    </button>
+    <IconButton aria-label="add to favorites" type="button" onClick={() => addFavoritesHandler()}>
+      {isFavorite ? <StarRateIcon fontSize="medium" /> : <StarBorderIcon fontSize="medium" />}
+    </IconButton>
   );
 }

@@ -5,6 +5,14 @@ export type GoodType = {
   description: string;
   color: string;
   image: string;
+  Goodsinfos: GoodsInfosType[];
+};
+
+export type GoodsInfosType = {
+  id: number;
+  goodId: number;
+  size: string;
+  quantity: number;
 };
 
 export type GoodState = {
