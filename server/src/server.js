@@ -29,7 +29,7 @@ app.use(express.static("public"));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/goods", apiGoodsRouter);
-app.use("/api/v1/favorite", favoriteRouter);
+app.use("/api/v1/favorites", favoriteRouter);
 app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
