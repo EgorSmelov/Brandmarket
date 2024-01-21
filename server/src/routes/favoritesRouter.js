@@ -1,10 +1,10 @@
 const express = require("express");
 const { Favorite } = require("../../db/models");
 
-const favoriteRouter = express.Router();
+const favoritesRouter = express.Router();
 
 // Избранное
-favoriteRouter.get("/:userId", async (req, res) => {
+favoritesRouter.get("/:userId", async (req, res) => {
   try {
     const favorites = await Favorite.findAll(req.params.id, {
       include: [{ model: Favorite, where: { quantity: { [Op.gt]: 0 } } }],
@@ -15,7 +15,7 @@ favoriteRouter.get("/:userId", async (req, res) => {
   }
 });
 
-favoriteRouter
+favoritesRouter
   .route("/:userId/:goodId")
   .post(async (req, res) => {
     try {
@@ -43,4 +43,4 @@ favoriteRouter
   });
 // ------------ //
 
-module.exports = favoriteRouter;
+module.exports = favoritesRouter;
