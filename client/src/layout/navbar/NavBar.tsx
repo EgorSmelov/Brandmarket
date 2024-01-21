@@ -20,7 +20,7 @@ export default function NavBar(): JSX.Element {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" color="inherit">
         <Toolbar>
           <Grid container justifyContent="space-between">
             <Grid display="flex" alignItems="center">
@@ -48,17 +48,18 @@ export default function NavBar(): JSX.Element {
                 </>
               )}
 
-              <IconButton color="inherit" component={NavLink} to="/favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton color="inherit" component={NavLink} to="/basket">
-                <LocalGroceryStoreIcon />
-              </IconButton>
-
               {user.status === 'authenticated' && (
-                <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
-                  Выйти
-                </Button>
+                <>
+                  <IconButton color="inherit" component={NavLink} to="/favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <IconButton color="inherit" component={NavLink} to="/basket">
+                    <LocalGroceryStoreIcon />
+                  </IconButton>
+                  <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
+                    Выйти
+                  </Button>
+                </>
               )}
             </Grid>
           </Grid>
