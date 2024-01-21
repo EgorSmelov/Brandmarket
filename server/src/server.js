@@ -9,6 +9,7 @@ const categoriesRouter = require("./routes/categoriesRouter");
 const brandsRouter = require("./routes/brandsRouter");
 const gendersRouter = require("./routes/gendersRouter");
 const favoritesRouter = require("./routes/favoritesRouter");
+const resLocals = require("./middlewares/resLocals");
 require("dotenv").config();
 
 const app = express();

@@ -30,7 +30,7 @@ export default function GoodSoloPage(): JSX.Element {
   return (
     <Grid
       container
-      sx={{ justifyContent: 'space-around', alignItems: 'center', flexWrap: 'nowrap', gap: '40px' }}
+      sx={{ justifyContent: 'space-around', alignItems: 'center', flexWrap: 'nowrap', gap: '40px', mt:'150px' }}
     >
       <GoodSoloImage good={good} />
       <GoodSoloDesc good={good} />

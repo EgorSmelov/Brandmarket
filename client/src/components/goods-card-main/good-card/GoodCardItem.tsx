@@ -5,6 +5,7 @@ import {
   CardMedia,
   Grid,
   IconButton,
+  Rating,
   Typography,
 } from '@mui/material';
 import React from 'react';
@@ -34,16 +35,9 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           ':hover': {
             boxShadow: 20, // theme.shadows[20]
           },
+          border: '1px solid #e0e0e0',
         }}
       >
-        <FavoriteButton userId={userId} goodId={good.id} />
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <StarBorderIcon fontSize="medium" />
-            </IconButton>
-          }
-        />
         <CardMedia
           component={NavLink}
           to={`/goods/${good.id}`}
@@ -55,15 +49,18 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           image={`http://localhost:3000/${good.image}`}
         />
         <StyledCardContent sx={{ flexGrow: 1 }}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h5" component="h2">
             {good.title}
           </Typography>
-          <Typography sx={{ color: 'gray' }}>{good.description}</Typography>
-          <Typography sx={{ color: 'gray' }}>{good.color}</Typography>
-          <br />
-          <Typography>{good.price} ₽</Typography>
+          <Typography sx={{ color: 'gray' }} gutterBottom>
+            {good.description}
+          </Typography>
+          <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
-        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
+        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
+          <IconButton aria-label="add to favorites">
+            <StarBorderIcon fontSize="medium" />
+          </IconButton>
           <IconButton aria-label="add to basket">
             <ShoppingCartIcon />
           </IconButton>

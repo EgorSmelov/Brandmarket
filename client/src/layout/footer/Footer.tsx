@@ -5,7 +5,7 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 export default function Footer(): JSX.Element {
   return (
     <Box component="footer" sx={{ mt: 'auto' }}>
-      <AppBar position="static">
+      <AppBar position="static" color='inherit'>
         <Toolbar>
           <Box display="flex" alignItems="center">
             <CopyrightIcon />
