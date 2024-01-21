@@ -9,6 +9,7 @@ const categoriesRouter = require("./routes/categoriesRouter");
 const brandsRouter = require("./routes/brandsRouter");
 const gendersRouter = require("./routes/gendersRouter");
 const resLocals = require("./middlewares/resLocals");
+const favoriteRouter = require("./routes/favoriteRouter");
 require("dotenv").config();
 
 const app = express();
@@ -20,15 +21,16 @@ app.use(
     origin: true,
   })
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
 app.use(cookieParser());
-app.use(resLocals);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
+// app.use(resLocals);
 
-app.use("/api/v1/goods", apiGoodsRouter);
-app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/goods", apiGoodsRouter);
+app.use("/api/v1/favorite", favoriteRouter);
+app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
 app.use("/api/v1/genders", gendersRouter);
