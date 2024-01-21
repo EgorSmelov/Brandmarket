@@ -1,5 +1,6 @@
 import React from 'react';
+import FavoriteButton from '../../components/buttons/FavoriteButton';
 
 export default function FavoritesPage(): JSX.Element {
-  return <div>FavoritesPage</div>;
+  return <FavoriteButton />;
 }

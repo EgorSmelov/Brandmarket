@@ -34,7 +34,7 @@ export default function FavoriteButton({ userId, goodId }: FavoriteButtonPropsTy
 
   return (
     <button type="button" onClick={() => addFavoritesHandler()}>
-      {isFavorite ? 'Удалить' : 'Добавить'}
+      {isFavorite ? 'Удалить из избр' : 'Добавить в избр'}
     </button>
   );
 }
