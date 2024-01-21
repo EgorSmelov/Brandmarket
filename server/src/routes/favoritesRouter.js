@@ -1,15 +1,20 @@
 const express = require("express");
-const { Favorite } = require("../../db/models");
+const { Favorite, Good, User } = require("../../db/models");
 
 const favoritesRouter = express.Router();
 
 // Избранное
 favoritesRouter.get("/:userId", async (req, res) => {
   try {
-    const favorites = await Favorite.findAll(req.params.id, {
-      include: [{ model: Favorite, where: { quantity: { [Op.gt]: 0 } } }],
+    const favoriteGoods = await Good.findAll({
+      include: [
+        {
+          model: Favorite,
+          where: { userId: req.params.id },
+        },
+      ],
     });
-    res.json(favorites);
+    res.json(favoriteGoods);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -20,11 +25,10 @@ favoritesRouter
   .post(async (req, res) => {
     try {
       const { goodId, userId } = req.params;
-      await Favorite.create({
-        goodId,
-        userId,
+      const favorites = await Favorite.findOrCreate({
+        where: { goodId, userId },
       });
-      res.sendStatus(200);
+      return res.json(favorites);
     } catch (error) {
       return res.status(500).json(error);
     }

@@ -16,7 +16,7 @@ class FavoritesService {
 
   static async addFavorites(userId: UserType['id'], goodId: GoodType['id']): Promise<void> {
     const response = await apiFavoritesService.post(`/${userId}/${goodId}`);
-    if (response.status === 200) return;
+    if (response.status === 200) return response.data;
     return Promise.reject(new Error(`Server error on adding to favorites`));
   }
 

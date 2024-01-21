@@ -1,27 +1,19 @@
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  Grid,
-  IconButton,
-  Rating,
-  Typography,
-} from '@mui/material';
+import { Card, CardActions, CardMedia, Grid, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { NavLink, useParams } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
+import type { UserType } from '../../../types/auth';
+import FavoriteButton from '../../buttons/FavoriteButton';
 
 type PropsCard = {
   good: GoodType;
+  userId: UserType['id'];
 };
 
-export default function GoodCardItem({ good }: PropsCard): JSX.Element {
-  const { id } = useParams();
-
+function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
   return (
     <Grid className="wrapper" item xs={12} sm={6} md={4}>
       <Card
@@ -57,6 +49,7 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
           <IconButton aria-label="add to favorites">
             <StarBorderIcon fontSize="medium" />
           </IconButton>
+          <FavoriteButton userId={userId} goodId={good.id} />
           <IconButton aria-label="add to basket">
             <ShoppingCartIcon />
           </IconButton>
@@ -65,3 +58,5 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
     </Grid>
   );
 }
+
+export default React.memo(GoodCardItem);

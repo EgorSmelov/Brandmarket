@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import FavoritesService from '../../../services/favoritesService';
 import type { UserType } from '../../../types/auth';
 import type { GoodType } from '../../../types/good';
+import GoodsService from '../../../services/goodsService';
 
 export const getFavoritesThunk = createAsyncThunk('favorites/getFavoritesThunk', async () => {
   const data = await FavoritesService.getFavorites();
@@ -11,8 +12,9 @@ export const getFavoritesThunk = createAsyncThunk('favorites/getFavoritesThunk',
 export const addFavoritesThunk = createAsyncThunk(
   'favorites/addFavoritesThunk',
   async ({ userId, goodId }: { userId: UserType['id']; goodId: GoodType['id'] }) => {
-    const data = await FavoritesService.addFavorites(userId, goodId);
-    return data;
+    await FavoritesService.addFavorites(userId, goodId);
+    const favoriteCard = await GoodsService.getOneGood(goodId);
+    return favoriteCard;
   },
 );
 
