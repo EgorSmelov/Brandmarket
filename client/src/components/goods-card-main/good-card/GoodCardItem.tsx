@@ -11,14 +11,18 @@ import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { NavLink, useParams } from 'react-router-dom';
+import { Favorite } from '@mui/icons-material';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
+import type { UserType } from '../../../types/auth';
+import FavoriteButton from '../../buttons/FavoriteButton';
 
 type PropsCard = {
   good: GoodType;
+  userId: UserType['id'];
 };
 
-export default function GoodCardItem({ good }: PropsCard): JSX.Element {
+function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
   const { id } = useParams();
 
   return (
@@ -32,6 +36,7 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
           },
         }}
       >
+        <FavoriteButton userId={userId} goodId={good.id} />
         <CardHeader
           action={
             <IconButton aria-label="settings">
@@ -67,3 +72,5 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
     </Grid>
   );
 }
+
+export default React.memo(GoodCardItem);
