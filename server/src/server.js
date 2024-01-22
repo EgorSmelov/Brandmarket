@@ -10,6 +10,7 @@ const brandsRouter = require("./routes/brandsRouter");
 const gendersRouter = require("./routes/gendersRouter");
 const favoritesRouter = require("./routes/favoritesRouter");
 const resLocals = require("./middlewares/resLocals");
+const moderationRouter = require("./routes/moderationRouter");
 require("dotenv").config();
 
 const app = express();
@@ -34,5 +35,6 @@ app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
 app.use("/api/v1/genders", gendersRouter);
+app.use("/api/v1/moderation", moderationRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
