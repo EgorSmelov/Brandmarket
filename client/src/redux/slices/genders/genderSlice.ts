@@ -16,6 +16,7 @@ export const gendersSlice = createSlice({
   },
 });
 
+// eslint-disable-next-line no-empty-pattern
 export const {} = gendersSlice.actions;
 
 export default gendersSlice.reducer;
