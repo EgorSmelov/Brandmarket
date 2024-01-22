@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Good, {
         foreignKey: "userId",
       });
+      this.hasMany(models.ModerationSeller, {
+        foreignKey: "userId",
+      });
       this.belongsToMany(models.Good, {
         // as: "favorite",
         through: "Favorites",
