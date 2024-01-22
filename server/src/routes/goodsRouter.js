@@ -1,8 +1,8 @@
-const express = require('express');
-const { Op } = require('sequelize');
-const verifyAccessToken = require('../middlewares/verifyAccessToken');
-const { Good, GoodsInfo, Favorite, User } = require('../../db/models');
-const uploadMiddleware = require('../middlewares/uploadFile');
+const express = require("express");
+const { Op } = require("sequelize");
+const verifyAccessToken = require("../middlewares/verifyAccessToken");
+const { Good, GoodsInfo, Favorite, Basket, User } = require("../../db/models");
+const uploadMiddleware = require("../middlewares/uploadFile");
 
 const apiGoodsRouter = express.Router();
 
@@ -26,18 +26,30 @@ apiGoodsRouter
             where: { quantity: { [Op.gt]: 0 } },
           },
           {
+            as: "userFavorites",
             model: User,
-            where: { id: res.locals.user.id },
             required: false,
-            attributes: ['id'],
+            where: { id: res.locals.user ? res.locals.user?.id : null },
+            attributes: ["id"],
             through: {
               model: Favorite,
+            },
+          },
+          {
+            as: "userBaskets",
+            model: User,
+            required: false,
+            where: { id: res.locals.user ? res.locals.user?.id : null },
+            attributes: ["id"],
+            through: {
+              model: Basket,
             },
           },
         ],
       });
       return res.json(goods);
     } catch (error) {
+      console.log(error);
       return res.status(500).json(error);
     }
   })
@@ -127,12 +139,23 @@ apiGoodsRouter
             where: { quantity: { [Op.gt]: 0 } },
           },
           {
+            as: "userFavorites",
             model: User,
-            where: { id: res.locals.user.id },
+            where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,
             attributes: ['id'],
             through: {
               model: Favorite,
+            },
+          },
+          {
+            as: "userBaskets",
+            model: User,
+            where: { id: res.locals.user ? res.locals.user?.id : null },
+            required: false,
+            attributes: ["id"],
+            through: {
+              model: Basket,
             },
           },
         ],

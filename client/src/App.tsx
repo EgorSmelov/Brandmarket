@@ -30,21 +30,9 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(userCheckThunk());
-  }, [dispatch]);
-
-  useEffect(() => {
-    void dispatch(getFavoritesThunk(1));
-  }, [dispatch]);
-
-  useEffect(() => {
+    void dispatch(getFavoritesThunk());
     void dispatch(getAllCategoriesThunk());
-  }, [dispatch]);
-
-  useEffect(() => {
     void dispatch(getAllBrandsThunk());
-  }, [dispatch]);
-
-  useEffect(() => {
     void dispatch(getAllGendersThunk());
   }, [dispatch]);
 

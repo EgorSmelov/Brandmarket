@@ -15,14 +15,17 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
       });
       this.belongsToMany(models.Good, {
+        // as: "favorite",
         through: "Favorites",
         foreignKey: "userId",
       });
       this.belongsToMany(models.Good, {
+        // as: "basket",
         through: "Baskets",
         foreignKey: "userId",
       });
       this.belongsToMany(models.Good, {
+        // as: "purchase",
         through: "Purchases",
         foreignKey: "userId",
       });
