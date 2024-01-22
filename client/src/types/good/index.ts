@@ -5,7 +5,7 @@ export type GoodType = {
   description: string;
   color: string;
   image: string;
-  Goodsinfos: GoodsInfosType[];
+  GoodsInfos: GoodsInfosType[];
 };
 
 export type GoodsInfosType = {

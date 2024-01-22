@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
@@ -53,25 +52,19 @@ export default function NavBar(): JSX.Element {
                   </Button>
                 </>
               )}
-              <Tooltip title="Favourite">
-                <IconButton color="inherit" component={NavLink} to="/favorites">
-                  <FavoriteIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Cart">
-                <IconButton color="inherit" component={NavLink} to="/basket">
-                  <LocalGroceryStoreIcon />
-                </IconButton>
-              </Tooltip>
-
               {user.status === 'authenticated' && (
                 <>
-                  <IconButton color="inherit" component={NavLink} to="/favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton color="inherit" component={NavLink} to="/basket">
-                    <LocalGroceryStoreIcon />
-                  </IconButton>
+                  <Tooltip title="Favourite">
+                    <IconButton color="inherit" component={NavLink} to="/favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Cart">
+                    <IconButton color="inherit" component={NavLink} to="/basket">
+                      <LocalGroceryStoreIcon />
+                    </IconButton>
+                  </Tooltip>
+
                   <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
                     Выйти
                   </Button>

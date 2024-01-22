@@ -9,7 +9,6 @@ const apiGoodsRouter = express.Router();
 apiGoodsRouter
   .route("/")
   .get(async (req, res) => {
-    console.log(res.locals.user)
     try {
       const goods = await Good.findAll({
         include: [
