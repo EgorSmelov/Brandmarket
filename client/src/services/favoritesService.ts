@@ -5,6 +5,7 @@ import type { UserType } from '../types/auth';
 
 export const apiFavoritesService = axios.create({
   baseURL: 'http://localhost:3000/api/v1/favorites',
+  withCredentials: true,
 });
 
 class FavoritesService {

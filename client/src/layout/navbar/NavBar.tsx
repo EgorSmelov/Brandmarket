@@ -54,12 +54,12 @@ export default function NavBar(): JSX.Element {
               )}
               {user.status === 'authenticated' && (
                 <>
-                  <Tooltip title="Favourite">
+                  <Tooltip title="Избранное">
                     <IconButton color="inherit" component={NavLink} to="/favorites">
                       <FavoriteIcon />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title="Cart">
+                  <Tooltip title="Корзина">
                     <IconButton color="inherit" component={NavLink} to="/basket">
                       <LocalGroceryStoreIcon />
                     </IconButton>

@@ -44,12 +44,11 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           </Typography>
           <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
-        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
-          <Tooltip title="Cart">
-            <IconButton aria-label="add to basket">
-              <ShoppingCartIcon />
-            </IconButton>
-          </Tooltip>
+        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
+          <FavoriteButton userId={userId} goodId={good.id} />
+          <IconButton aria-label="add to basket">
+            <ShoppingCartIcon />
+          </IconButton>
         </CardActions>
       </Card>
     </Grid>

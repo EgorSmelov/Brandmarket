@@ -23,7 +23,7 @@ favoritesRouter.get("/:userId", async (req, res) => {
 });
 
 favoritesRouter
-  .route("/:userId/:goodId")
+  .route("/:userId/:goodId") // Либо парсить заголовок Authorization через мидлвару verifyAccessToken, либо во все сервисы подклчить передачу куки и на сервере через resLocals.js или verifyRefreshTokeb.js
   .post(async (req, res) => {
     try {
       const { goodId, userId } = req.params;
