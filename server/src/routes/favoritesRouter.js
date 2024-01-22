@@ -6,15 +6,17 @@ const favoritesRouter = express.Router();
 // Избранное
 favoritesRouter.get("/:userId", async (req, res) => {
   try {
-    const favoriteGoods = await Good.findAll({
-      include: [
-        {
+    const favoriteGoods = await User.findAll({
+      where: { id: req.params.userId },
+      include: {
+        model: Good,
+        attributes: { exclude: ["password"] },
+        through: {
           model: Favorite,
-          where: { userId: req.params.id },
         },
-      ],
+      },
     });
-    res.json(favoriteGoods);
+    res.json(favoriteGoods[0].Goods);
   } catch (error) {
     return res.status(500).json(error);
   }

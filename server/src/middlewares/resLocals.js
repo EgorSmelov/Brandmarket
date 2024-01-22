@@ -3,11 +3,11 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 async function resLocals(req, res, next) {
-  const { token } = req.cookies.refreshToken;
+  const { refreshToken } = req.cookies;
   try {
-    const { user } = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+    const { user } = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    // console.log({ user });
     res.locals.user = user;
-    // console.log(res.locals.user);
     next();
   } catch (error) {
     console.error(error);

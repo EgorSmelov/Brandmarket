@@ -1,6 +1,16 @@
-import { Card, CardActions, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { NavLink } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
@@ -25,6 +35,15 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           border: '1px solid #e0e0e0',
         }}
       >
+        <CardHeader
+          action={
+            <Tooltip title="Favourite">
+              <IconButton aria-label="settings">
+                <StarBorderIcon fontSize="medium" />
+              </IconButton>
+            </Tooltip>
+          }
+        />
         <CardMedia
           component={NavLink}
           to={`/goods/${good.id}`}

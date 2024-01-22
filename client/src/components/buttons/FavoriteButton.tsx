@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarRateIcon from '@mui/icons-material/StarRate';
@@ -17,9 +17,11 @@ export default function FavoriteButton({ userId, goodId }: FavoriteButtonPropsTy
   const dispath = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.favorites);
 
-  if (favorites.find((favorite: GoodType) => favorite.id === goodId)) {
-    setIsFavorite(true);
-  }
+  useEffect(() => {
+    if (favorites.find((favorite: GoodType) => favorite.id === goodId)) {
+      setIsFavorite(true);
+    }
+  }, []);
 
   const addFavoritesHandler = (): void => {
     if (!isFavorite) {

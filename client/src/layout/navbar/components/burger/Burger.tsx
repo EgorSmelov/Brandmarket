@@ -3,13 +3,11 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import getAllCategoriesThunk from '../../../../redux/slices/categories/categoryThunks';
+import CategoryItem from './category-item/CategoryItem';
+import GenderItem from './gender-item/GenderItem';
 
 type Anchor = 'left';
 
@@ -31,6 +29,14 @@ export default function Burger(): JSX.Element {
       setState({ ...state, [anchor]: open });
     };
 
+  const { categories } = useAppSelector((stateForCategories) => stateForCategories.categories);
+  const { genders } = useAppSelector((stateForGenders) => stateForGenders.genders);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    void dispatch(getAllCategoriesThunk());
+  }, [dispatch]);
+
   const list = (anchor: Anchor): JSX.Element => (
     <Box
       sx={{ width: 250 }}
@@ -39,24 +45,18 @@ export default function Burger(): JSX.Element {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {genders?.map((gender) => (
+          <div key={gender.id}>
+            <GenderItem gender={gender} />
+          </div>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {categories?.map((category) => (
+          <div key={category.id}>
+            <CategoryItem category={category} />
+          </div>
         ))}
       </List>
     </Box>
@@ -66,7 +66,7 @@ export default function Burger(): JSX.Element {
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       {(['left'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <MenuIcon fontSize='large' onClick={toggleDrawer(anchor, true)} />
+          <MenuIcon fontSize="large" onClick={toggleDrawer(anchor, true)} />
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
           </Drawer>
