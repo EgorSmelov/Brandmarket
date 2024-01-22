@@ -56,6 +56,12 @@ export default function NavBar(): JSX.Element {
               )}
               {user.status === 'authenticated' && (
                 <>
+                  <Button color="inherit" component={NavLink} to="/seller/new">
+                        Стать продавцом
+                  </Button>
+                  <Button color="inherit" component={NavLink} to="/moderation">
+                        Пользователи
+                  </Button>
                   <Tooltip title="Избранное">
                     <IconButton color="inherit" component={NavLink} to="/favorites">
                       <Badge badgeContent={favorites.length} color="primary">

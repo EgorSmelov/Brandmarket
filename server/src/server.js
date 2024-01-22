@@ -30,6 +30,7 @@ app.use(express.static("public"));
 app.use(resLocals);
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/moderation", moderationRouter);
 app.use("/api/v1/goods", apiGoodsRouter);
 app.use("/api/v1/favorites", favoritesRouter);
 app.use("/api/v1/baskets", basketRouter);
@@ -37,6 +38,5 @@ app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
 app.use("/api/v1/genders", gendersRouter);
-app.use("/api/v1/moderation", moderationRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

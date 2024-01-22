@@ -180,6 +180,7 @@ apiGoodsRouter
   })
   .delete(async (req, res) => {
     try {
+      console.log(req)
       await Good.destroy({ where: { id: req.params.id } });
       res.sendStatus(200);
     } catch (error) {

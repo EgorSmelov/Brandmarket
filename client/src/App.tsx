@@ -21,8 +21,8 @@ import PrivateRouter from './routes/privateRouter/PrivateRouter';
 import Loader from './components/Loader';
 import RegRouter from './components/routing/RegRouter';
 import { getFavoritesThunk } from './redux/slices/favorites/favoritesThunks';
-import ModerationEditList from './pages/moderation/ModerationEditList';
-import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
+import ModerationSellerInputs from './pages/moderation/ModerationSellerInputs';
+import ModerationUserList from './pages/moderation/ModerationUserList';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -59,14 +59,16 @@ function App(): JSX.Element {
         >
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/:categoryId" element={<HomePage />} />
             <Route element={<PrivateRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/auth/login" element={<SignInPage />} />
               <Route path="/auth/registration" element={<SignUpPage />} />
             </Route>
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
-              <Route path="/moderation" element={<ModerationEditList />} />
               <Route path="/good/:id/edit" element={<GoodEditPage />} />
               <Route path="/goods/:id" element={<GoodSoloPage />} />
+              <Route path="/seller/new" element={<ModerationSellerInputs />} />
+              <Route path="/moderation" element={<ModerationUserList />} />
             </Route>
             <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/basket" element={<BasketPage />} />

@@ -1,10 +1,10 @@
 import { TableContainer } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import getAllUsersThunk from '../../redux/slices/users/userThunks';
+import { getAllUsersThunk } from '../../redux/slices/moderationSellers/userThunks';
 import ModerationEditPage from './moderationPage/ModerationEditPage';
 
-export default function ModerationEditList(): JSX.Element {
+export default function ModerationUserList(): JSX.Element {
   const { users } = useAppSelector((state) => state.users);
 
   const dispatch = useAppDispatch();

@@ -4,15 +4,17 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { IconButton, Link, Tooltip } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import type { UserType } from '../../../types/auth';
+import { useAppDispatch } from '../../../redux/hooks';
+import { getUserThunk } from '../../../redux/slices/moderationSellers/userThunks';
 
 type UserPropsType = {
   user: UserType;
 };
 
 function ModerationEditPage({ user }: UserPropsType): JSX.Element {
-  //   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -25,9 +27,9 @@ function ModerationEditPage({ user }: UserPropsType): JSX.Element {
           <TableCell align="right">{user.email}</TableCell>
           <TableCell align="right">
             <Tooltip title="Сделать продавцом">
-              {/* <IconButton onClick={() => void dispatch(deleteGoodHandlerThunk(good.id))}> */}
-              <DeleteIcon />
-              {/* </IconButton> */}
+              <IconButton onClick={() => void dispatch(getUserThunk(user.id))}>
+                <CheckCircleIcon />
+              </IconButton>
             </Tooltip>
           </TableCell>
         </TableRow>

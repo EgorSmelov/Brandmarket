@@ -11,6 +11,7 @@ export type UserState =
 
 export type UserModerState = {
   users: UserType[];
+  user: UserType | null;
   isLoading: boolean;
 };
 
