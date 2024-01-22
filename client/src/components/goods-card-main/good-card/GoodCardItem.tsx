@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   Card,
   CardActions,
@@ -9,9 +8,6 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-=======
-import { Card, CardActions, CardMedia, Grid, IconButton, Typography } from '@mui/material';
->>>>>>> dev
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -67,23 +63,12 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           </Typography>
           <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
-<<<<<<< HEAD
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
           <Tooltip title="Cart">
             <IconButton aria-label="add to basket">
               <ShoppingCartIcon />
             </IconButton>
           </Tooltip>
-=======
-        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
-          <IconButton aria-label="add to favorites">
-            <StarBorderIcon fontSize="medium" />
-          </IconButton>
-          <FavoriteButton userId={userId} goodId={good.id} />
-          <IconButton aria-label="add to basket">
-            <ShoppingCartIcon />
-          </IconButton>
->>>>>>> dev
         </CardActions>
       </Card>
     </Grid>

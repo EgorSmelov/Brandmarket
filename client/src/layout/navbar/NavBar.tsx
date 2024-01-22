@@ -47,25 +47,18 @@ export default function NavBar(): JSX.Element {
                   </Button>
                 </>
               )}
-              <Tooltip title="Favourite">
-                <IconButton color="inherit" component={NavLink} to="/favorites">
-                  <FavoriteIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Cart">
-                <IconButton color="inherit" component={NavLink} to="/basket">
-                  <LocalGroceryStoreIcon />
-                </IconButton>
-              </Tooltip>
-
               {user.status === 'authenticated' && (
                 <>
-                  <IconButton color="inherit" component={NavLink} to="/favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton color="inherit" component={NavLink} to="/basket">
-                    <LocalGroceryStoreIcon />
-                  </IconButton>
+                  <Tooltip title="Favourite">
+                    <IconButton color="inherit" component={NavLink} to="/favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Cart">
+                    <IconButton color="inherit" component={NavLink} to="/basket">
+                      <LocalGroceryStoreIcon />
+                    </IconButton>
+                  </Tooltip>
                   <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
                     Выйти
                   </Button>
