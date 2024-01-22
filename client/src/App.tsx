@@ -21,6 +21,7 @@ import PrivateRouter from './routes/privateRouter/PrivateRouter';
 import Loader from './components/Loader';
 import RegRouter from './components/routing/RegRouter';
 import { getFavoritesThunk } from './redux/slices/favorites/favoritesThunks';
+import ModerationEditList from './pages/moderation/ModerationEditList';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -73,6 +74,7 @@ function App(): JSX.Element {
               <Route path="/auth/registration" element={<SignUpPage />} />
             </Route>
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
+              <Route path="/moderation" element={<ModerationEditList />} />
               <Route path="/good/:id/edit" element={<GoodEditPage />} />
               <Route path="/goods/:id" element={<GoodSoloPage />} />
             </Route>

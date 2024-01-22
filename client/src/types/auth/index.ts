@@ -9,6 +9,11 @@ export type UserState =
   | { status: 'guest' }
   | ({ status: 'authenticated' } & UserType);
 
+export type UserModerState = {
+  users: UserType[];
+  isLoading: boolean;
+};
+
 export type AuthState = {
   user: UserState;
   accessToken: string;
