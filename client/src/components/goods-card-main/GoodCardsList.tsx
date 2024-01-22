@@ -9,7 +9,7 @@ export default function GoodCardsList(): JSX.Element {
   const { goods } = useAppSelector((state) => state.goods);
 
   useEffect(() => {
-    void dispatch(getAllGoodsThunk());
+    void dispatch(getAllGoodsThunk(null));
   }, []);
 
   return (

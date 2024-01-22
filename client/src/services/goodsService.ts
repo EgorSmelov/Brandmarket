@@ -8,8 +8,8 @@ export const apiGoodsService = axios.create({
 });
 
 class GoodsService {
-  static async getGoods(): Promise<GoodType[]> {
-    const response = await apiGoodsService.get<GoodType[]>('/');
+  static async getGoods(categoryId: number | null): Promise<GoodType[]> {
+    const response = await apiGoodsService.get<GoodType[]>(`/?categoryId=${categoryId}`);
     if (response.status === 200) return response.data;
     return [];
   }
