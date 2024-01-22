@@ -57,6 +57,7 @@ function App(): JSX.Element {
         >
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/:categoryId" element={<HomePage />} />
             <Route element={<PrivateRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/auth/login" element={<SignInPage />} />
               <Route path="/auth/registration" element={<SignUpPage />} />

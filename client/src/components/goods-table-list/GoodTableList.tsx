@@ -3,22 +3,20 @@ import { TableContainer } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import GoodItem from './good-item/GoodItem';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getAllGoodsThunk } from '../../redux/slices/goods/goodThunk';
+import getAllSellerGoodsThunk from '../../redux/slices/seller/sellerThunk';
 
 export default function GoodTableList(): JSX.Element {
-  const { goods } = useAppSelector((state) => state.goods);
+  const { sellerGoods } = useAppSelector((state) => state.sellers);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    void dispatch(getAllGoodsThunk(null));
+    void dispatch(getAllSellerGoodsThunk());
   }, [dispatch]);
 
   return (
     <TableContainer component={Paper}>
-      {goods?.map((good) => (
-        <div key={good.id}>
-          <GoodItem good={good} />
-        </div>
+      {sellerGoods?.map((sellerGood, index) => (
+        <GoodItem key={sellerGood.id} sellerGood={sellerGood} index={index + 1} />
       ))}
     </TableContainer>
   );
