@@ -12,6 +12,9 @@ export default function GoodCardsList(): JSX.Element {
   useEffect(() => {
     void dispatch(getAllGoodsThunk());
   }, []);
+
+  console.log(goods[0]);
+  
   return (
     <Grid container spacing={4}>
       {goods.map((good) => (
