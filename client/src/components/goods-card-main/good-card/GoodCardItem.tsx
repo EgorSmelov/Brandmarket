@@ -1,4 +1,17 @@
+<<<<<<< HEAD
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+=======
 import { Card, CardActions, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+>>>>>>> dev
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -26,6 +39,15 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           border: '1px solid #e0e0e0',
         }}
       >
+        <CardHeader
+          action={
+            <Tooltip title="Favourite">
+              <IconButton aria-label="settings">
+                <StarBorderIcon fontSize="medium" />
+              </IconButton>
+            </Tooltip>
+          }
+        />
         <CardMedia
           component={NavLink}
           to={`/goods/${good.id}`}
@@ -45,6 +67,14 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           </Typography>
           <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
+<<<<<<< HEAD
+        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
+          <Tooltip title="Cart">
+            <IconButton aria-label="add to basket">
+              <ShoppingCartIcon />
+            </IconButton>
+          </Tooltip>
+=======
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
           <IconButton aria-label="add to favorites">
             <StarBorderIcon fontSize="medium" />
@@ -53,6 +83,7 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           <IconButton aria-label="add to basket">
             <ShoppingCartIcon />
           </IconButton>
+>>>>>>> dev
         </CardActions>
       </Card>
     </Grid>

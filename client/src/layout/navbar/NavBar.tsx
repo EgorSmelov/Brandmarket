@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import { Grid, IconButton, Link } from '@mui/material';
+import { Grid, IconButton, Link, Tooltip } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import DropDownList from './components/drop-down-list/DropDownList';
@@ -47,6 +47,16 @@ export default function NavBar(): JSX.Element {
                   </Button>
                 </>
               )}
+              <Tooltip title="Favourite">
+                <IconButton color="inherit" component={NavLink} to="/favorites">
+                  <FavoriteIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Cart">
+                <IconButton color="inherit" component={NavLink} to="/basket">
+                  <LocalGroceryStoreIcon />
+                </IconButton>
+              </Tooltip>
 
               {user.status === 'authenticated' && (
                 <>
