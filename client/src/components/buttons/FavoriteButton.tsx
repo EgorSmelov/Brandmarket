@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addFavoritesThunk, delFavoritesThunk } from '../../redux/slices/favorites/favoritesThunks';
 import type { GoodType } from '../../types/good';
@@ -14,9 +14,11 @@ export default function FavoriteButton({ userId, goodId }: FavoriteButtonPropsTy
   const dispath = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.favorites);
 
-  if (favorites.find((favorite: GoodType) => favorite.id === goodId)) {
-    setIsFavorite(true);
-  }
+  useEffect(() => {
+    if (favorites.find((favorite: GoodType) => favorite.id === goodId)) {
+      setIsFavorite(true);
+    }
+  }, []);
 
   const addFavoritesHandler = (): void => {
     if (!isFavorite) {
