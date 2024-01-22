@@ -10,11 +10,11 @@ export default function GoodCardsList(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    void dispatch(getAllGoodsThunk());
+    void dispatch(getAllGoodsThunk(null));
   }, []);
 
   console.log(goods[0]);
-  
+
   return (
     <Grid container spacing={4}>
       {goods.map((good) => (
