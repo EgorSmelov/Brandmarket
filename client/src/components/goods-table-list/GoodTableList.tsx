@@ -10,7 +10,7 @@ export default function GoodTableList(): JSX.Element {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    void dispatch(getAllGoodsThunk());
+    void dispatch(getAllGoodsThunk(null));
   }, [dispatch]);
 
   return (
