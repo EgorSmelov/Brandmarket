@@ -6,7 +6,6 @@ async function resLocals(req, res, next) {
   const { refreshToken } = req.cookies;
   try {
     const { user } = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-    // console.log({ user });
     res.locals.user = user;
     next();
   } catch (error) {

@@ -3,6 +3,7 @@ import type { BrandType } from '../types/brand';
 
 export const apiBrandsService = axios.create({
   baseURL: 'http://localhost:3000/api/v1/brands/',
+  withCredentials: true,
 });
 
 class BrandsService {

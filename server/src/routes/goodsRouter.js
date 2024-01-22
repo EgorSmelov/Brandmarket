@@ -1,7 +1,7 @@
 const express = require("express");
 const { Op } = require("sequelize");
 const verifyAccessToken = require("../middlewares/verifyAccessToken");
-const { Good, GoodsInfo } = require("../../db/models");
+const { Good, GoodsInfo, Favorite, User } = require("../../db/models");
 const uploadMiddleware = require("../middlewares/uploadFile");
 
 const apiGoodsRouter = express.Router();
@@ -9,13 +9,21 @@ const apiGoodsRouter = express.Router();
 apiGoodsRouter
   .route("/")
   .get(async (req, res) => {
-    console.log(res.locals.user)
     try {
       const goods = await Good.findAll({
         include: [
           {
             model: GoodsInfo,
             where: { quantity: { [Op.gt]: 0 } },
+          },
+          {
+            model: User,
+            where: { id: res.locals.user.id },
+            required: false,
+            attributes: ["id"],
+            through: {
+              model: Favorite,
+            },
           },
         ],
       });
@@ -121,7 +129,21 @@ apiGoodsRouter
   .get(async (req, res) => {
     try {
       const good = await Good.findByPk(req.params.id, {
-        include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
+        include: [
+          {
+            model: GoodsInfo,
+            where: { quantity: { [Op.gt]: 0 } },
+          },
+          {
+            model: User,
+            where: { id: res.locals.user.id },
+            required: false,
+            attributes: ["id"],
+            through: {
+              model: Favorite,
+            },
+          },
+        ],
       });
       res.json(good);
     } catch (error) {

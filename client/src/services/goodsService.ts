@@ -4,6 +4,7 @@ import type { GoodType } from '../types/good';
 
 export const apiGoodsService = axios.create({
   baseURL: 'http://localhost:3000/api/v1/goods',
+  withCredentials: true,
 });
 
 class GoodsService {

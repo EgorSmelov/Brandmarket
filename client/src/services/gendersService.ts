@@ -3,6 +3,7 @@ import type { GenderType } from '../types/gender';
 
 export const apiGendersService = axios.create({
   baseURL: 'http://localhost:3000/api/v1/genders/',
+  withCredentials: true,
 });
 
 class GendersService {
