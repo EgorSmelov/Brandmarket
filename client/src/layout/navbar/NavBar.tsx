@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
@@ -28,9 +27,15 @@ export default function NavBar(): JSX.Element {
                 <Burger />
               </IconButton>
               <Link color="inherit" underline="none" component={NavLink} to="/">
-                <Typography variant="h6" component="div">
-                  Brandmarket
-                </Typography>
+                <Box
+                  component="img"
+                  sx={{
+                    height: 45,
+                    width: 200,
+                  }}
+                  alt="logo"
+                  src="/img/wiotqupl.png"
+                />
               </Link>
             </Grid>
 
@@ -59,6 +64,7 @@ export default function NavBar(): JSX.Element {
                       <LocalGroceryStoreIcon />
                     </IconButton>
                   </Tooltip>
+
                   <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
                     Выйти
                   </Button>

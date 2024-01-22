@@ -20,6 +20,7 @@ import getAllGendersThunk from './redux/slices/genders/genderThunks';
 import PrivateRouter from './routes/privateRouter/PrivateRouter';
 import Loader from './components/Loader';
 import RegRouter from './components/routing/RegRouter';
+import { getFavoritesThunk } from './redux/slices/favorites/favoritesThunks';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,6 +29,10 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(userCheckThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(getFavoritesThunk(1));
   }, [dispatch]);
 
   useEffect(() => {

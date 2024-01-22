@@ -8,8 +8,8 @@ export const apiFavoritesService = axios.create({
 });
 
 class FavoritesService {
-  static async getFavorites(): Promise<GoodType[]> {
-    const response = await apiFavoritesService.get<GoodType[]>('/');
+  static async getFavorites(userId: UserType['id']): Promise<GoodType[]> {
+    const response = await apiFavoritesService.get<GoodType[]>(`/${userId}`);
     if (response.status === 200) return response.data;
     return [];
   }

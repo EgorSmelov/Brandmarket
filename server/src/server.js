@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-// app.use(resLocals);
+app.use(resLocals);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/goods", apiGoodsRouter);

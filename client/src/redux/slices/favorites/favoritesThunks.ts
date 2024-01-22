@@ -4,8 +4,8 @@ import type { UserType } from '../../../types/auth';
 import type { GoodType } from '../../../types/good';
 import GoodsService from '../../../services/goodsService';
 
-export const getFavoritesThunk = createAsyncThunk('favorites/getFavoritesThunk', async () => {
-  const data = await FavoritesService.getFavorites();
+export const getFavoritesThunk = createAsyncThunk('favorites/getFavoritesThunk', async (userId) => {
+  const data = await FavoritesService.getFavorites(userId);
   return data;
 });
 
