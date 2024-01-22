@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Card,
   CardActions,
@@ -8,18 +9,24 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+=======
+import { Card, CardActions, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+>>>>>>> dev
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
+import type { UserType } from '../../../types/auth';
+import FavoriteButton from '../../buttons/FavoriteButton';
 
 type PropsCard = {
   good: GoodType;
+  userId: UserType['id'];
 };
 
-export default function GoodCardItem({ good }: PropsCard): JSX.Element {
+function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
   return (
     <Grid className="wrapper" item xs={12} sm={6} md={4}>
       <Card
@@ -29,6 +36,7 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
           ':hover': {
             boxShadow: 20, // theme.shadows[20]
           },
+          border: '1px solid #e0e0e0',
         }}
       >
         <CardHeader
@@ -51,22 +59,35 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
           image={`http://localhost:3000/${good.image}`}
         />
         <StyledCardContent sx={{ flexGrow: 1 }}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h5" component="h2">
             {good.title}
           </Typography>
-          <Typography sx={{ color: 'gray' }}>{good.description}</Typography>
-          <Typography sx={{ color: 'gray' }}>{good.color}</Typography>
-          <br />
-          <Typography>{good.price} ₽</Typography>
+          <Typography sx={{ color: 'gray' }} gutterBottom>
+            {good.description}
+          </Typography>
+          <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
+<<<<<<< HEAD
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
           <Tooltip title="Cart">
             <IconButton aria-label="add to basket">
               <ShoppingCartIcon />
             </IconButton>
           </Tooltip>
+=======
+        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
+          <IconButton aria-label="add to favorites">
+            <StarBorderIcon fontSize="medium" />
+          </IconButton>
+          <FavoriteButton userId={userId} goodId={good.id} />
+          <IconButton aria-label="add to basket">
+            <ShoppingCartIcon />
+          </IconButton>
+>>>>>>> dev
         </CardActions>
       </Card>
     </Grid>
   );
 }
+
+export default React.memo(GoodCardItem);

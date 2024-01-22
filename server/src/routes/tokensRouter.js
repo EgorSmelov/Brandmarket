@@ -1,12 +1,12 @@
-const express = require('express');
-const jwtConfig = require('../config/jwtConfig');
-const generateTokens = require('../utils/generateTokens');
-const cookiesConfig = require('../config/cookiesConfig')
-const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
+const express = require("express");
+const jwtConfig = require("../config/jwtConfig");
+const generateTokens = require("../utils/generateTokens");
+const cookiesConfig = require("../config/cookiesConfig");
+const verifyRefreshToken = require("../middlewares/verifyRefreshToken");
 
 const tokensRouter = express.Router();
 
-tokensRouter.get('/refresh', verifyRefreshToken, async (req, res) => {
+tokensRouter.get("/refresh", verifyRefreshToken, async (req, res) => {
   const { user } = res.locals;
   const { accessToken, refreshToken } = generateTokens({ user });
   res

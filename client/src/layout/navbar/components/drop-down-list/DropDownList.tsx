@@ -19,20 +19,25 @@ export default function BasicMenu(): JSX.Element {
 
   return (
     <Box>
-      <MenuItem>
-        <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-          sx={{ color: 'white' }}
-          startIcon={<PersonIcon />}
-        >
-          Личный кабинет
-          <ArrowDropDownIcon />
-        </Button>
-      </MenuItem>
+      {/* <MenuItem> */}
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        sx={{
+          color: 'black',
+          ':hover': {
+            backgroundColor: '#f2f2f2', // theme.shadows[20]
+          },
+        }}
+        startIcon={<PersonIcon />}
+      >
+        Личный кабинет
+        <ArrowDropDownIcon />
+      </Button>
+      {/* </MenuItem> */}
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

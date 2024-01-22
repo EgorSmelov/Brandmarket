@@ -14,12 +14,10 @@ apiGoodsRouter
         include: [
           {
             model: GoodsInfo,
-            user: { where: { userId: res.locals.id } },
             where: { quantity: { [Op.gt]: 0 } },
           },
         ],
       });
-
       return res.json(goods);
     } catch (error) {
       return res.status(500).json(error);
@@ -36,6 +34,7 @@ apiGoodsRouter
         color,
         size,
         quantity,
+        userId,
         categoryId,
         genderId,
         brandId,
@@ -50,7 +49,7 @@ apiGoodsRouter
         categoryId,
         genderId,
         brandId,
-        userId: res.locals.userId,
+        userId: Number(userId),
       }).then((data) => {
         GoodsInfo.create({
           goodId: data.id,
@@ -67,6 +66,7 @@ apiGoodsRouter
     }
   });
 
+// Все товары по полу
 apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
   try {
     const goods = await Good.findAll({
@@ -78,7 +78,23 @@ apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
     return res.status(500).json(error);
   }
 });
+// ------------ //
 
+// Товары продавца
+apiGoodsRouter.get("/sellers", async (req, res) => {
+  try {
+    const goodsSeller = await Good.findAll({
+      where: { userId: res.locals.user.id },
+      order: [["createdAt", "DESC"]],
+    });
+    return res.json(goodsSeller);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+// ------------ //
+
+// Все товары в категории
 apiGoodsRouter.get(
   "/genders/:genderId/categories/:categoryId",
   async (req, res) => {
@@ -96,59 +112,62 @@ apiGoodsRouter.get(
     }
   }
 );
+// ------------ //
 
-apiGoodsRouter.delete("/:id", async (req, res) => {
-  try {
-    await Good.destroy({ where: { id: req.params.id } });
-    res.sendStatus(200);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json(error);
-  }
-});
+// Один товар
+apiGoodsRouter
+  .route("/:id")
+  .get(async (req, res) => {
+    try {
+      const good = await Good.findByPk(req.params.id, {
+        include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
+      });
+      res.json(good);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  })
+  .delete(async (req, res) => {
+    try {
+      await Good.destroy({ where: { id: req.params.id } });
+      res.sendStatus(200);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json(error);
+    }
+  })
+  .patch(verifyAccessToken, async (req, res) => {
+    try {
+      if (!req.body?.title)
+        return res.status(500).json({ message: "Empty reqbody" });
+      const {
+        title,
+        price,
+        image,
+        description,
+        color,
+        categoryId,
+        genderId,
+        brandId,
+      } = req.body;
 
-apiGoodsRouter.get("/:id", async (req, res) => {
-  try {
-    const good = await Good.findByPk(req.params.id, {
-      include: [{ model: GoodsInfo, where: { quantity: { [Op.gt]: 0 } } }],
-    });
-    res.json(good);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-});
+      const good = await Good.findByPk(req.params.id);
+      good.title = title;
+      good.price = price;
+      good.image = req.file?.filename || image;
+      good.description = description;
+      good.color = color;
+      good.categoryId = Number(categoryId);
+      good.genderId = Number(genderId);
+      good.brandId = Number(brandId);
 
-apiGoodsRouter.patch("/:id", verifyAccessToken, async (req, res) => {
-  try {
-    if (!req.body?.title)
-      return res.status(500).json({ message: "Empty reqbody" });
-    const {
-      title,
-      price,
-      image,
-      description,
-      color,
-      categoryId,
-      genderId,
-      brandId,
-    } = req.body;
+      good.save();
 
-    const good = await Good.findByPk(req.params.id);
-    good.title = title;
-    good.price = price;
-    good.image = req.file?.filename || image;
-    good.description = description;
-    good.color = color;
-    good.categoryId = Number(categoryId);
-    good.genderId = Number(genderId);
-    good.brandId = Number(brandId);
-
-    good.save();
-
-    return res.status(200).json(good);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-});
+      return res.status(200).json(good);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  });
+// ------------ //
 
 module.exports = apiGoodsRouter;

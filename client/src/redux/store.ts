@@ -2,16 +2,18 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/auth/authSlice';
 import categorySlice from './slices/categories/categorySlice';
 import brandSlice from './slices/brands/brandSlice';
-import goodSlice from './slices/goods/goodSlice';
+import goodReducer from './slices/goods/goodSlice';
 import genderSlice from './slices/genders/genderSlice';
+import favoritesReducer from './slices/favorites/favoritesSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     categories: categorySlice,
     brands: brandSlice,
-    goods: goodSlice,
+    goods: goodReducer,
     genders: genderSlice,
+    favorites: favoritesReducer,
   },
 });
 
