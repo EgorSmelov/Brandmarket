@@ -6,6 +6,7 @@ import goodReducer from './slices/goods/goodSlice';
 import genderSlice from './slices/genders/genderSlice';
 import favoritesReducer from './slices/favorites/favoritesSlice';
 import userReducer from './slices/users/userSlice';
+import basketReducer from './slices/baskets/basketSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     genders: genderSlice,
     favorites: favoritesReducer,
     users: userReducer,
+    baskets: basketReducer,
   },
 });
 

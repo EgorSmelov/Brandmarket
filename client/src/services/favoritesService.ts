@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 import type { GoodType } from '../types/good';
-import type { UserType } from '../types/auth';
 
 export const apiFavoritesService = axios.create({
   baseURL: 'http://localhost:3000/api/v1/favorites',

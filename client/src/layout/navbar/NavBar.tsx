@@ -17,6 +17,7 @@ export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
   const { favorites } = useAppSelector((state) => state.favorites);
+  const { baskets } = useAppSelector((state) => state.baskets);
 
   return (
     <Box>
@@ -64,7 +65,9 @@ export default function NavBar(): JSX.Element {
                   </Tooltip>
                   <Tooltip title="Корзина">
                     <IconButton color="inherit" component={NavLink} to="/basket">
-                      <LocalGroceryStoreIcon />
+                      <Badge badgeContent={baskets.length} color="primary">
+                        <LocalGroceryStoreIcon />
+                      </Badge>
                     </IconButton>
                   </Tooltip>
 

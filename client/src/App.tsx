@@ -22,6 +22,7 @@ import Loader from './components/Loader';
 import RegRouter from './components/routing/RegRouter';
 import { getFavoritesThunk } from './redux/slices/favorites/favoritesThunks';
 import ModerationEditList from './pages/moderation/ModerationEditList';
+import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ function App(): JSX.Element {
     void dispatch(getAllCategoriesThunk());
     void dispatch(getAllBrandsThunk());
     void dispatch(getAllGendersThunk());
+    void dispatch(getBasketsThunk());
   }, [dispatch]);
 
   return (
