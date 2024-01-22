@@ -7,6 +7,9 @@ export type GoodType = {
   image: string;
   GoodsInfos: GoodsInfosType[];
   categoryId: number;
+  brandId: number;
+  userId: number;
+  genderId: number;
 };
 
 export type GoodsInfosType = {

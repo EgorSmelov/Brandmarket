@@ -1,11 +1,10 @@
 import { Card, CardActions, CardMedia, Grid, IconButton, Tooltip, Typography } from '@mui/material';
 import React from 'react';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { NavLink } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
-import type { UserType } from '../../../types/auth';
 import FavoriteButton from '../../buttons/FavoriteButton';
+import BasketButton from '../../buttons/BasketButton';
 
 type PropsCard = {
   good: GoodType;
@@ -45,9 +44,7 @@ function GoodCardItem({ good }: PropsCard): JSX.Element {
         </StyledCardContent>
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
           <FavoriteButton good={good} />
-          <IconButton aria-label="add to basket">
-            <ShoppingCartIcon />
-          </IconButton>
+          <BasketButton good={good} />
         </CardActions>
       </Card>
     </Grid>

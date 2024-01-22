@@ -1,38 +1,38 @@
 const express = require("express");
-const { Favorite, Good, User } = require("../../db/models");
+const { Basket, Good, User } = require("../../db/models");
 
-const favoritesRouter = express.Router();
+const basketRouter = express.Router();
 
 // Избранное
-favoritesRouter.get("/", async (req, res) => {
+basketRouter.get("/", async (req, res) => {
   try {
-    const favoriteGoods = await Good.findAll({
+    const basketGoods = await Good.findAll({
       include: {
-        as: "userFavorites",
+        as: "userBaskets",
         model: User,
         where: { id: res.locals.user.id },
         attributes: ["id"],
         through: {
-          model: Favorite,
+          model: Basket,
         },
       },
     });
-    res.json(favoriteGoods);
+    res.json(basketGoods);
   } catch (error) {
     console.error(error);
     return res.status(500).json(error);
   }
 });
 
-favoritesRouter
+basketRouter
   .route("/:goodId") // Либо парсить заголовок Authorization через мидлвару verifyAccessToken, либо во все сервисы подклчить передачу куки и на сервере через resLocals.js или verifyRefreshTokeb.js
   .post(async (req, res) => {
     try {
       const { goodId } = req.params;
-      const favorites = await Favorite.findOrCreate({
+      const baskets = await Basket.findOrCreate({
         where: { goodId, userId: res.locals.user.id },
       });
-      return res.json(favorites);
+      return res.json(baskets);
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
@@ -41,7 +41,7 @@ favoritesRouter
   .delete(async (req, res) => {
     try {
       const { goodId } = req.params;
-      await Favorite.destroy({
+      await Basket.destroy({
         where: { goodId, userId: res.locals.user.id },
       });
       res.sendStatus(200);
@@ -52,4 +52,4 @@ favoritesRouter
   });
 // ------------ //
 
-module.exports = favoritesRouter;
+module.exports = basketRouter;

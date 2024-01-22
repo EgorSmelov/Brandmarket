@@ -11,6 +11,7 @@ const gendersRouter = require("./routes/gendersRouter");
 const favoritesRouter = require("./routes/favoritesRouter");
 const resLocals = require("./middlewares/resLocals");
 const moderationRouter = require("./routes/moderationRouter");
+const basketRouter = require("./routes/basketRouter");
 require("dotenv").config();
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/moderation", moderationRouter);
 app.use("/api/v1/goods", apiGoodsRouter);
 app.use("/api/v1/favorites", favoritesRouter);
+app.use("/api/v1/baskets", basketRouter);
 app.use("/api/v1/tokens", tokensRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
