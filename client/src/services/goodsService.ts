@@ -9,6 +9,7 @@ export const apiGoodsService = axios.create({
 
 class GoodsService {
   static async getGoods(categoryId: number | null): Promise<GoodType[]> {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const response = await apiGoodsService.get<GoodType[]>(`/?categoryId=${categoryId}`);
     if (response.status === 200) return response.data;
     return [];

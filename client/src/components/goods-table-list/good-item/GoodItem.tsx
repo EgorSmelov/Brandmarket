@@ -7,37 +7,56 @@ import TableRow from '@mui/material/TableRow';
 import { IconButton, Link, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from 'react-router-dom';
-import type { GoodType } from '../../../types/good';
 import { useAppDispatch } from '../../../redux/hooks';
+import type { SellerGoodType } from '../../../types/seller';
+import { deleteSellerGoodHandlerThunk } from '../../../redux/slices/seller/sellerThunk';
 import { deleteGoodHandlerThunk } from '../../../redux/slices/goods/goodThunk';
+import type { GoodType } from '../../../types/good';
 
-type GoodItemPropsType = {
-  good: GoodType;
+type SellerGoodItemPropsType = {
+  sellerGood: SellerGoodType;
 };
 
-function GoodItem({ good }: GoodItemPropsType): JSX.Element {
+function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: number }): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableBody>
         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-          <TableCell component="th" scope="row">
-            {good.title}
+          <TableCell style={{ width: '10%', fontWeight: 600 }} align="left">
+            {index}.
           </TableCell>
-          <TableCell align="right">{good.price}</TableCell>
-          <TableCell align="right">
+          <TableCell style={{ width: '35%' }} component="th" scope="row">
+            {sellerGood.title}
+          </TableCell>
+          {sellerGood.GoodsInfos && (
+            <TableCell style={{ width: '20%' }} align="left">
+              Размер: {sellerGood.GoodsInfos.map((el) => el.size)}
+            </TableCell>
+          )}
+          <TableCell style={{ width: '20%' }} align="right">
+            {sellerGood.price} ₽
+          </TableCell>
+          <TableCell style={{ width: '22.5%' }} align="right">
             <Tooltip title="Edit">
               <IconButton>
-                <Link color="inherit" underline="none" component={NavLink} to="/good/:id/edit">
+                <Link
+                  color="inherit"
+                  underline="none"
+                  component={NavLink}
+                  to={`/good/${sellerGood.id}/edit`}
+                >
                   <ModeEditIcon />
                 </Link>
               </IconButton>
             </Tooltip>
           </TableCell>
-          <TableCell align="right">
+          <TableCell style={{ width: '22.5%' }} align="right">
             <Tooltip title="Delete">
-              <IconButton onClick={() => void dispatch(deleteGoodHandlerThunk(good.id))}>
+              <IconButton
+                onClick={() => void dispatch(deleteSellerGoodHandlerThunk(sellerGood.id))}
+              >
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
