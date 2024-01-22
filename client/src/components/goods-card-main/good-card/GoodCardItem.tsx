@@ -9,10 +9,9 @@ import FavoriteButton from '../../buttons/FavoriteButton';
 
 type PropsCard = {
   good: GoodType;
-  userId: UserType['id'];
 };
 
-function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
+function GoodCardItem({ good }: PropsCard): JSX.Element {
   return (
     <Grid className="wrapper" item xs={12} sm={6} md={4}>
       <Card
@@ -45,7 +44,7 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
-          <FavoriteButton userId={userId} goodId={good.id} />
+          <FavoriteButton good={good} />
           <IconButton aria-label="add to basket">
             <ShoppingCartIcon />
           </IconButton>

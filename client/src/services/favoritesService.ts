@@ -9,20 +9,20 @@ export const apiFavoritesService = axios.create({
 });
 
 class FavoritesService {
-  static async getFavorites(userId: UserType['id']): Promise<GoodType[]> {
-    const response = await apiFavoritesService.get<GoodType[]>(`/${userId}`);
+  static async getFavorites(): Promise<GoodType[]> {
+    const response = await apiFavoritesService.get<GoodType[]>(`/`);
     if (response.status === 200) return response.data;
     return [];
   }
 
-  static async addFavorites(userId: UserType['id'], goodId: GoodType['id']): Promise<void> {
-    const response = await apiFavoritesService.post(`/${userId}/${goodId}`);
+  static async addFavorites(goodId: GoodType['id']): Promise<GoodType> {
+    const response = await apiFavoritesService.post<GoodType>(`/${goodId}`);
     if (response.status === 200) return response.data;
     return Promise.reject(new Error(`Server error on adding to favorites`));
   }
 
-  static async delFavorites(userId: UserType['id'], goodId: GoodType['id']): Promise<void> {
-    const response = await apiFavoritesService.delete(`/${userId}/${goodId}`);
+  static async delFavorites(goodId: GoodType['id']): Promise<void> {
+    const response = await apiFavoritesService.delete(`/${goodId}`);
     if (response.status === 200) return;
     return Promise.reject(new Error(`Server error deleting from favorites`));
   }

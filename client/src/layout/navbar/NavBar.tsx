@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import { Grid, IconButton, Link, Tooltip } from '@mui/material';
+import { Badge, Grid, IconButton, Link, Tooltip } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import DropDownList from './components/drop-down-list/DropDownList';
@@ -16,6 +16,7 @@ import { logoutHandlerThunk } from '../../redux/slices/auth/authThunks';
 export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
+  const { favorites } = useAppSelector((state) => state.favorites);
 
   return (
     <Box>
@@ -56,7 +57,9 @@ export default function NavBar(): JSX.Element {
                 <>
                   <Tooltip title="Избранное">
                     <IconButton color="inherit" component={NavLink} to="/favorites">
-                      <FavoriteIcon />
+                      <Badge badgeContent={favorites.length} color="primary">
+                        <FavoriteIcon />
+                      </Badge>
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Корзина">
