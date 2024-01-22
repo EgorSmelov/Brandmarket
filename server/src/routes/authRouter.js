@@ -34,10 +34,10 @@ authRouter.post("/login", async (req, res) => {
 
 authRouter.post("/registration", async (req, res) => {
   try {
-    const { email, password, name, roleId } = req.body;
+    const { email, password, name } = req.body;
     const [user, created] = await User.findOrCreate({
       where: { email },
-      defaults: { name, roleId, password: await bcrypt.hash(password, 10) },
+      defaults: { name, password: await bcrypt.hash(password, 10) },
     });
     if (!created)
       return res.status(400).json({ message: "Email already exists" });
