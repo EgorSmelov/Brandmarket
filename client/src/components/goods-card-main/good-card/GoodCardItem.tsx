@@ -5,6 +5,7 @@ import {
   CardMedia,
   Grid,
   IconButton,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import React from 'react';
@@ -32,9 +33,11 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
       >
         <CardHeader
           action={
-            <IconButton aria-label="settings">
-              <StarBorderIcon fontSize="medium" />
-            </IconButton>
+            <Tooltip title="Favourite">
+              <IconButton aria-label="settings">
+                <StarBorderIcon fontSize="medium" />
+              </IconButton>
+            </Tooltip>
           }
         />
         <CardMedia
@@ -57,9 +60,11 @@ export default function GoodCardItem({ good }: PropsCard): JSX.Element {
           <Typography>{good.price} ₽</Typography>
         </StyledCardContent>
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
-          <IconButton aria-label="add to basket">
-            <ShoppingCartIcon />
-          </IconButton>
+          <Tooltip title="Cart">
+            <IconButton aria-label="add to basket">
+              <ShoppingCartIcon />
+            </IconButton>
+          </Tooltip>
         </CardActions>
       </Card>
     </Grid>

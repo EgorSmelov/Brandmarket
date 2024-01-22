@@ -15,7 +15,7 @@ type GoodItemPropsType = {
   good: GoodType;
 };
 
-export default function GoodItem({ good }: GoodItemPropsType): JSX.Element {
+function GoodItem({ good }: GoodItemPropsType): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
@@ -47,3 +47,5 @@ export default function GoodItem({ good }: GoodItemPropsType): JSX.Element {
     </Table>
   );
 }
+
+export default React.memo(GoodItem);
