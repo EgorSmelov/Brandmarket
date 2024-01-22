@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardActions,
-  CardMedia,
-  Grid,
-  IconButton,
-  Typography,
-} from '@mui/material';
+import { Card, CardActions, CardMedia, Grid, IconButton, Tooltip, Typography } from '@mui/material';
 import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { NavLink } from 'react-router-dom';
@@ -51,11 +44,12 @@ function GoodCardItem({ good, userId }: PropsCard): JSX.Element {
           </Typography>
           <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
         </StyledCardContent>
-        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
-          <FavoriteButton userId={userId} goodId={good.id} />
-          <IconButton aria-label="add to basket">
-            <ShoppingCartIcon />
-          </IconButton>
+        <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'flex-end' }}>
+          <Tooltip title="Cart">
+            <IconButton aria-label="add to basket">
+              <ShoppingCartIcon />
+            </IconButton>
+          </Tooltip>
         </CardActions>
       </Card>
     </Grid>

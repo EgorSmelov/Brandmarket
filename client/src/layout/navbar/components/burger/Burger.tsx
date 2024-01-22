@@ -4,6 +4,8 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Button, IconButton, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import getAllCategoriesThunk from '../../../../redux/slices/categories/categoryThunks';
 import CategoryItem from './category-item/CategoryItem';
@@ -11,7 +13,7 @@ import GenderItem from './gender-item/GenderItem';
 
 type Anchor = 'left';
 
-export default function Burger(): JSX.Element {
+export default function OneMoreBurger(): JSX.Element {
   const [state, setState] = React.useState({
     left: false,
   });
@@ -44,12 +46,26 @@ export default function Burger(): JSX.Element {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {genders?.map((gender) => (
+      <List sx={{ display: 'flex', alignItems: 'center', paddingLeft: '5px' }}>
+        {/* {genders?.map((gender) => (
           <div key={gender.id}>
             <GenderItem gender={gender} />
           </div>
+        ))} */}
+        <Typography variant="h5">Женщины</Typography>
+        <ExpandMoreIcon />
+      </List>
+      <Divider />
+      <List>
+        {categories?.map((category) => (
+          <div key={category.id}>
+            <CategoryItem category={category} />
+          </div>
         ))}
+      </List>
+      <List sx={{ display: 'flex', alignItems: 'center', paddingLeft: '5px' }}>
+        <Typography variant="h5">Мужчины</Typography>
+        <ExpandMoreIcon />
       </List>
       <Divider />
       <List>
