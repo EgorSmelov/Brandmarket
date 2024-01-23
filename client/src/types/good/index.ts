@@ -17,3 +17,8 @@ export type GoodState = {
   goods: GoodType[];
   good: GoodType | null;
 };
+
+export type SellerGoodState = {
+  sellerGoods: GoodType[];
+  isLoading: boolean;
+};
