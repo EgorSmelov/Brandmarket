@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import type { SellerGoodState } from '../../../types/seller';
 import getAllSellerGoodsThunk, { deleteSellerGoodHandlerThunk } from './sellerThunk';
-import type { SellerGoodState } from '../../../types/good';
 
 const initialState: SellerGoodState = { sellerGoods: [], isLoading: false };
 

@@ -16,6 +16,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../redux/hooks';
 import type { GoodType } from '../../../../types/good';
+import GoodsService from '../../../../services/goodsService';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -52,15 +53,9 @@ export default function GoodEditForm({ good }: { good: GoodType }): JSX.Element 
     formData.append('file', img);
     const data = Object.fromEntries(formData);
     console.log(data);
-    const response = await axios
-      .patch(`http://localhost:3000/api/v1/goods/${good.id}`, data, {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      })
-      .finally(() => {
-        navigate('/');
-      });
+    const response = await GoodsService.editGood(good.id, data).finally(() => {
+      navigate('/');
+    });
   };
 
   return (
