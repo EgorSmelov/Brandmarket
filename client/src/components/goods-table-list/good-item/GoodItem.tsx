@@ -28,19 +28,17 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
           <TableCell style={{ width: '10%', fontWeight: 600 }} align="left">
             {index}.
           </TableCell>
-          <TableCell style={{ width: '35%' }} component="th" scope="row">
+          <TableCell style={{ width: '25%' }} component="th" scope="row">
             {sellerGood.title}
           </TableCell>
-          {/* {sellerGood.GoodsInfos && (
-            <TableCell style={{ width: '20%' }} align="left">
-              Размер: {sellerGood.GoodsInfos.map((el) => el.size)}
-            </TableCell>
-          )} */}
-          <TableCell style={{ width: '20%' }} align="right">
+          <TableCell style={{ width: '15%' }} align="left">
+            Размер: {sellerGood.size}
+          </TableCell>
+          <TableCell style={{ width: '15%' }} align="right">
             {sellerGood.price} ₽
           </TableCell>
           <TableCell style={{ width: '22.5%' }} align="right">
-            <Tooltip title="Edit">
+            <Tooltip title="Редактировать">
               <IconButton>
                 <Link
                   color="inherit"
@@ -54,7 +52,7 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
             </Tooltip>
           </TableCell>
           <TableCell style={{ width: '22.5%' }} align="right">
-            <Tooltip title="Delete">
+            <Tooltip title="Удалить">
               <IconButton
                 onClick={() => void dispatch(deleteSellerGoodHandlerThunk(sellerGood.id))}
               >
