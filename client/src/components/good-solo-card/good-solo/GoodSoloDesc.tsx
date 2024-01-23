@@ -1,7 +1,9 @@
-import { CardContent, Grid, Typography } from '@mui/material';
+import { CardActions, CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import type { GoodType } from '../../../types/good';
+import FavoriteButton from '../../buttons/FavoriteButton';
+import BasketButton from '../../buttons/BasketButton';
 // import { StyledCardContent } from '../../goods-card-main/good-card/ComponentStyled';
 
 type GoodTypeProps = {
@@ -42,15 +44,20 @@ const StyledPrice = styled(Typography)`
   font-size: 18px;
 `;
 export default function GoodSoloDesc({ good }: GoodTypeProps): JSX.Element {
-  
   return (
-    <StyledCardContent>
-      <StyledTitle gutterBottom variant="h5" component="h2">
-        {good.title}
-      </StyledTitle>
-      <StyledDescription>{good.description}</StyledDescription>
-      <StyledColor>Цвет: {good.color}</StyledColor>
-      <StyledPrice>{good.price} ₽</StyledPrice>
-    </StyledCardContent>
+    <>
+      <StyledCardContent>
+        <StyledTitle gutterBottom variant="h5" component="h2">
+          {good.title}
+        </StyledTitle>
+        <StyledDescription>{good.description}</StyledDescription>
+        <StyledColor>Цвет: {good.color}</StyledColor>
+        <StyledPrice>{good.price} ₽</StyledPrice>
+      </StyledCardContent>
+      <CardActions>
+        <FavoriteButton good={good} />
+        <BasketButton good={good} />
+      </CardActions>
+    </>
   );
 }

@@ -26,7 +26,6 @@ export default function GoodSoloPage(): JSX.Element {
         <Typography variant="h4">good is null</Typography>
       </Container>
     );
-  console.log(good.GoodsInfos);
 
   return (
     <Grid

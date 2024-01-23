@@ -3,30 +3,20 @@ const { User, ModerationSeller } = require("../../db/models");
 
 const moderationRouter = express.Router();
 
-moderationRouter
-  .route("/")
-  .get(async (req, res) => {
-    try {
-      const users = await User.findAll();
-      return res.json(users);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
-  })
-  .post(async (req, res) => {
-    try {
-      const { inn, phone } = req.body;
-      const sellerForm = await ModerationSeller.findOrCreate({
-        where: { inn, phone, userId: res.locals.user.id },
-      });
-      return res
-        .status(201)
-        .json({ message: "The good has been successfully added" });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json(error);
-    }
-  });
+moderationRouter.route("/").post(async (req, res) => {
+  try {
+    const { inn, phone } = req.body;
+    const sellerForm = await ModerationSeller.findOrCreate({
+      where: { inn, phone, userId: res.locals.user.id },
+    });
+    return res
+      .status(201)
+      .json({ message: "The good has been successfully added" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
 
 moderationRouter.get("/users", async (req, res) => {
   try {

@@ -9,7 +9,7 @@ export const apiModerationService = axios.create({
 
 class ModerationService {
   static async getUsers(): Promise<UserType[]> {
-    const response = await apiModerationService.get<UserType[]>('/');
+    const response = await apiModerationService.get<UserType[]>('/users');
     if (response.status === 200) return response.data;
     return [];
   }

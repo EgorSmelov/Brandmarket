@@ -38,6 +38,7 @@ function App(): JSX.Element {
     void dispatch(getAllGendersThunk());
     void dispatch(getBasketsThunk());
   }, [dispatch]);
+  
 
   return (
     <Loader isLoading={user.status === 'pending'}>
@@ -61,15 +62,17 @@ function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/:categoryId" element={<HomePage />} />
+              <Route path="/goods/:id" element={<GoodSoloPage />} />
             <Route element={<PrivateRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/auth/login" element={<SignInPage />} />
               <Route path="/auth/registration" element={<SignUpPage />} />
             </Route>
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
               <Route path="/good/:id/edit" element={<GoodEditPage />} />
-              <Route path="/goods/:id" element={<GoodSoloPage />} />
               <Route path="/seller/new" element={<ModerationSellerInputs />} />
-              <Route path="/moderation" element={<ModerationUserList />} />
+              {/* <Route element={<PrivateRouter isAllowed={user === } />}> */}
+                <Route path="/moderation" element={<ModerationUserList />} />
+              {/* </Route> */}
             </Route>
             <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/basket" element={<BasketPage />} />
