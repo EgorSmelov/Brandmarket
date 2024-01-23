@@ -1,17 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-import type { SellerGoodType } from '../../../types/seller';
-import SellerGoodsService from '../../../services/sellerGoodsService';
+import type { GoodType } from '../../../types/good';
+import GoodsService from '../../../services/goodsService';
 
 const getAllSellerGoodsThunk = createAsyncThunk('sellers/getAllSellerGoodsThunk', async () => {
-  const data = await SellerGoodsService.getSellerGoods();
+  const data = await GoodsService.getSellerGoods();
   return data;
 });
 
 export const deleteSellerGoodHandlerThunk = createAsyncThunk(
   'seller/deleteSellerGoodHandlerThunk',
-  async (id: SellerGoodType['id']) => {
-    await SellerGoodsService.deleteSellerGood(id);
+  async (id: GoodType['id']) => {
+    await GoodsService.deleteGood(id);
     return id;
   },
 );
