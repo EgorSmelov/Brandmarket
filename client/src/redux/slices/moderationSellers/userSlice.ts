@@ -16,7 +16,7 @@ export const ModerSlice = createSlice({
     builder.addCase(getUserThunk.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
-    })
+    });
   },
 });
 

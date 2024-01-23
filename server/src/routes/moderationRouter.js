@@ -1,5 +1,5 @@
 const express = require("express");
-const { User, ModerationSeller } = require("../../db/models");
+const { User, ModerationSeller, Good } = require("../../db/models");
 
 const moderationRouter = express.Router();
 
@@ -28,6 +28,16 @@ moderationRouter.get("/users", async (req, res) => {
     return res.status(500).json(error);
   }
 });
+
+moderationRouter.get("/goods", async (req, res) => {
+  try {
+    const goods = await Good.findAll();
+    return res.json(goods);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
 moderationRouter.patch("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
