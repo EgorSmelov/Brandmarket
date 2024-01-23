@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Brand, {
         foreignKey: "brandId",
       });
-      this.belongsTo(models.Good, {
+      this.belongsTo(models.User, {
         foreignKey: "userId",
       });
       this.belongsTo(models.Gender, {
@@ -19,9 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.belongsTo(models.Category, {
         foreignKey: "categoryId",
-      });
-      this.hasMany(models.GoodsInfo, {
-        foreignKey: "goodId",
       });
       this.belongsToMany(models.User, {
         as: "userFavorites",
@@ -47,6 +44,8 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       description: DataTypes.TEXT,
       color: DataTypes.STRING,
+      size: DataTypes.STRING,
+      quantity: DataTypes.INTEGER,
       categoryId: DataTypes.INTEGER,
       genderId: DataTypes.INTEGER,
       brandId: DataTypes.INTEGER,

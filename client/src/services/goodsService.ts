@@ -27,6 +27,29 @@ class GoodsService {
     return Promise.reject(new Error('Server error getting good'));
   }
 
+  static async addGood(formdata: SellerInputsFormType): Promise<SellerInputsType> {
+    const response = await apiGoodsService.post<SellerInputsType>('/', formdata, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+    if (response.status === 200) return response.data;
+    return Promise.reject(new Error(`Server error add good`));
+  }
+
+  static async editGood(
+    goodId: GoodType['id'],
+    formdata: SellerInputsFormType,
+  ): Promise<SellerInputsType> {
+    const response = await apiGoodsService.patch<SellerInputsType>(`/${goodId}`, formdata, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+    if (response.status === 200) return response.data;
+    return Promise.reject(new Error(`Server error edit good`));
+  }
+
   static async deleteGood(id: GoodType['id']): Promise<void> {
     const response = await apiGoodsService.delete(`/${id}`);
     if (response.status === 200) return;
