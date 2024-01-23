@@ -55,8 +55,8 @@ export default function GoodSoloDesc({ good }: GoodTypeProps): JSX.Element {
         <StyledPrice>{good.price} ₽</StyledPrice>
       </StyledCardContent>
       <CardActions>
-        <FavoriteButton good={good} />
-        <BasketButton good={good} />
+        <FavoriteButton page good={good} />
+        <BasketButton page good={good} />
       </CardActions>
     </>
   );

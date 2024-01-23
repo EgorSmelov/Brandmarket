@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addFavoritesThunk, delFavoritesThunk } from '../../redux/slices/favorites/favoritesThunks';
 import type { GoodType } from '../../types/good';
+import { MaterialButton } from './StyledButton';
 
 type FavoriteButtonPropsType = {
   good: GoodType;
+  page?: boolean;
 };
 
-export default function FavoriteButton({ good }: FavoriteButtonPropsType): JSX.Element {
+export default function FavoriteButton({ good, page }: FavoriteButtonPropsType): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
   const dispath = useAppDispatch();
@@ -39,6 +41,19 @@ export default function FavoriteButton({ good }: FavoriteButtonPropsType): JSX.E
 
   if (user.status !== 'authenticated') {
     return <div />;
+  }
+
+  if (page) {
+    return (
+      <MaterialButton 
+        aria-label="add to favorites"
+        type="button"
+        isFavorite
+        onClick={() => addFavoritesHandler(good.id)}
+      >
+        {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+      </MaterialButton>
+    );
   }
 
   return (
