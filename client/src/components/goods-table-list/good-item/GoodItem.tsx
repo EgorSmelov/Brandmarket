@@ -8,17 +8,18 @@ import { IconButton, Link, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
-import type { SellerGoodType } from '../../../types/seller';
 import { deleteSellerGoodHandlerThunk } from '../../../redux/slices/seller/sellerThunk';
 import { deleteGoodHandlerThunk } from '../../../redux/slices/goods/goodThunk';
 import type { GoodType } from '../../../types/good';
 
 type SellerGoodItemPropsType = {
-  sellerGood: SellerGoodType;
+  sellerGood: GoodType;
 };
 
 function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: number }): JSX.Element {
   const dispatch = useAppDispatch();
+
+  console.log(sellerGood);
 
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -30,11 +31,11 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
           <TableCell style={{ width: '35%' }} component="th" scope="row">
             {sellerGood.title}
           </TableCell>
-          {sellerGood.GoodsInfos && (
+          {/* {sellerGood.GoodsInfos && (
             <TableCell style={{ width: '20%' }} align="left">
               Размер: {sellerGood.GoodsInfos.map((el) => el.size)}
             </TableCell>
-          )}
+          )} */}
           <TableCell style={{ width: '20%' }} align="right">
             {sellerGood.price} ₽
           </TableCell>

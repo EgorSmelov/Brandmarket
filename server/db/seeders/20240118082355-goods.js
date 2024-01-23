@@ -13,8 +13,6 @@ module.exports = {
           categoryId: 1,
           genderId: 1,
           brandId: 1,
-          size: "M",
-          quantity: 1,
         },
         {
           title: "Футболка",
@@ -25,8 +23,6 @@ module.exports = {
           categoryId: 1,
           genderId: 1,
           brandId: 1,
-          size: "X",
-          quantity: 1,
         },
         {
           title: "Джинсы",
@@ -37,8 +33,6 @@ module.exports = {
           categoryId: 2,
           genderId: 1,
           brandId: 2,
-          size: "M",
-          quantity: 1,
         },
         {
           title: "Платье",
@@ -49,8 +43,6 @@ module.exports = {
           categoryId: 3,
           genderId: 2,
           brandId: 3,
-          size: "M",
-          quantity: 5,
         },
         {
           title: "Куртка",
@@ -61,8 +53,6 @@ module.exports = {
           categoryId: 4,
           genderId: 1,
           brandId: 4,
-          size: "M",
-          quantity: 1,
         },
         {
           title: "Юбка",
@@ -73,8 +63,6 @@ module.exports = {
           categoryId: 5,
           genderId: 2,
           brandId: 5,
-          size: "S",
-          quantity: 1,
         },
         {
           title: "Рубашка",
@@ -85,8 +73,6 @@ module.exports = {
           categoryId: 6,
           genderId: 1,
           brandId: 6,
-          size: "L",
-          quantity: 1,
         },
         {
           title: "Блузка",
@@ -97,8 +83,6 @@ module.exports = {
           categoryId: 7,
           genderId: 2,
           brandId: 7,
-          size: "S",
-          quantity: 3,
         },
         {
           title: "Спортивные штаны",
@@ -109,8 +93,6 @@ module.exports = {
           categoryId: 8,
           genderId: 1,
           brandId: 8,
-          size: "M",
-          quantity: 2,
         },
         {
           title: "Шапка",
@@ -121,8 +103,6 @@ module.exports = {
           categoryId: 9,
           genderId: 1,
           brandId: 9,
-          size: "XS",
-          quantity: 5,
         },
         {
           title: "Ботинки",
@@ -133,8 +113,6 @@ module.exports = {
           categoryId: 10,
           genderId: 1,
           brandId: 10,
-          size: 42,
-          quantity: 10,
         },
       ],
       {}
