@@ -17,12 +17,9 @@ apiGoodsRouter
 
       const goods = await Good.findAll({
         // where,
+        where: { quantity: { [Op.gt]: 0 } },
 
         include: [
-          {
-            model: GoodsInfo,
-            where: { quantity: { [Op.gt]: 0 } },
-          },
           {
             as: "userFavorites",
             model: User,
@@ -60,13 +57,12 @@ apiGoodsRouter
         color,
         size,
         quantity,
-        userId,
         categoryId,
         genderId,
         brandId,
       } = req.body;
 
-      const good = await Good.create({
+      await Good.create({
         title,
         price: Number(price),
         image: req.file.path.replace("public", ""),
@@ -75,13 +71,9 @@ apiGoodsRouter
         categoryId,
         genderId,
         brandId,
-        userId: Number(userId),
-      }).then((data) => {
-        GoodsInfo.create({
-          goodId: data.id,
-          size,
-          quantity,
-        });
+        userId: res.locals.user.id,
+        size,
+        quantity,
       });
       return res
         .status(201)
@@ -146,11 +138,8 @@ apiGoodsRouter
   .get(async (req, res) => {
     try {
       const good = await Good.findByPk(req.params.id, {
+        where: { quantity: { [Op.gt]: 0 } },
         include: [
-          {
-            model: GoodsInfo,
-            where: { quantity: { [Op.gt]: 0 } },
-          },
           {
             as: "userFavorites",
             model: User,
@@ -180,7 +169,7 @@ apiGoodsRouter
   })
   .delete(async (req, res) => {
     try {
-      console.log(req)
+      console.log(req);
       await Good.destroy({ where: { id: req.params.id } });
       res.sendStatus(200);
     } catch (error) {
@@ -212,6 +201,8 @@ apiGoodsRouter
       good.genderId = genderId;
       good.brandId = brandId;
       good.userId = res.locals.user.id;
+      good.size = size;
+      good.quantity = quantity;
       good.save();
 
       return res.status(200).json(good);
