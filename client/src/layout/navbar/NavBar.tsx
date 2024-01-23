@@ -57,10 +57,10 @@ export default function NavBar(): JSX.Element {
               {user.status === 'authenticated' && (
                 <>
                   <Button color="inherit" component={NavLink} to="/seller/new">
-                        Стать продавцом
+                    Стать продавцом
                   </Button>
                   <Button color="inherit" component={NavLink} to="/moderation">
-                        Пользователи
+                    Пользователи
                   </Button>
                   <Tooltip title="Избранное">
                     <IconButton color="inherit" component={NavLink} to="/favorites">
@@ -71,7 +71,13 @@ export default function NavBar(): JSX.Element {
                   </Tooltip>
                   <Tooltip title="Корзина">
                     <IconButton color="inherit" component={NavLink} to="/basket">
-                      <Badge badgeContent={baskets.length} color="primary">
+                      <Badge
+                        badgeContent={baskets.reduce(
+                          (accum, sum) => accum + sum.userBaskets[0].Baskets.quantity,
+                          0,
+                        )}
+                        color="primary"
+                      >
                         <LocalGroceryStoreIcon />
                       </Badge>
                     </IconButton>

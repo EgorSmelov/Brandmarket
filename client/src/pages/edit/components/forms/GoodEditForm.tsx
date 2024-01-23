@@ -183,6 +183,7 @@ export default function GoodEditForm({ good }: { good: GoodType }): JSX.Element 
             autoComplete="size"
             type="text"
             autoFocus
+            defaultValue={good.size}
           />
           <TextField
             margin="normal"
@@ -194,6 +195,7 @@ export default function GoodEditForm({ good }: { good: GoodType }): JSX.Element 
             autoComplete="quantity"
             type="number"
             autoFocus
+            defaultValue={good.quantity}
           />
           <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
             <Box

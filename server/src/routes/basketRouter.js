@@ -29,10 +29,17 @@ basketRouter
   .post(async (req, res) => {
     try {
       const { goodId } = req.params;
-      const baskets = await Basket.findOrCreate({
-        where: { goodId, userId: res.locals.user.id },
+
+      const good = await Good.findOne({ where: { id: goodId } });
+
+      const basket = await Basket.create({
+        goodId,
+        userId: res.locals.user.id,
+        price: good.price,
+        totalPrice: good.price,
+        quantity: 1,
       });
-      return res.json(baskets);
+      return res.status(201).json(basket); // 201 - создание объекта
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
@@ -51,5 +58,43 @@ basketRouter
     }
   });
 // ------------ //
+
+basketRouter.patch("/:goodId/increment", async (req, res) => {
+  try {
+    const { goodId } = req.params;
+    const basketGood = await Basket.findOne({
+      where: { goodId, userId: res.locals.user.id },
+    });
+    basketGood.quantity += 1;
+    basketGood.totalPrice += basketGood.price;
+    basketGood.save();
+
+    return res.json(basketGood);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
+
+basketRouter.patch("/:goodId/decrement", async (req, res) => {
+  try {
+    const { goodId } = req.params;
+    const basketGood = await Basket.findOne({
+      where: { goodId, userId: res.locals.user.id },
+    });
+    basketGood.quantity > 1 ? (basketGood.quantity -= 1) : basketGood.quantity;
+
+    basketGood.totalPrice > basketGood.price
+      ? (basketGood.totalPrice -= basketGood.price)
+      : basketGood.totalPrice;
+
+    basketGood.save();
+
+    return res.json(basketGood);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
 
 module.exports = basketRouter;

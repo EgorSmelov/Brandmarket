@@ -21,7 +21,7 @@ export default function FavoriteButton({ good }: FavoriteButtonPropsType): JSX.E
     } else {
       setIsFavorite(false);
     }
-  }, []);
+  }, [good.userFavorites]);
 
   const addFavoritesHandler = (id): void => {
     if (!isFavorite) {
