@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { UserModerState } from '../../../types/auth';
-import { getAllUsersThunk, getUserThunk } from './userThunks';
+import { getAllUsersThunk, getUserThunk } from './moderationThunks';
 
 const initialState: UserModerState = { users: [], user: null, isLoading: false };
 

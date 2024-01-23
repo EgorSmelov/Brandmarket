@@ -12,6 +12,6 @@ export default function AdminRouter({
   isSeller,
   redirectPath = '/',
 }: AdminRouterProps): JSX.Element {
-  if (isSeller) return <Navigate to={redirectPath} />;
-  return children || <Outlet />;
+  if (isSeller) return children || <Outlet />;
+  return <Navigate to={redirectPath} />;
 }

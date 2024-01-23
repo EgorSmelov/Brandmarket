@@ -69,7 +69,7 @@ export default function BasicMenu(): JSX.Element {
             <MenuItem color="inherit" component={Link} to="/moderation">
               Пользователи
             </MenuItem>
-            <MenuItem color="inherit" component={Link} to="/goods">
+            <MenuItem color="inherit" component={Link} to="/moderation/goods">
               Все товары
             </MenuItem>
           </>

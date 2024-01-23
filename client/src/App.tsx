@@ -25,6 +25,7 @@ import ModerationSellerInputs from './pages/moderation/ModerationSellerInputs';
 import ModerationUserList from './pages/moderation/ModerationUserList';
 import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
 import AdminRouter from './components/routing/AdminRouter';
+import ModerationGoodsListPage from './pages/moderation/moderationPage/ModerationGoodsListPage';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
@@ -39,7 +40,6 @@ function App(): JSX.Element {
     void dispatch(getAllGendersThunk());
     void dispatch(getBasketsThunk());
   }, [dispatch]);
-  console.log(user.roleId, '<-------------');
 
   return (
     <Loader isLoading={user.status === 'pending'}>
@@ -69,14 +69,15 @@ function App(): JSX.Element {
               <Route path="/auth/registration" element={<SignUpPage />} />
             </Route>
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
-              <Route element={<AdminRouter isSeller={user.roleId !== 2} />}>
+              <Route element={<AdminRouter isSeller={user.roleId !== 1} />}>
                 <Route path="/good/:id/edit" element={<GoodEditPage />} />
                 <Route path="/seller/add" element={<GoodAddPage />} />
                 <Route path="/seller/goods" element={<SellerPage />} />
               </Route>
               <Route path="/seller/new" element={<ModerationSellerInputs />} />
-              <Route element={<AdminRouter isSeller={user.roleId !== 3} />}>
+              <Route element={<AdminRouter isSeller={user.roleId === 3} />}>
                 <Route path="/moderation" element={<ModerationUserList />} />
+                <Route path="/moderation/goods" element={<ModerationGoodsListPage />} />
               </Route>
             </Route>
             <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>

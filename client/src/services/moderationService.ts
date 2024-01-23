@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { UserType } from '../types/auth';
 import type { SellerInputsFormType, SellerInputsType } from '../types/seller';
+import type { GoodType } from '../types/good';
 
 export const apiModerationService = axios.create({
   baseURL: 'http://localhost:3000/api/v1/moderation',
@@ -10,6 +11,12 @@ export const apiModerationService = axios.create({
 class ModerationService {
   static async getUsers(): Promise<UserType[]> {
     const response = await apiModerationService.get<UserType[]>('/users');
+    if (response.status === 200) return response.data;
+    return [];
+  }
+
+  static async getGoods(): Promise<GoodType[]> {
+    const response = await apiModerationService.get<GoodType[]>(`/goods`);
     if (response.status === 200) return response.data;
     return [];
   }
