@@ -5,6 +5,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { GoodType } from '../../types/good';
 import { addBasketThunk, delBasketThunk } from '../../redux/slices/baskets/basketThunks';
+import { BasketStyledButton } from './StyledButtons';
 
 type FavoriteButtonPropsType = {
   good: GoodType;
@@ -44,13 +45,14 @@ export default function BasketButton({ good, page }: FavoriteButtonPropsType): J
 
   if (page) {
     return (
-      <Button
+      <BasketStyledButton
         aria-label="add to basket"
         size="small"
         onClick={() => addBasketHandler(good.id)}
+        isBasket={isBasket}
       >
         {isBasket ? 'Удалить из корзины' : 'Добавить в корзину'}
-      </Button>
+      </BasketStyledButton>
     );
   }
 
