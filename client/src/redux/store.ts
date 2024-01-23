@@ -5,7 +5,7 @@ import brandSlice from './slices/brands/brandSlice';
 import goodReducer from './slices/goods/goodSlice';
 import genderSlice from './slices/genders/genderSlice';
 import favoritesReducer from './slices/favorites/favoritesSlice';
-import userReducer from './slices/moderationSellers/userSlice';
+import userReducer from './slices/moderationSellers/moderationSlice';
 import basketReducer from './slices/baskets/basketSlice';
 import sellerSlice from './slices/seller/sellerSlice';
 

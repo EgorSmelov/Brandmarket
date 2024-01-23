@@ -24,11 +24,13 @@ import { getFavoritesThunk } from './redux/slices/favorites/favoritesThunks';
 import ModerationSellerInputs from './pages/moderation/ModerationSellerInputs';
 import ModerationUserList from './pages/moderation/ModerationUserList';
 import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
+import AdminRouter from './components/routing/AdminRouter';
+import ModerationGoodsListPage from './pages/moderation/moderationPage/ModerationGoodsListPage';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const { user } = useAppSelector((state) => state.auth);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     void dispatch(userCheckThunk());
@@ -61,21 +63,26 @@ function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/:categoryId" element={<HomePage />} />
+            <Route path="/goods/:id" element={<GoodSoloPage />} />
             <Route element={<PrivateRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/auth/login" element={<SignInPage />} />
               <Route path="/auth/registration" element={<SignUpPage />} />
             </Route>
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
-              <Route path="/good/:id/edit" element={<GoodEditPage />} />
-              <Route path="/goods/:id" element={<GoodSoloPage />} />
+              <Route element={<AdminRouter isSeller={user.roleId !== 1} />}>
+                <Route path="/good/:id/edit" element={<GoodEditPage />} />
+                <Route path="/seller/add" element={<GoodAddPage />} />
+                <Route path="/seller/goods" element={<SellerPage />} />
+              </Route>
               <Route path="/seller/new" element={<ModerationSellerInputs />} />
-              <Route path="/moderation" element={<ModerationUserList />} />
+              <Route element={<AdminRouter isSeller={user.roleId === 3} />}>
+                <Route path="/moderation" element={<ModerationUserList />} />
+                <Route path="/moderation/goods" element={<ModerationGoodsListPage />} />
+              </Route>
             </Route>
             <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/basket" element={<BasketPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
-              <Route path="/seller/add" element={<GoodAddPage />} />
-              <Route path="/seller/goods" element={<SellerPage />} />
             </Route>
           </Routes>
         </Container>

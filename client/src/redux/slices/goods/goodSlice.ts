@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { GoodState } from '../../../types/good';
-import { getAllGoodsThunk, deleteGoodHandlerThunk, getOneGoodThunk } from './goodThunk';
+import { getAllGoodsThunk, deleteGoodHandlerThunk, getAdminGoodsThunk } from './goodThunk';
 
 const initialState: GoodState = { goods: [], good: null };
 
@@ -18,9 +18,6 @@ export const goodSlice = createSlice({
     });
     builder.addCase(deleteGoodHandlerThunk.fulfilled, (state, action) => {
       state.goods = state.goods.filter((good) => good.id !== action.payload);
-    });
-    builder.addCase(getOneGoodThunk.fulfilled, (state, action) => {
-      state.good = action.payload;
     });
   },
 });

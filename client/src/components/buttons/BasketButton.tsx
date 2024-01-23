@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { GoodType } from '../../types/good';
 import { addBasketThunk, delBasketThunk } from '../../redux/slices/baskets/basketThunks';
+import { BasketStyledButton } from './StyledButtons';
 
 type FavoriteButtonPropsType = {
   good: GoodType;
+  page?: boolean;
 };
 
-export default function BasketButton({ good }: FavoriteButtonPropsType): JSX.Element {
+export default function BasketButton({ good, page }: FavoriteButtonPropsType): JSX.Element {
   const [isBasket, setIsBasket] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
   const dispath = useAppDispatch();
@@ -39,6 +41,19 @@ export default function BasketButton({ good }: FavoriteButtonPropsType): JSX.Ele
 
   if (user.status !== 'authenticated') {
     return <div />;
+  }
+
+  if (page) {
+    return (
+      <BasketStyledButton
+        aria-label="add to basket"
+        size="small"
+        onClick={() => addBasketHandler(good.id)}
+        isBasket={isBasket}
+      >
+        {isBasket ? 'Удалить из корзины' : 'Добавить в корзину'}
+      </BasketStyledButton>
+    );
   }
 
   return (
