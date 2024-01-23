@@ -9,7 +9,7 @@ import HomePage from './pages/home/HomePage';
 import GoodAddPage from './pages/goodAdd/GoodAddPage';
 import SellerPage from './pages/seller/SellerPage';
 import BasketPage from './pages/basket/BasketPage';
-import FavoritesPage from './pages/favorites/FavoritesPage';
+import FavoritesPage from './pages/favorites/FavoritePage';
 import GoodEditPage from './pages/edit/GoodEditPage';
 import GoodSoloPage from './components/good-solo-card/GoodSoloPage';
 import { useAppDispatch, useAppSelector } from './redux/hooks';

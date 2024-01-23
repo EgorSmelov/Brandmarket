@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import { StyledCardContent } from './ComponentStyled';
 import FavoriteButton from '../../buttons/FavoriteButton';
-import BasketButton from '../../buttons/BasketButton';
+import BasketButton from '../../buttons/basketButoon/BasketButton';
+import BusketCountButton from '../../buttons/basketButoon/BusketCountButton';
 
 type PropsCard = {
   good: GoodType;
@@ -40,7 +41,7 @@ function GoodCardItem({ good }: PropsCard): JSX.Element {
           <Typography sx={{ color: 'gray' }} gutterBottom>
             {good.description}
           </Typography>
-          <Typography sx={{ fontStyle: 'italic' }}>{good.price} ₽</Typography>
+          <Typography>{good.price} ₽</Typography>
         </StyledCardContent>
         <CardActions sx={{ zIndex: 'tooltip', justifyContent: 'space-between' }}>
           <FavoriteButton good={good} />

@@ -23,7 +23,7 @@ export default function FavoriteButton({ good, page }: FavoriteButtonPropsType):
     } else {
       setIsFavorite(false);
     }
-  }, []);
+  }, [good.userFavorites]);
 
   const addFavoritesHandler = (id): void => {
     if (!isFavorite) {

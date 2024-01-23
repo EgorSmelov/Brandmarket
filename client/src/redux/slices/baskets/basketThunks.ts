@@ -9,11 +9,11 @@ export const getBasketsThunk = createAsyncThunk('basket/getFavoritesThunk', asyn
 });
 
 export const addBasketThunk = createAsyncThunk(
-  'basket.addBasketThunk',
+  'basket/addBasketThunk',
   async (goodId: GoodType['id']) => {
     await BasketService.addBasket(goodId);
-    const favoriteCard = await GoodsService.getOneGood(goodId);
-    return favoriteCard;
+    const BasketCard = await GoodsService.getOneGood(goodId);
+    return BasketCard;
   },
 );
 
@@ -22,5 +22,21 @@ export const delBasketThunk = createAsyncThunk(
   async (goodId: GoodType['id']) => {
     await BasketService.delBasket(goodId);
     return goodId;
+  },
+);
+
+export const incrementCountBasketThunk = createAsyncThunk(
+  'basket/incrementCountBasketThunk',
+  async (goodId: GoodType['id']) => {
+    const data = await BasketService.incrementCountBasket(goodId);
+    return data;
+  },
+);
+
+export const decrementCountBasketThunk = createAsyncThunk(
+  'basket/decrementCountBasketThunk',
+  async (goodId: GoodType['id']) => {
+    const data = await BasketService.decrementCountBasket(goodId);
+    return data;
   },
 );

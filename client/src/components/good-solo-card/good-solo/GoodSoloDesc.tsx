@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import type { GoodType } from '../../../types/good';
 import FavoriteButton from '../../buttons/FavoriteButton';
-import BasketButton from '../../buttons/BasketButton';
+import BasketButton from '../../buttons/basketButoon/BasketButton';
 // import { StyledCardContent } from '../../goods-card-main/good-card/ComponentStyled';
 
 type GoodTypeProps = {

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { GoodState } from '../../../types/good';
-import { getAllGoodsThunk, deleteGoodHandlerThunk, getAdminGoodsThunk } from './goodThunk';
+import { getAllGoodsThunk, deleteGoodHandlerThunk, getOneGoodThunk } from './goodThunk';
 
 const initialState: GoodState = { goods: [], good: null };
 
@@ -13,6 +13,9 @@ export const goodSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getOneGoodThunk.fulfilled, (state, action) => {
+      state.good = action.payload;
+    });
     builder.addCase(getAllGoodsThunk.fulfilled, (state, action) => {
       state.goods = action.payload;
     });

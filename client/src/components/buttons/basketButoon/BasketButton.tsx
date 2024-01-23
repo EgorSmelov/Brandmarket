@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import type { GoodType } from '../../types/good';
-import { addBasketThunk, delBasketThunk } from '../../redux/slices/baskets/basketThunks';
-import { BasketStyledButton } from './StyledButtons';
+import { NavLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import type { GoodType } from '../../../types/good';
+import { addBasketThunk, delBasketThunk } from '../../../redux/slices/baskets/basketThunks';
+import { BasketStyledButton } from '../StyledButtons';
 
 type FavoriteButtonPropsType = {
   good: GoodType;
@@ -23,7 +24,7 @@ export default function BasketButton({ good, page }: FavoriteButtonPropsType): J
     } else {
       setIsBasket(false);
     }
-  }, []);
+  }, [good.userBaskets]);
 
   const addBasketHandler = (id): void => {
     if (!isBasket) {
@@ -56,13 +57,16 @@ export default function BasketButton({ good, page }: FavoriteButtonPropsType): J
     );
   }
 
+  if (isBasket)
+    return (
+      <IconButton aria-label="to basket" type="button" component={NavLink} to="/basket">
+        <ShoppingCartIcon fontSize="medium" />
+      </IconButton>
+    );
+
   return (
     <IconButton aria-label="add to basket" type="button" onClick={() => addBasketHandler(good.id)}>
-      {isBasket ? (
-        <ShoppingCartIcon fontSize="medium" />
-      ) : (
-        <AddShoppingCartIcon fontSize="medium" />
-      )}
+      <AddShoppingCartIcon fontSize="medium" />
     </IconButton>
   );
 }

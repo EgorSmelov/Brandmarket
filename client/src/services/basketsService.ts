@@ -24,6 +24,18 @@ class BasketService {
     if (response.status === 200) return;
     return Promise.reject(new Error(`Server error deleting from baskets`));
   }
+
+  static async incrementCountBasket(goodId: GoodType['id']): Promise<void> {
+    const response = await apiBasketService.patch(`/${goodId}/increment`);
+    if (response.status === 200) return response.data;
+    return Promise.reject(new Error(`Server error increment count from baskets`));
+  }
+
+  static async decrementCountBasket(goodId: GoodType['id']): Promise<void> {
+    const response = await apiBasketService.patch(`/${goodId}/decrement`);
+    if (response.status === 200) return response.data;
+    return Promise.reject(new Error(`Server error decrement count from baskets`));
+  }
 }
 
 export default BasketService;
