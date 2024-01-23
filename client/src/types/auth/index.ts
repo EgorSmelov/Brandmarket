@@ -2,11 +2,12 @@ export type UserType = {
   id: number;
   name: string;
   email: string;
+  roleId: number;
 };
 
 export type UserState =
-  | { status: 'pending' }
   | { status: 'guest' }
+  | { status: 'pending' }
   | ({ status: 'authenticated' } & UserType);
 
 export type UserModerState = {

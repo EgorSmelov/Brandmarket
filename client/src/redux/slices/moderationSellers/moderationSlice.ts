@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { UserModerState } from '../../../types/auth';
-import { getAllUsersThunk, getUserThunk } from './userThunks';
+import { getAllUsersThunk, getUserThunk } from './moderationThunks';
 
 const initialState: UserModerState = { users: [], user: null, isLoading: false };
 
@@ -16,7 +16,7 @@ export const ModerSlice = createSlice({
     builder.addCase(getUserThunk.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
-    })
+    });
   },
 });
 

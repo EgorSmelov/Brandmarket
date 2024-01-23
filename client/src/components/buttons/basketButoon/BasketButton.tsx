@@ -6,12 +6,14 @@ import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { GoodType } from '../../../types/good';
 import { addBasketThunk, delBasketThunk } from '../../../redux/slices/baskets/basketThunks';
+import { BasketStyledButton } from '../StyledButtons';
 
 type FavoriteButtonPropsType = {
   good: GoodType;
+  page?: boolean;
 };
 
-export default function BasketButton({ good }: FavoriteButtonPropsType): JSX.Element {
+export default function BasketButton({ good, page }: FavoriteButtonPropsType): JSX.Element {
   const [isBasket, setIsBasket] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
   const dispath = useAppDispatch();
@@ -40,6 +42,19 @@ export default function BasketButton({ good }: FavoriteButtonPropsType): JSX.Ele
 
   if (user.status !== 'authenticated') {
     return <div />;
+  }
+
+  if (page) {
+    return (
+      <BasketStyledButton
+        aria-label="add to basket"
+        size="small"
+        onClick={() => addBasketHandler(good.id)}
+        isBasket={isBasket}
+      >
+        {isBasket ? 'Удалить из корзины' : 'Добавить в корзину'}
+      </BasketStyledButton>
+    );
   }
 
   if (isBasket)

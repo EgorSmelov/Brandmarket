@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import GoodsService from '../../../services/goodsService';
 import type { GoodType } from '../../../types/good';
+import ModerationService from '../../../services/moderationService';
 
 export const getAllGoodsThunk = createAsyncThunk(
   'good/getAllGoodsThunk',
@@ -17,6 +18,10 @@ export const getOneGoodThunk = createAsyncThunk(
     return data;
   },
 );
+export const getAdminGoodsThunk = createAsyncThunk('goods/getGoodsThunk', async () => {
+  const data = await ModerationService.getGoods();
+  return data;
+});
 
 export const deleteGoodHandlerThunk = createAsyncThunk(
   'good/deleteGoodHandlerThunk',

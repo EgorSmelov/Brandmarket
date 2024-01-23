@@ -1,32 +1,22 @@
 const express = require("express");
-const { User, ModerationSeller } = require("../../db/models");
+const { User, ModerationSeller, Good } = require("../../db/models");
 
 const moderationRouter = express.Router();
 
-moderationRouter
-  .route("/")
-  .get(async (req, res) => {
-    try {
-      const users = await User.findAll();
-      return res.json(users);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
-  })
-  .post(async (req, res) => {
-    try {
-      const { inn, phone } = req.body;
-      const sellerForm = await ModerationSeller.findOrCreate({
-        where: { inn, phone, userId: res.locals.user.id },
-      });
-      return res
-        .status(201)
-        .json({ message: "The good has been successfully added" });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json(error);
-    }
-  });
+moderationRouter.route("/").post(async (req, res) => {
+  try {
+    const { inn, phone } = req.body;
+    const sellerForm = await ModerationSeller.findOrCreate({
+      where: { inn, phone, userId: res.locals.user.id },
+    });
+    return res
+      .status(201)
+      .json({ message: "The good has been successfully added" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
 
 moderationRouter.get("/users", async (req, res) => {
   try {
@@ -38,6 +28,16 @@ moderationRouter.get("/users", async (req, res) => {
     return res.status(500).json(error);
   }
 });
+
+moderationRouter.get("/goods", async (req, res) => {
+  try {
+    const goods = await Good.findAll();
+    return res.json(goods);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
 moderationRouter.patch("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;

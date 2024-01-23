@@ -5,12 +5,14 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addFavoritesThunk, delFavoritesThunk } from '../../redux/slices/favorites/favoritesThunks';
 import type { GoodType } from '../../types/good';
+import { FavoriteStyledButton } from './StyledButtons';
 
 type FavoriteButtonPropsType = {
   good: GoodType;
+  page?: boolean;
 };
 
-export default function FavoriteButton({ good }: FavoriteButtonPropsType): JSX.Element {
+export default function FavoriteButton({ good, page }: FavoriteButtonPropsType): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
   const dispath = useAppDispatch();
@@ -39,6 +41,19 @@ export default function FavoriteButton({ good }: FavoriteButtonPropsType): JSX.E
 
   if (user.status !== 'authenticated') {
     return <div />;
+  }
+
+  if (page) {
+    return (
+      <FavoriteStyledButton 
+        aria-label="add to favorites"
+        type="button"
+        isFavorite={isFavorite}
+        onClick={() => addFavoritesHandler(good.id)}
+      >
+        {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+      </FavoriteStyledButton>
+    );
   }
 
   return (

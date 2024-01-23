@@ -6,9 +6,11 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
+import { useAppSelector } from '../../../../redux/hooks';
 
 export default function BasicMenu(): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { user } = useAppSelector((state) => state.auth);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -47,12 +49,31 @@ export default function BasicMenu(): JSX.Element {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose} component={Link} to="/seller/add">
-          Добавить товар
-        </MenuItem>
-        <MenuItem onClick={handleClose} component={Link} to="/seller/goods">
-          Мои товары
-        </MenuItem>
+        {user.roleId === 2 && (
+          <>
+            <MenuItem onClick={handleClose} component={Link} to="/seller/add">
+              Добавить товар
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/seller/goods">
+              Мои товары
+            </MenuItem>
+          </>
+        )}
+        {user.roleId === 1 && (
+          <MenuItem component={Link} to="/seller/new">
+            Стать продавцом
+          </MenuItem>
+        )}
+        {user.roleId === 3 && (
+          <>
+            <MenuItem color="inherit" component={Link} to="/moderation">
+              Пользователи
+            </MenuItem>
+            <MenuItem color="inherit" component={Link} to="/moderation/goods">
+              Все товары
+            </MenuItem>
+          </>
+        )}
       </Menu>
     </Box>
   );

@@ -1,25 +1,21 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import TableRow from '@mui/material/TableRow';
-import { IconButton, Link, Tooltip } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React from 'react';
+import { IconButton, Link, Table, TableBody, TableCell, TableRow, Tooltip } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch } from '../../../redux/hooks';
-import { deleteSellerGoodHandlerThunk } from '../../../redux/slices/seller/sellerThunk';
-import { deleteGoodHandlerThunk } from '../../../redux/slices/goods/goodThunk';
-import type { GoodType } from '../../../types/good';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import type { GoodType } from '../../../../types/good';
+import { useAppDispatch } from '../../../../redux/hooks';
+import { deleteSellerGoodHandlerThunk } from '../../../../redux/slices/seller/sellerThunk';
 
-type SellerGoodItemPropsType = {
-  sellerGood: GoodType;
+type GoodAdminProps = {
+  good: GoodType;
 };
 
-function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: number }): JSX.Element {
+export default function ModerationGoodItem({
+  good,
+  index,
+}: GoodAdminProps & { index: number }): JSX.Element {
   const dispatch = useAppDispatch();
-
-  console.log(sellerGood);
 
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -29,13 +25,13 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
             {index}.
           </TableCell>
           <TableCell style={{ width: '25%' }} component="th" scope="row">
-            {sellerGood.title}
+            {good.title}
           </TableCell>
           <TableCell style={{ width: '15%' }} align="left">
-            Размер: {sellerGood.size}
+            Размер: {good.size}
           </TableCell>
           <TableCell style={{ width: '15%' }} align="right">
-            {sellerGood.price} ₽
+            {good.price} ₽
           </TableCell>
           <TableCell style={{ width: '22.5%' }} align="right">
             <Tooltip title="Редактировать">
@@ -44,7 +40,7 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
                   color="inherit"
                   underline="none"
                   component={NavLink}
-                  to={`/good/${sellerGood.id}/edit`}
+                  to={`/good/${good.id}/edit`}
                 >
                   <ModeEditIcon />
                 </Link>
@@ -53,9 +49,7 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
           </TableCell>
           <TableCell style={{ width: '22.5%' }} align="right">
             <Tooltip title="Удалить">
-              <IconButton
-                onClick={() => void dispatch(deleteSellerGoodHandlerThunk(sellerGood.id))}
-              >
+              <IconButton onClick={() => void dispatch(deleteSellerGoodHandlerThunk(good.id))}>
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
@@ -65,5 +59,3 @@ function GoodItem({ sellerGood, index }: SellerGoodItemPropsType & { index: numb
     </Table>
   );
 }
-
-export default React.memo(GoodItem);

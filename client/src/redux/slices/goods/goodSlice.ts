@@ -13,14 +13,14 @@ export const goodSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getOneGoodThunk.fulfilled, (state, action) => {
+      state.good = action.payload;
+    });
     builder.addCase(getAllGoodsThunk.fulfilled, (state, action) => {
       state.goods = action.payload;
     });
     builder.addCase(deleteGoodHandlerThunk.fulfilled, (state, action) => {
       state.goods = state.goods.filter((good) => good.id !== action.payload);
-    });
-    builder.addCase(getOneGoodThunk.fulfilled, (state, action) => {
-      state.good = action.payload;
     });
   },
 });

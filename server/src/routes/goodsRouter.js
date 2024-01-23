@@ -9,19 +9,18 @@ apiGoodsRouter
   .route("/")
   .get(async (req, res) => {
     try {
-      const where = {};
+      const whereFilter = {};
       const { categoryId } = req.query;
-      if (categoryId !== "null") {
-        where.categoryId = categoryId;
+      if (categoryId !== 'null') {
+        whereFilter.categoryId = categoryId;
       }
 
       const goods = await Good.findAll({
-        // where,
-        where: { quantity: { [Op.gt]: 0 } },
+        where: { ...whereFilter, quantity: { [Op.gt]: 0 } },
 
         include: [
           {
-            as: "userFavorites",
+            as: 'userFavorites',
             model: User,
             required: false,
             where: { id: res.locals.user ? res.locals.user?.id : null },
@@ -50,17 +49,7 @@ apiGoodsRouter
   })
   .post(uploadMiddleware.single("file"), async (req, res) => {
     try {
-      const {
-        title,
-        price,
-        description,
-        color,
-        size,
-        quantity,
-        categoryId,
-        genderId,
-        brandId,
-      } = req.body;
+      const { title, price, description, color, size, quantity, categoryId, genderId, brandId } = req.body;
 
       await Good.create({
         title,
@@ -143,7 +132,7 @@ apiGoodsRouter
         where: { quantity: { [Op.gt]: 0 } },
         include: [
           {
-            as: "userFavorites",
+            as: 'userFavorites',
             model: User,
             where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,

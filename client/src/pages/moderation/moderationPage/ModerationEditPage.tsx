@@ -7,7 +7,7 @@ import { IconButton, Link, Tooltip } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import type { UserType } from '../../../types/auth';
 import { useAppDispatch } from '../../../redux/hooks';
-import { getUserThunk } from '../../../redux/slices/moderationSellers/userThunks';
+import { getUserThunk } from '../../../redux/slices/moderationSellers/moderationThunks';
 
 type UserPropsType = {
   user: UserType;

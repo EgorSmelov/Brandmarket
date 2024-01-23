@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Badge, Grid, IconButton, Link, Tooltip } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import DropDownList from './components/drop-down-list/DropDownList';
 import Burger from './components/burger/Burger';
@@ -56,12 +57,7 @@ export default function NavBar(): JSX.Element {
               )}
               {user.status === 'authenticated' && (
                 <>
-                  <Button color="inherit" component={NavLink} to="/seller/new">
-                    Стать продавцом
-                  </Button>
-                  <Button color="inherit" component={NavLink} to="/moderation">
-                    Пользователи
-                  </Button>
+                  {user.roleId === 3 && <AdminPanelSettingsIcon />}
                   <Tooltip title="Избранное">
                     <IconButton color="inherit" component={NavLink} to="/favorites">
                       <Badge badgeContent={favorites.length} color="primary">

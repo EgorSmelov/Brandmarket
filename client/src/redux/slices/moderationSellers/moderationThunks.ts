@@ -11,3 +11,5 @@ export const getUserThunk = createAsyncThunk('user/getUserThunk', async (id: Use
   const data = await ModerationService.grandUserRole(id);
   return data;
 });
+
+

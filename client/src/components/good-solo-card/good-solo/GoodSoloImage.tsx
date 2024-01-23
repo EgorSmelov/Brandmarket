@@ -7,10 +7,11 @@ type GoodTypeProps = {
 };
 
 export default function GoodSoloImage({ good }: GoodTypeProps): JSX.Element {
+  
   return (
     <Grid item>
       <Box>
-        <ImageListItem sx={{width: '450px', height: '500px'}}>
+        <ImageListItem sx={{ width: '450px', height: '500px' }}>
           <img src={`http://localhost:3000/${good.image}`} alt="diadora" />
         </ImageListItem>
       </Box>
