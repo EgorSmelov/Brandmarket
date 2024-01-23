@@ -1,17 +1,17 @@
-const express = require("express");
-const { Op } = require("sequelize");
-const { Good, GoodsInfo, Favorite, Basket, User } = require("../../db/models");
-const uploadMiddleware = require("../middlewares/uploadFile");
+const express = require('express');
+const { Op } = require('sequelize');
+const { Good, GoodsInfo, Favorite, Basket, User } = require('../../db/models');
+const uploadMiddleware = require('../middlewares/uploadFile');
 
 const apiGoodsRouter = express.Router();
 
 apiGoodsRouter
-  .route("/")
+  .route('/')
   .get(async (req, res) => {
     try {
       const where = {};
       const { categoryId } = req.query;
-      if (categoryId !== "null") {
+      if (categoryId !== 'null') {
         where.categoryId = categoryId;
       }
 
@@ -24,21 +24,21 @@ apiGoodsRouter
             where: { quantity: { [Op.gt]: 0 } },
           },
           {
-            as: "userFavorites",
+            as: 'userFavorites',
             model: User,
             required: false,
             where: { id: res.locals.user ? res.locals.user?.id : null },
-            attributes: ["id"],
+            attributes: ['id'],
             through: {
               model: Favorite,
             },
           },
           {
-            as: "userBaskets",
+            as: 'userBaskets',
             model: User,
             required: false,
             where: { id: res.locals.user ? res.locals.user?.id : null },
-            attributes: ["id"],
+            attributes: ['id'],
             through: {
               model: Basket,
             },
@@ -51,25 +51,14 @@ apiGoodsRouter
       return res.status(500).json(error);
     }
   })
-  .post(uploadMiddleware.single("file"), async (req, res) => {
+  .post(uploadMiddleware.single('file'), async (req, res) => {
     try {
-      const {
-        title,
-        price,
-        description,
-        color,
-        size,
-        quantity,
-        userId,
-        categoryId,
-        genderId,
-        brandId,
-      } = req.body;
+      const { title, price, description, color, size, quantity, userId, categoryId, genderId, brandId } = req.body;
 
       const good = await Good.create({
         title,
         price: Number(price),
-        image: req.file.path.replace("public", ""),
+        image: req.file.path.replace('public', ''),
         description,
         color,
         categoryId,
@@ -83,9 +72,7 @@ apiGoodsRouter
           quantity,
         });
       });
-      return res
-        .status(201)
-        .responce({ message: "The good has been successfully added" });
+      return res.status(201).responce({ message: 'The good has been successfully added' });
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
@@ -93,11 +80,11 @@ apiGoodsRouter
   });
 
 // Все товары по полу
-apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
+apiGoodsRouter.get('/genders/:genderId', async (req, res) => {
   try {
     const goods = await Good.findAll({
       where: { genderId: req.params.genderId },
-      order: [["createdAt", "DESC"]],
+      order: [['createdAt', 'DESC']],
     });
     return res.json(goods);
   } catch (error) {
@@ -107,12 +94,14 @@ apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
 // ------------ //
 
 // Товары продавца
-apiGoodsRouter.get("/sellers", async (req, res) => {
+apiGoodsRouter.get('/sellers', async (req, res) => {
+  console.log(res.locals.user);
   try {
     const goodsSeller = await Good.findAll({
       where: { userId: res.locals.user.id },
-      order: [["createdAt", "DESC"]],
+      order: [['createdAt', 'DESC']],
     });
+    console.log(goodsSeller);
     return res.json(goodsSeller);
   } catch (error) {
     return res.status(500).json(error);
@@ -121,28 +110,25 @@ apiGoodsRouter.get("/sellers", async (req, res) => {
 // ------------ //
 
 // Все товары в категории
-apiGoodsRouter.get(
-  "/genders/:genderId/categories/:categoryId",
-  async (req, res) => {
-    try {
-      const goods = await Good.findAll({
-        where: {
-          genderId: req.params.genderId,
-          categoryId: req.params.categoryId,
-        },
-        order: [["createdAt", "DESC"]],
-      });
-      return res.json(goods);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+apiGoodsRouter.get('/genders/:genderId/categories/:categoryId', async (req, res) => {
+  try {
+    const goods = await Good.findAll({
+      where: {
+        genderId: req.params.genderId,
+        categoryId: req.params.categoryId,
+      },
+      order: [['createdAt', 'DESC']],
+    });
+    return res.json(goods);
+  } catch (error) {
+    return res.status(500).json(error);
   }
-);
+});
 // ------------ //
 
 // Один товар
 apiGoodsRouter
-  .route("/:id")
+  .route('/:id')
   .get(async (req, res) => {
     try {
       const good = await Good.findByPk(req.params.id, {
@@ -152,21 +138,21 @@ apiGoodsRouter
             where: { quantity: { [Op.gt]: 0 } },
           },
           {
-            as: "userFavorites",
+            as: 'userFavorites',
             model: User,
             where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,
-            attributes: ["id"],
+            attributes: ['id'],
             through: {
               model: Favorite,
             },
           },
           {
-            as: "userBaskets",
+            as: 'userBaskets',
             model: User,
             where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,
-            attributes: ["id"],
+            attributes: ['id'],
             through: {
               model: Basket,
             },
@@ -180,7 +166,7 @@ apiGoodsRouter
   })
   .delete(async (req, res) => {
     try {
-      console.log(req)
+      console.log(req);
       await Good.destroy({ where: { id: req.params.id } });
       res.sendStatus(200);
     } catch (error) {
@@ -188,24 +174,14 @@ apiGoodsRouter
       return res.status(500).json(error);
     }
   })
-  .patch(uploadMiddleware.single("file"), async (req, res) => {
+  .patch(uploadMiddleware.single('file'), async (req, res) => {
     try {
-      const {
-        title,
-        price,
-        description,
-        color,
-        size,
-        quantity,
-        categoryId,
-        genderId,
-        brandId,
-      } = req.body;
+      const { title, price, description, color, size, quantity, categoryId, genderId, brandId } = req.body;
 
       const good = await Good.findByPk(req.params.id);
       good.title = title;
       good.price = Number(price);
-      good.image = req.file.path.replace("public", "");
+      good.image = req.file.path.replace('public', '');
       good.description = description;
       good.color = color;
       good.categoryId = categoryId;
