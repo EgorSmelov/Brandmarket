@@ -53,9 +53,7 @@ export default function GoodEditForm({ good }: { good: GoodType }): JSX.Element 
     formData.append('file', img);
     const data = Object.fromEntries(formData);
     console.log(data);
-    const response = await GoodsService.editGood(good.id, data).finally(() => {
-      navigate('/');
-    });
+    await GoodsService.editGood(good.id, data).then(() => navigate(`/goods/${good.id}`));
   };
 
   return (
@@ -217,7 +215,6 @@ export default function GoodEditForm({ good }: { good: GoodType }): JSX.Element 
                 type="file"
                 accept="image/*"
                 autoFocus
-                required
                 onChange={(e) => void setImg(e.target.files[0])}
               />
             </Button>

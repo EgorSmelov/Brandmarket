@@ -15,7 +15,7 @@ class OrdersService {
   }
 
   static async addOrders(formdata: SellerInputsFormType): Promise<SellerInputsType> {
-    const response = await apiOrdersService.post<SellerInputsType>('/', formdata);
+    const response = await apiOrdersService.post<SellerInputsType>('/purchase', formdata);
     if (response.status === 200) return response.data;
     return Promise.reject(new Error(`Server error add good`));
   }
