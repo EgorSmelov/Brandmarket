@@ -16,6 +16,7 @@ function CategoryItem({ category }: CategoryPropsType): JSX.Element {
       component={Link}
       to={`/${category.id}`}
       onClick={() => void dispatch(getAllGoodsThunk(category.id))}
+      sx={{ color: 'black' }}
     >
       {category.name}
     </Button>
