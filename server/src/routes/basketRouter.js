@@ -39,7 +39,7 @@ basketRouter
         totalPrice: good.price,
         quantity: 1,
       });
-      return res.status(201).json(basket); // 201 - создание объекта
+      return res.status(200).json(basket); // 201 - создание объекта
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
