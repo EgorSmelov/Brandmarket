@@ -16,6 +16,7 @@ class BasketService {
   static async addBasket(goodId: GoodType['id']): Promise<GoodType> {
     const response = await apiBasketService.post<GoodType>(`/${goodId}`);
     if (response.status === 200) return response.data;
+    console.log(response.data)
     return Promise.reject(new Error(`Server error on adding to baskets`));
   }
 

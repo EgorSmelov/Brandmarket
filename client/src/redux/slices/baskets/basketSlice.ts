@@ -20,6 +20,7 @@ export const basketSlice = createSlice({
     });
 
     builder.addCase(addBasketThunk.fulfilled, (state, action) => {
+      console.log(action.payload)
       if (!state.baskets.find((good) => good.id === action.payload.id)) {
         state.baskets.push(action.payload);
       }
