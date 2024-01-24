@@ -12,7 +12,11 @@ const initialState = { baskets: [], isLoading: false };
 export const basketSlice = createSlice({
   name: 'basket',
   initialState,
-  reducers: {},
+  reducers: {
+    resetBaskets: (state) => {
+      state.baskets = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getBasketsThunk.fulfilled, (state, action) => {
       state.baskets = action.payload;
@@ -20,7 +24,7 @@ export const basketSlice = createSlice({
     });
 
     builder.addCase(addBasketThunk.fulfilled, (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       if (!state.baskets.find((good) => good.id === action.payload.id)) {
         state.baskets.push(action.payload);
       }
@@ -48,6 +52,6 @@ export const basketSlice = createSlice({
   },
 });
 
-export const {} = basketSlice.actions;
+export const { resetBaskets } = basketSlice.actions;
 
 export default basketSlice.reducer;

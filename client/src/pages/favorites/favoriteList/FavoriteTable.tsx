@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Container, Link } from '@mui/material';
+import { Box, Container, Link } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import FavoriteButton from '../../../components/buttons/FavoriteButton';
@@ -35,10 +35,13 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
           <TableHead>
             <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>№</TableCell>
-              <TableCell align="left" sx={{ fontWeight: 'bold' }}>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                 Название
               </TableCell>
-              <TableCell align="left" sx={{ fontWeight: 'bold' }}>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+                Изображение
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                 Размер
               </TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }} />
@@ -50,7 +53,7 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="center">
                   <Link
                     color="inherit"
                     underline="none"
@@ -60,7 +63,20 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
                     {good.title}
                   </Link>
                 </TableCell>
-                <TableCell align="left">{good.size}</TableCell>
+                <TableCell align="center">
+                  <Box
+                    component="img"
+                    sx={{
+                      objectFit: 'cover',
+                      height: 50,
+                      width: 50,
+                      borderRadius: '10%',
+                    }}
+                    alt={good.title}
+                    src={`http://localhost:3000/${good.image}`}
+                  />
+                </TableCell>
+                <TableCell align="center">{good.size}</TableCell>
                 <TableCell align="center">
                   <FavoriteButton good={good} />
                 </TableCell>
