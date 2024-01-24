@@ -6,7 +6,11 @@ const initialState = { favorites: [], isLoading: false };
 export const favoritesSlice = createSlice({
   name: 'favorites',
   initialState,
-  reducers: {},
+  reducers: {
+    resetFavorites: (state) => {
+      state.favorites = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getFavoritesThunk.fulfilled, (state, action) => {
       state.favorites = action.payload;
@@ -28,6 +32,6 @@ export const favoritesSlice = createSlice({
   },
 });
 
-export const {} = favoritesSlice.actions;
+export const { resetFavorites } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

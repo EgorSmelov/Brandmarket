@@ -16,7 +16,6 @@ class BasketService {
   static async addBasket(goodId: GoodType['id']): Promise<GoodType> {
     const response = await apiBasketService.post<GoodType>(`/${goodId}`);
     if (response.status === 200) return response.data;
-    console.log(response.data)
     return Promise.reject(new Error(`Server error on adding to baskets`));
   }
 
@@ -28,13 +27,19 @@ class BasketService {
 
   static async incrementCountBasket(goodId: GoodType['id']): Promise<void> {
     const response = await apiBasketService.patch(`/${goodId}/increment`);
-    if (response.status === 200) return response.data;
+    if (response.status === 200) {
+      const data = await apiBasketService.get<GoodType[]>(`/`);
+      if (response.status === 200) return data.data;
+    }
     return Promise.reject(new Error(`Server error increment count from baskets`));
   }
 
   static async decrementCountBasket(goodId: GoodType['id']): Promise<void> {
     const response = await apiBasketService.patch(`/${goodId}/decrement`);
-    if (response.status === 200) return response.data;
+    if (response.status === 200) {
+      const data = await apiBasketService.get<GoodType[]>(`/`);
+      if (response.status === 200) return data.data;
+    }
     return Promise.reject(new Error(`Server error decrement count from baskets`));
   }
 }
