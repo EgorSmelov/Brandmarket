@@ -56,13 +56,15 @@ const StyledActionContainer = styled(CardActions)`
 
 export default function GoodSoloDesc({ good }: GoodTypeProps): JSX.Element {
   return (
-    <Grid item>
-      <Card elevation={0} >
+    <Grid item sx={{ width: '560px' }}>
+      <Card elevation={0}>
         <StyledCardContent>
-          <StyledTitle gutterBottom variant="h5" component="h2">
-            {good.title}
-          </StyledTitle>
-          <Grid item sx={{ width: '560px' }}>
+          <Grid item sx={{ width: '100%' }}>
+            <StyledTitle gutterBottom variant="h5" component="h2">
+              {good.title}
+            </StyledTitle>
+          </Grid>
+          <Grid item sx={{ width: '100%' }}>
             <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
               Описание:
             </Typography>
