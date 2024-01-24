@@ -1,5 +1,5 @@
 const express = require("express");
-const { Gender } = require("../../db/models");
+const { Basket, Good, Purchase } = require("../../db/models");
 
 const apiOrdersRouter = express.Router();
 
@@ -16,13 +16,26 @@ apiOrdersRouter
     }
   })
   .post(async (req, res) => {
-    req.body;
-
     try {
-      const genders = await Gender.findAll({
-        order: [["name", "ASC"]],
+      await Basket.destroy({ where: { userId: res.locals.user.id } });
+      req.body.forEach(async (item) => {
+        const good = await Good.findByPk(item.id);
+        good.quantity -= item.quantity;
+        good.save();
       });
-      return res.json(genders);
+
+      req.body.forEach(async (item) => {
+        await Purchase.create({
+          goodId: item.id,
+          userId: res.locals.user.id,
+          quantity: item.userBaskets[0].Baskets.quantity,
+          orderPrice:
+            item.userBaskets[0].Baskets.quantity *
+            item.userBaskets[0].Baskets.price,
+        });
+      });
+
+      return res.status(200);
     } catch (error) {
       return res.status(500).json(error);
     }

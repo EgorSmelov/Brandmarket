@@ -7,6 +7,7 @@ const basketRouter = express.Router();
 basketRouter.get("/", async (req, res) => {
   try {
     const basketGoods = await Good.findAll({
+      order: [["id", "ASC"]],
       include: {
         as: "userBaskets",
         model: User,

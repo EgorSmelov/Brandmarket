@@ -24,7 +24,6 @@ export const basketSlice = createSlice({
     });
 
     builder.addCase(addBasketThunk.fulfilled, (state, action) => {
-      console.log(action.payload);
       if (!state.baskets.find((good) => good.id === action.payload.id)) {
         state.baskets.push(action.payload);
       }
@@ -37,16 +36,12 @@ export const basketSlice = createSlice({
     });
 
     builder.addCase(incrementCountBasketThunk.fulfilled, (state, action) => {
-      const index = state.baskets.findIndex((good) => good.id === action.payload.goodId);
-      state.baskets[index].userBaskets[0].Baskets.quantity = action.payload.quantity;
-      state.baskets[index].userBaskets[0].Baskets.totalPrice = action.payload.totalPrice;
+      state.baskets = action.payload;
       state.isLoading = false;
     });
 
     builder.addCase(decrementCountBasketThunk.fulfilled, (state, action) => {
-      const index = state.baskets.findIndex((good) => good.id === action.payload.goodId);
-      state.baskets[index].userBaskets[0].Baskets.quantity = action.payload.quantity;
-      state.baskets[index].userBaskets[0].Baskets.totalPrice = action.payload.totalPrice;
+      state.baskets = action.payload;
       state.isLoading = false;
     });
   },
