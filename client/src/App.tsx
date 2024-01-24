@@ -26,6 +26,7 @@ import ModerationUserList from './pages/moderation/ModerationUserList';
 import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
 import AdminRouter from './components/routing/AdminRouter';
 import ModerationGoodsListPage from './pages/moderation/moderationPage/ModerationGoodsListPage';
+import OrderPage from './pages/order/OrderPage';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
@@ -86,6 +87,7 @@ function App(): JSX.Element {
             <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/basket" element={<BasketPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/orders/purchase" element={<OrderPage />} />
             </Route>
           </Routes>
         </Container>

@@ -113,10 +113,15 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
                 <RubleIcon />
               </TableCell>
             </TableRow>
+            <TableRow />
           </TableBody>
         </Table>
       </TableContainer>
-      <OrderButton />
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
+        <Button variant="contained" component={NavLink} to="/orders/purchase/">
+          Оформить заказ
+        </Button>
+      </Box>
     </Container>
   );
 }
