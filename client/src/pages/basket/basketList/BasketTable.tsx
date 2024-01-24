@@ -37,10 +37,13 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
           <TableHead>
             <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>№</TableCell>
-              <TableCell align="left" sx={{ fontWeight: 'bold' }}>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                 Название
               </TableCell>
-              <TableCell align="left" sx={{ fontWeight: 'bold' }}>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+                Изображение
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                 Размер
               </TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }}>
@@ -58,7 +61,7 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="center">
                   <Link
                     color="inherit"
                     underline="none"
@@ -68,16 +71,28 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
                     {good.title}
                   </Link>
                 </TableCell>
-                <TableCell align="left">{good.size}</TableCell>
+                <TableCell align="center">
+                  <Box
+                    component="img"
+                    sx={{
+                      objectFit: 'cover',
+                      height: 50,
+                      width: 50,
+                      borderRadius: '10%',
+                    }}
+                    alt={good.title}
+                    src={`http://localhost:3000/${good.image}`}
+                  />
+                </TableCell>
+                <TableCell align="center">{good.size}</TableCell>
                 <TableCell align="center">
                   {good.userBaskets[0].Baskets.totalPrice}
                   <RubleIcon />
                 </TableCell>
                 <TableCell align="center">
-                  <BusketCountButton good={good} />
-                  {good.userBaskets[0].Baskets.quantity}
+                  <BusketCountButton good={good} quantity={good.userBaskets[0].Baskets.quantity} />
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="center">
                   <BasketDelButton good={good} />
                 </TableCell>
               </TableRow>
@@ -86,8 +101,9 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
               <TableCell sx={{ fontWeight: 'bold' }} component="th" scope="row">
                 Итого
               </TableCell>
-              <TableCell align="left" sx={{ fontWeight: 'bold' }} />
-              <TableCell align="left" sx={{ fontWeight: 'bold' }} />
+              <TableCell align="center" sx={{ fontWeight: 'bold' }} />
+              <TableCell align="center" sx={{ fontWeight: 'bold' }} />
+              <TableCell align="center" sx={{ fontWeight: 'bold' }} />
               <TableCell sx={{ fontWeight: 'bold' }} align="center">
                 {basketGoods.reduce(
                   (accum, item) => accum + item.userBaskets[0].Baskets.totalPrice,

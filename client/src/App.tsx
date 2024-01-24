@@ -34,12 +34,15 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(userCheckThunk());
-    void dispatch(getFavoritesThunk());
     void dispatch(getAllCategoriesThunk());
     void dispatch(getAllBrandsThunk());
     void dispatch(getAllGendersThunk());
-    void dispatch(getBasketsThunk());
   }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(getFavoritesThunk());
+    void dispatch(getBasketsThunk());
+  }, [dispatch, user.status]);
 
   return (
     <Loader isLoading={user.status === 'pending'}>
