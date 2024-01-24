@@ -12,6 +12,7 @@ import type { GoodType } from '../../../types/good';
 import RubleIcon from '../../../components/icons/RubleIcon';
 import BasketDelButton from '../../../components/buttons/basketButoon/BasketDelButton';
 import BusketCountButton from '../../../components/buttons/basketButoon/BusketCountButton';
+import OrderButton from '../../../components/buttons/OrderButton';
 
 function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
   return { name, calories, fat, carbs, protein };
@@ -115,9 +116,7 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
-        <Button variant="contained">Купить</Button>
-      </Box>
+      <OrderButton />
     </Container>
   );
 }

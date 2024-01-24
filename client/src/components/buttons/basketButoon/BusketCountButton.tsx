@@ -7,6 +7,7 @@ import {
 } from '../../../redux/slices/baskets/basketThunks';
 import type { GoodType } from '../../../types/good';
 import type { BasketType } from '../../../types/basket';
+import { useAppSelector } from '../../../redux/hooks';
 
 type BusketCountButtonPropsType = {
   good: GoodType;
@@ -18,16 +19,20 @@ export default function BusketCountButton({
   quantity,
 }: BusketCountButtonPropsType): JSX.Element {
   const dispatch = useDispatch();
+  const { baskets } = useAppSelector((state) => state.baskets);
+  console.log(baskets);
+
   return (
     <>
       <Button
         variant="contained"
         size="small"
-        onClick={() => void dispatch(incrementCountBasketThunk(good.id))}
-        disabled={quantity > good.quantity}
+        onClick={() => void dispatch(decrementCountBasketThunk(good.id))}
+        disabled={quantity === 1}
       >
-        +
+        -
       </Button>
+
       <TextField
         id="standard-basic"
         variant="standard"
@@ -39,10 +44,10 @@ export default function BusketCountButton({
       <Button
         variant="contained"
         size="small"
-        onClick={() => void dispatch(decrementCountBasketThunk(good.id))}
-        disabled={quantity === 1}
+        onClick={() => void dispatch(incrementCountBasketThunk(good.id))}
+        disabled={quantity > good.quantity}
       >
-        -
+        +
       </Button>
     </>
   );
