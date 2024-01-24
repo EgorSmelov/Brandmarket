@@ -10,11 +10,21 @@ module.exports = {
         { name: "Куртки" },
         { name: "Юбки" },
         { name: "Рубашки" },
-        { name: "Блузки" },
+        { name: "Кардиганы" },
         { name: "Спортивные штаны" },
         { name: "Шапки" },
         { name: "Ботинки" },
-      ],
+        { name: "Кроссовки" },
+        { name: "Кеды" },
+        { name: "Сланцы" },
+        { name: "Свитеры" },
+        { name: "Водолазки" },
+        { name: "Толстовки" },
+        { name: "Брюки" },
+        { name: "Шорты" },
+        { name: "Лонгсливы" },
+        { name: "Поло" }
+        ],
       {}
     );
   },
@@ -23,3 +33,4 @@ module.exports = {
     await queryInterface.bulkDelete("Categories", null, {});
   },
 };
+

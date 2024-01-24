@@ -26,6 +26,7 @@ import ModerationUserList from './pages/moderation/ModerationUserList';
 import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
 import AdminRouter from './components/routing/AdminRouter';
 import ModerationGoodsListPage from './pages/moderation/moderationPage/ModerationGoodsListPage';
+import BrendsLogo from './layout/brendsComponent/BrendsLogo';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
@@ -51,6 +52,7 @@ function App(): JSX.Element {
         }}
       >
         <NavBar />
+        <BrendsLogo />
         <Container
           maxWidth="lg"
           sx={{

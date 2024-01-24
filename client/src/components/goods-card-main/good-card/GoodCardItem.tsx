@@ -35,11 +35,11 @@ function GoodCardItem({ good }: PropsCard): JSX.Element {
           image={`http://localhost:3000/${good.image}`}
         />
         <StyledCardContent sx={{ flexGrow: 1 }}>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h6" component="h2" sx={{ width: '100%' }} noWrap={true}>
             {good.title}
           </Typography>
           <Typography sx={{ color: 'gray' }} gutterBottom>
-            {good.description}
+            Цвет: {good.color}
           </Typography>
           <Typography>{good.price} ₽</Typography>
         </StyledCardContent>

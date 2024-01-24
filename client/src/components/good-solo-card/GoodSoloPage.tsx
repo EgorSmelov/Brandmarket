@@ -36,6 +36,7 @@ export default function GoodSoloPage(): JSX.Element {
         flexWrap: 'nowrap',
         gap: '40px',
         mt: '150px',
+        boxShadow: '0 2px 4px black'
       }}
     >
       <GoodSoloImage good={good} />

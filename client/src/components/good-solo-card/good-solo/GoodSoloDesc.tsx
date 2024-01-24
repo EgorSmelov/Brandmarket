@@ -1,4 +1,13 @@
-import { Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import type { GoodType } from '../../../types/good';
@@ -9,26 +18,12 @@ import BasketButton from '../../buttons/basketButoon/BasketButton';
 type GoodTypeProps = {
   good: GoodType;
 };
-const StyledCard = styled(Card)`
-  border: 1px solid #dddddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-`;
 
 const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-  }
 `;
 
 const StyledTitle = styled(Typography)`
@@ -36,17 +31,7 @@ const StyledTitle = styled(Typography)`
   margin-bottom: 10px;
   color: #212121;
   line-height: 1.3;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #ff5722;
-  }
-`;
-
-const StyledDescription = styled(Typography)`
-  color: #757575;
-  margin-bottom: 10px;
-  line-height: 1.5;
+  align-items: flex-start;
 `;
 
 const StyledColor = styled(Typography)`
@@ -72,20 +57,29 @@ const StyledActionContainer = styled(CardActions)`
 export default function GoodSoloDesc({ good }: GoodTypeProps): JSX.Element {
   return (
     <Grid item>
-      <StyledCard elevation={0}>
+      <Card elevation={0} >
         <StyledCardContent>
           <StyledTitle gutterBottom variant="h5" component="h2">
             {good.title}
           </StyledTitle>
-          <StyledDescription>{good.description}</StyledDescription>
-          <StyledColor>Цвет: {good.color}</StyledColor>
-          <StyledPrice>{good.price} ₽</StyledPrice>
-          <Typography variant="body2" color="text.secondary">
-            Количество: {good.quantity}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Размеры: {good.size}
-          </Typography>
+          <Grid item sx={{ width: '560px' }}>
+            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+              Описание:
+            </Typography>
+            <List>
+              {good.description.split('.').map((data) => (
+                <ListItemText primary={data} sx={{ color: '#757575' }} />
+              ))}
+            </List>
+            <StyledColor>Цвет: {good.color}</StyledColor>
+            <StyledPrice>{good.price} ₽</StyledPrice>
+            <Typography variant="body2" color="text.secondary">
+              Количество: {good.quantity}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Размеры: {good.size}
+            </Typography>
+          </Grid>
         </StyledCardContent>
         <CardActions sx={{ justifyContent: 'space-between' }}>
           <StyledActionContainer>
@@ -93,7 +87,7 @@ export default function GoodSoloDesc({ good }: GoodTypeProps): JSX.Element {
             <BasketButton page good={good} />
           </StyledActionContainer>
         </CardActions>
-      </StyledCard>
+      </Card>
     </Grid>
   );
 }

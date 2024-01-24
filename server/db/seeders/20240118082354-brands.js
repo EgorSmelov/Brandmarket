@@ -4,16 +4,12 @@ module.exports = {
     await queryInterface.bulkInsert(
       "Brands",
       [
-        { name: "Nike" },
-        { name: "Adidas" },
-        { name: "Gucci" },
-        { name: "Zara" },
-        { name: "H&M" },
-        { name: "Calvin Klein" },
-        { name: "Levis" },
-        { name: "Versace" },
-        { name: "Puma" },
-        { name: "Tommy Hilfiger" },
+        { name: "Evisu" },
+        { name: "RIPNDIP" },
+        { name: "Butter Goods" },
+        { name: "Jordan" },
+        { name: "MINGA LONDON" },
+        { name: "Carhartt WIP" },
       ],
       {}
     );
