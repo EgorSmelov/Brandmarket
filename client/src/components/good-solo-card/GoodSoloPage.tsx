@@ -15,9 +15,9 @@ export default function GoodSoloPage(): JSX.Element {
   useEffect(() => {
     void dispatch(getOneGoodThunk(Number(id)));
 
-    return () => {
-      dispatch(resetGood());
-    };
+    // return () => {
+    //   dispatch(resetGood());
+    // };
   }, [dispatch, id]);
 
   if (!good)
