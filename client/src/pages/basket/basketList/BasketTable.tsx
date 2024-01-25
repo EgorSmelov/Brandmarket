@@ -51,7 +51,7 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
                 Цена
               </TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }}>
-                Количество
+                Товаров в корзине
               </TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }} />
             </TableRow>
@@ -112,6 +112,13 @@ export default function BasketTable({ basketGoods }: BasketTablePropsType): JSX.
                 )}
                 <RubleIcon />
               </TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} align="center">
+                {basketGoods.reduce(
+                  (accum, item) => accum + item.userBaskets[0].Baskets.quantity,
+                  0,
+                )}
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }} />
             </TableRow>
             <TableRow />
           </TableBody>
