@@ -1,18 +1,19 @@
-const express = require('express');
-const { Op } = require('sequelize');
-const { Good, Favorite, Basket, User } = require('../../db/models');
-const uploadMiddleware = require('../middlewares/uploadFile');
+const express = require("express");
+const { Op } = require("sequelize");
+const { Good, Favorite, Basket, User } = require("../../db/models");
+const uploadMiddleware = require("../middlewares/uploadFile");
 
 const apiGoodsRouter = express.Router();
 
 apiGoodsRouter
-  .route('/')
+  .route("/")
   .get(async (req, res) => {
     try {
       const whereFilter = {};
       const { categoryId } = req.query;
+
       if (categoryId !== "null") {
-        whereFilter.categoryId = categoryId;
+        whereFilter.categoryId = decodeURIComponent(categoryId);
       }
 
       const goods = await Good.findAll({
@@ -24,17 +25,17 @@ apiGoodsRouter
             model: User,
             required: false,
             where: { id: res.locals.user ? res.locals.user?.id : null },
-            attributes: ['id'],
+            attributes: ["id"],
             through: {
               model: Favorite,
             },
           },
           {
-            as: 'userBaskets',
+            as: "userBaskets",
             model: User,
             required: false,
             where: { id: res.locals.user ? res.locals.user?.id : null },
-            attributes: ['id'],
+            attributes: ["id"],
             through: {
               model: Basket,
             },
@@ -47,7 +48,7 @@ apiGoodsRouter
       return res.status(500).json(error);
     }
   })
-  .post(uploadMiddleware.single('file'), async (req, res) => {
+  .post(uploadMiddleware.single("file"), async (req, res) => {
     try {
       const {
         title,
@@ -64,7 +65,7 @@ apiGoodsRouter
       await Good.create({
         title,
         price: Number(price),
-        image: req.file.path.replace('public', ''),
+        image: req.file.path.replace("public", ""),
         description,
         color,
         categoryId,
@@ -74,19 +75,25 @@ apiGoodsRouter
         size,
         quantity,
       });
-      return res.status(201).responce({ message: 'The good has been successfully added' });
+      return res
+        .status(201)
+        .responce({ message: "The good has been successfully added" });
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
     }
   });
 
-apiGoodsRouter.get('/search', async (req, res) => {
+// Поиск
+apiGoodsRouter.get("/search", async (req, res) => {
   try {
     const { searchText } = req.query;
     const findGoods = await Good.findAll({
       where: {
-        [Op.or]: [{ title: { [Op.iLike]: `%${decodeURIComponent(searchText)}%` } }, { description: { [Op.iLike]: decodeURIComponent(searchText) } }],
+        [Op.or]: [
+          { title: { [Op.iLike]: `%${decodeURIComponent(searchText)}%` } },
+          { description: { [Op.iLike]: decodeURIComponent(searchText) } },
+        ],
         quantity: { [Op.gt]: 0 },
       },
     });
@@ -95,13 +102,52 @@ apiGoodsRouter.get('/search', async (req, res) => {
     return res.status(500).json(error);
   }
 });
+// ------------ //
+
+// Фильтер
+apiGoodsRouter.get("/filter", async (req, res) => {
+  try {
+    const whereFilter = {};
+    const { categoryId, brandId, color, price } = req.query;
+
+    if (categoryId !== "null") {
+      whereFilter.categoryId = decodeURIComponent(categoryId);
+    }
+
+    if (brandId !== "null") {
+      whereFilter.brandId = decodeURIComponent(brandId);
+    }
+
+    if (color !== "null") {
+      whereFilter.color = decodeURIComponent(color);
+    }
+
+    if (price !== "null") {
+      whereFilter.price = decodeURIComponent(price);
+    }
+
+    const findGoods = await Good.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.iLike]: `%${decodeURIComponent(searchText)}%` } },
+          { description: { [Op.iLike]: decodeURIComponent(searchText) } },
+        ],
+        quantity: { [Op.gt]: 0 },
+      },
+    });
+    res.json(findGoods);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+// ------------ //
 
 // Все товары по полу
-apiGoodsRouter.get('/genders/:genderId', async (req, res) => {
+apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
   try {
     const goods = await Good.findAll({
       where: { genderId: req.params.genderId },
-      order: [['createdAt', 'DESC']],
+      order: [["createdAt", "DESC"]],
     });
     return res.json(goods);
   } catch (error) {
@@ -115,7 +161,7 @@ apiGoodsRouter.get("/sellers", async (req, res) => {
   try {
     const goodsSeller = await Good.findAll({
       where: { userId: res.locals.user.id },
-      order: [['createdAt', 'DESC']],
+      order: [["createdAt", "DESC"]],
     });
     return res.json(goodsSeller);
   } catch (error) {
@@ -125,25 +171,28 @@ apiGoodsRouter.get("/sellers", async (req, res) => {
 // ------------ //
 
 // Все товары в категории
-apiGoodsRouter.get('/genders/:genderId/categories/:categoryId', async (req, res) => {
-  try {
-    const goods = await Good.findAll({
-      where: {
-        genderId: req.params.genderId,
-        categoryId: req.params.categoryId,
-      },
-      order: [['createdAt', 'DESC']],
-    });
-    return res.json(goods);
-  } catch (error) {
-    return res.status(500).json(error);
+apiGoodsRouter.get(
+  "/genders/:genderId/categories/:categoryId",
+  async (req, res) => {
+    try {
+      const goods = await Good.findAll({
+        where: {
+          genderId: req.params.genderId,
+          categoryId: req.params.categoryId,
+        },
+        order: [["createdAt", "DESC"]],
+      });
+      return res.json(goods);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
-});
+);
 // ------------ //
 
 // Один товар
 apiGoodsRouter
-  .route('/:id')
+  .route("/:id")
   .get(async (req, res) => {
     try {
       const good = await Good.findByPk(req.params.id, {
@@ -154,17 +203,17 @@ apiGoodsRouter
             model: User,
             where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,
-            attributes: ['id'],
+            attributes: ["id"],
             through: {
               model: Favorite,
             },
           },
           {
-            as: 'userBaskets',
+            as: "userBaskets",
             model: User,
             where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,
-            attributes: ['id'],
+            attributes: ["id"],
             through: {
               model: Basket,
             },
@@ -187,14 +236,24 @@ apiGoodsRouter
       return res.status(500).json(error);
     }
   })
-  .patch(uploadMiddleware.single('file'), async (req, res) => {
+  .patch(uploadMiddleware.single("file"), async (req, res) => {
     try {
-      const { title, price, description, color, size, quantity, categoryId, genderId, brandId } = req.body;
+      const {
+        title,
+        price,
+        description,
+        color,
+        size,
+        quantity,
+        categoryId,
+        genderId,
+        brandId,
+      } = req.body;
 
       const good = await Good.findByPk(req.params.id);
       good.title = title;
       good.price = Number(price);
-      good.image = req.file.path.replace('public', '');
+      good.image = req.file.path.replace("public", "");
       good.description = description;
       good.color = color;
       good.categoryId = categoryId;
