@@ -12,4 +12,10 @@ export const getUserThunk = createAsyncThunk('user/getUserThunk', async (id: Use
   return data;
 });
 
-
+export const deleteFormHandlerThunk = createAsyncThunk(
+  'form/deleteFormHandlerThunk',
+  async (id: UserType['id']) => {
+    await ModerationService.deleteFormUser(id);
+    return id;
+  },
+);

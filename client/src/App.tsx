@@ -28,6 +28,7 @@ import AdminRouter from './components/routing/AdminRouter';
 import ModerationGoodsListPage from './pages/moderation/moderationPage/ModerationGoodsListPage';
 import OrderPage from './pages/order/OrderPage';
 import ThankYouPage from './pages/thankYouPage/ThankYouPage';
+import Filter from './components/filter/Filter';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
@@ -58,7 +59,7 @@ function App(): JSX.Element {
       >
         <NavBar />
         <Container
-          maxWidth="lg"
+          maxWidth="xl"
           sx={{
             p: 2,
             display: 'flex',

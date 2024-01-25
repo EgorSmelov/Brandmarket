@@ -8,6 +8,7 @@ import favoritesReducer from './slices/favorites/favoritesSlice';
 import userReducer from './slices/moderationSellers/moderationSlice';
 import basketReducer from './slices/baskets/basketSlice';
 import sellerSlice from './slices/seller/sellerSlice';
+import goodAttributesReducer from './slices/attributes/attributesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     users: userReducer,
     baskets: basketReducer,
     sellers: sellerSlice,
+    goodAttributes: goodAttributesReducer,
   },
 });
 

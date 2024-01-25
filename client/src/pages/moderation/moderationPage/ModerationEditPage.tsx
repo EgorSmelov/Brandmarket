@@ -3,38 +3,62 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { IconButton, Link, Tooltip } from '@mui/material';
+import { Container, IconButton, Link, TableHead, Tooltip } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import type { UserType } from '../../../types/auth';
 import { useAppDispatch } from '../../../redux/hooks';
-import { getUserThunk } from '../../../redux/slices/moderationSellers/moderationThunks';
+import { deleteFormHandlerThunk, getUserThunk } from '../../../redux/slices/moderationSellers/moderationThunks';
 
 type UserPropsType = {
-  user: UserType;
+  users: UserType[];
 };
 
-function ModerationEditPage({ user }: UserPropsType): JSX.Element {
+function ModerationEditPage({ users }: UserPropsType): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-      <TableBody>
-        <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-          <TableCell component="th" scope="row">
-            {user.id}
-          </TableCell>
-          <TableCell align="right">{user.name}</TableCell>
-          <TableCell align="right">{user.email}</TableCell>
-          <TableCell align="right">
-            <Tooltip title="Сделать продавцом">
-              <IconButton onClick={() => void dispatch(getUserThunk(user.id))}>
-                <CheckCircleIcon />
-              </IconButton>
-            </Tooltip>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <Container>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: 'bold' }}>№</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+              Продавец
+            </TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+              Почта
+            </TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+              Статус продавца
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {users.map((user, index) => (
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row" align="left">
+                {user.id}
+              </TableCell>
+              <TableCell align="center">{user.name}</TableCell>
+              <TableCell align="center">{user.email}</TableCell>
+              <TableCell align="center">
+                <Tooltip title="Сделать продавцом">
+                  <IconButton
+                    onClick={() => {
+                      void dispatch(getUserThunk(user.id));
+                      void dispatch(deleteFormHandlerThunk(user.id));
+                    }}
+                    color={user.roleId === 2 ? 'success' : 'default'}
+                  >
+                    <CheckCircleIcon />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Container>
   );
 }
 

@@ -1,21 +1,8 @@
 import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Footer(): JSX.Element {
-  // return (
-  //   <Box component="footer" sx={{ mt: 'auto' }}>
-  //     <AppBar position="static" color='inherit'>
-  //       <Toolbar>
-  //         <Box display="flex" alignItems="center">
-  //           <CopyrightIcon />
-  //           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-  //             Ежи 2024
-  //           </Typography>
-  //         </Box>
-  //       </Toolbar>
-  //     </AppBar>
-  //   </Box>
-  // );
   return (
     <Box
       sx={{
@@ -52,7 +39,7 @@ export default function Footer(): JSX.Element {
             <ListItem sx={{ padding: '0' }}>
               <ListItemText primary="Контакты" />
             </ListItem>
-            <ListItem sx={{ padding: '0' }}>
+            <ListItem sx={{ padding: '0', color: '#ffffff' }} component={Link} to="/seller/new">
               <ListItemText primary="Стать продавцом" />
             </ListItem>
           </List>
@@ -66,16 +53,22 @@ export default function Footer(): JSX.Element {
           <Typography variant="h6">БРЕНДЫ</Typography>
           <List dense>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Оригинальные запчасти" />
+              <ListItemText primary="Evisu" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Неоригинальные запчасти" />
+              <ListItemText primary="RIPNDIP" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Автомасла" />
+              <ListItemText primary="Butter Goods" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Аккумуляторы" />
+              <ListItemText primary="Jordan" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="MINGA LONDON" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="Carhartt WIP" />
             </ListItem>
           </List>
         </Box>

@@ -13,11 +13,13 @@ const resLocals = require("./middlewares/resLocals");
 const moderationRouter = require("./routes/moderationRouter");
 const basketRouter = require("./routes/basketRouter");
 const apiOrdersRouter = require("./routes/apiOrdersRouter");
+const apiMailRouter = require("./routes/apiMailRouter");
+const attributesRouter = require("./routes/attributesRouter");
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(
   cors({
     credentials: true,
@@ -27,7 +29,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(resLocals);
 
 app.use("/api/v1/auth", authRouter);
@@ -40,5 +42,7 @@ app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/brands", brandsRouter);
 app.use("/api/v1/genders", gendersRouter);
 app.use("/api/v1/orders", apiOrdersRouter);
+app.use("/api/v1/mail", apiMailRouter);
+app.use("/api/v1/attributes", attributesRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
