@@ -12,8 +12,8 @@ apiMailRouter.route("/sendorder").post(async (req, res) => {
     host: "smtp.yandex.ru",
     port: 465,
     auth: {
-      user: "smelov909@yandex.ru",
-      pass: "rwumxjfoggyguayd",
+      user: "brandmarketelbrus@yandex.ru",
+      pass: "lyyxijwgzqeygymy",
     },
   });
   const { data } = req.body;
@@ -24,8 +24,8 @@ apiMailRouter.route("/sendorder").post(async (req, res) => {
   if (data) {
     const mail = Template(title, price, color);
     const mailOptions = {
-      from: "smelov909@yandex.ru",
-      to: "smelov909@yandex.ru",
+      from: "brandmarketelbrus@yandex.ru",
+      to: "brandmarketelbrus@yandex.ru",
       subject: "ЧЕК от Brandmarket 🎟",
       html: mail,
     };
