@@ -11,7 +11,7 @@ apiGoodsRouter
     try {
       const whereFilter = {};
       const { categoryId } = req.query;
-      if (categoryId !== 'null') {
+      if (categoryId !== "null") {
         whereFilter.categoryId = categoryId;
       }
 
@@ -20,7 +20,7 @@ apiGoodsRouter
 
         include: [
           {
-            as: 'userFavorites',
+            as: "userFavorites",
             model: User,
             required: false,
             where: { id: res.locals.user ? res.locals.user?.id : null },
@@ -49,7 +49,17 @@ apiGoodsRouter
   })
   .post(uploadMiddleware.single("file"), async (req, res) => {
     try {
-      const { title, price, description, color, size, quantity, categoryId, genderId, brandId } = req.body;
+      const {
+        title,
+        price,
+        description,
+        color,
+        size,
+        quantity,
+        categoryId,
+        genderId,
+        brandId,
+      } = req.body;
 
       await Good.create({
         title,
@@ -89,13 +99,11 @@ apiGoodsRouter.get("/genders/:genderId", async (req, res) => {
 
 // Товары продавца
 apiGoodsRouter.get("/sellers", async (req, res) => {
-  console.log(res.locals.user);
   try {
     const goodsSeller = await Good.findAll({
       where: { userId: res.locals.user.id },
       order: [["createdAt", "DESC"]],
     });
-    console.log(goodsSeller);
     return res.json(goodsSeller);
   } catch (error) {
     return res.status(500).json(error);
@@ -132,7 +140,7 @@ apiGoodsRouter
         where: { quantity: { [Op.gt]: 0 } },
         include: [
           {
-            as: 'userFavorites',
+            as: "userFavorites",
             model: User,
             where: { id: res.locals.user ? res.locals.user?.id : null },
             required: false,

@@ -38,6 +38,7 @@ export default function Footer(): JSX.Element {
         paddingBottom: '20px',
         paddingRight: '60px',
         paddingLeft: '60px',
+        mt: 'auto',
       }}
     >
       <Box
