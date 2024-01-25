@@ -248,7 +248,7 @@ apiGoodsRouter
       const good = await Good.findByPk(req.params.id);
       good.title = title;
       good.price = Number(price);
-      good.image = req.file.path.replace("public", "") || good.image; // если файл не был загружен, то оставляем старое имя файла и оставляем
+      good.image = req.file ? req.file.path.replace("public", "") : good.image;
       good.description = description;
       good.color = color;
       good.categoryId = categoryId;
