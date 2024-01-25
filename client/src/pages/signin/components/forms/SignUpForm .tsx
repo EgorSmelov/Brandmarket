@@ -69,6 +69,7 @@ export default function SignUpForm(): JSX.Element {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                inputProps={{ minLength: 5 }}
               />
             </Grid>
           </Grid>
