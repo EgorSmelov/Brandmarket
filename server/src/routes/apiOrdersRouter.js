@@ -16,7 +16,6 @@ apiOrdersRouter.get("/", async (req, res) => {
 
 apiOrdersRouter.post("/purchase", async (req, res) => {
   try {
-    console.log(req.body)
     await Basket.destroy({ where: { userId: res.locals.user.id } });
     req.body.forEach(async (item) => {
       const good = await Good.findByPk(item.id);
