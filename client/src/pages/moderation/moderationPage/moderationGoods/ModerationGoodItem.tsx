@@ -52,27 +52,29 @@ export default function ModerationGoodItem({ goods }: GoodAdminProps): JSX.Eleme
             <TableCell align="center" sx={{ fontWeight: 'bold' }}>
               Цена
             </TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }} />
+            <TableCell align="center" sx={{ fontWeight: 'bold' }} />
           </TableRow>
         </TableHead>
         <TableBody>
           {goods.map((good, index) => (
             <TableRow key={good.title} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell style={{ width: '10%', fontWeight: 600 }} align="left">
+              <TableCell style={{ width: '10%', fontWeight: 600 }} align="center">
                 {index + 1}.
               </TableCell>
-              <TableCell style={{ width: '10%' }} component="th" scope="row">
+              <TableCell style={{ width: '10%' }} component="th" scope="row" align="center">
                 {users.filter((user) => user.id === good.userId).map((user) => user.name)}
               </TableCell>
-              <TableCell style={{ width: '35%' }} component="th" scope="row">
+              <TableCell style={{ width: '35%' }} component="th" scope="row" align="center">
                 {good.title}
               </TableCell>
-              <TableCell style={{ width: '15%' }} align="left">
+              <TableCell style={{ width: '15%' }} align="center">
                 Размер: {good.size}
               </TableCell>
-              <TableCell style={{ width: '15%' }} align="right">
+              <TableCell style={{ width: '15%' }} align="center">
                 {good.price} ₽
               </TableCell>
-              <TableCell style={{ width: '22.5%' }} align="right">
+              <TableCell style={{ width: '22.5%' }} align="center">
                 <Tooltip title="Редактировать">
                   <IconButton>
                     <Link
@@ -86,7 +88,7 @@ export default function ModerationGoodItem({ goods }: GoodAdminProps): JSX.Eleme
                   </IconButton>
                 </Tooltip>
               </TableCell>
-              <TableCell style={{ width: '22.5%' }} align="right">
+              <TableCell style={{ width: '22.5%' }} align="center">
                 <Tooltip title="Удалить">
                   <IconButton onClick={() => void dispatch(deleteSellerGoodHandlerThunk(good.id))}>
                     <DeleteIcon />
