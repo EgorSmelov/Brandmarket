@@ -11,30 +11,28 @@ type PropsBasket = {
 
 export const FavoriteStyledButton = styled(Button)<PropsFavorite>`
   width: 200px;
-  height: 26px;
-  font-size: 10px;
+  height: 35px;
+  font-size: 12px;
   font-weight: bold;
-  background-color: ${(props) => (props.isFavorite ? 'red' : '#ffe4e3')};
-  color: black;
-  border: 1px solid ${(props) => (props.isFavorite ? 'red' : '#ffe4e3')};
+  background-color: ${(props) => (props.isFavorite ? 'white' : 'black')};
+  color: ${(props) => (props.isFavorite ? 'black' : 'white')};
+  border: 1px solid black;
   &:hover {
     background-color: #ffffff;
-    border: 1px solid ${(props) => (props.isFavorite ? 'red' : '#ffe4e3')};
     color: black;
   }
 `;
 
 export const BasketStyledButton = styled(Button)<PropsBasket>`
   width: 200px;
-  height: 26px;
-  font-size: 10px;
+  height: 35px;
+  font-size: 12px;
   font-weight: bold;
-  background-color: ${(props) => (props.isBasket ? 'red' : '#00b850')};
-  color: white;
-  border: 1px solid ${(props) => (props.isBasket ? 'red' : '#00b850')};
+  background-color: ${(props) => (props.isBasket ? 'white' : 'black')};
+  color: ${(props) => (props.isBasket ? 'black' : 'white')};
+  border: 1px solid black;
   &:hover {
     background-color: #ffffff;
-    border: 1px solid ${(props) => (props.isBasket ? 'red' : '#00b850')};
     color: black;
   }
 `;

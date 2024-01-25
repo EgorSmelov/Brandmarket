@@ -26,6 +26,8 @@ import ModerationUserList from './pages/moderation/ModerationUserList';
 import { getBasketsThunk } from './redux/slices/baskets/basketThunks';
 import AdminRouter from './components/routing/AdminRouter';
 import ModerationGoodsListPage from './pages/moderation/moderationPage/ModerationGoodsListPage';
+import OrderPage from './pages/order/OrderPage';
+import ThankYouPage from './pages/thankYouPage/ThankYouPage';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
@@ -35,12 +37,15 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(userCheckThunk());
-    void dispatch(getFavoritesThunk());
     void dispatch(getAllCategoriesThunk());
     void dispatch(getAllBrandsThunk());
     void dispatch(getAllGendersThunk());
-    void dispatch(getBasketsThunk());
   }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(getFavoritesThunk());
+    void dispatch(getBasketsThunk());
+  }, [dispatch, user.status]);
 
   return (
     <Loader isLoading={user.status === 'pending'}>
@@ -70,6 +75,8 @@ function App(): JSX.Element {
               <Route path="/auth/registration" element={<SignUpPage />} />
             </Route>
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
+              <Route path="/orders/purchase" element={<OrderPage />} />
+              <Route path="/orders/purchase/thankyou" element={<ThankYouPage />} />
               <Route element={<AdminRouter isSeller={user.roleId !== 1} />}>
                 <Route path="/good/:id/edit" element={<GoodEditPage />} />
                 <Route path="/seller/add" element={<GoodAddPage />} />
@@ -84,6 +91,7 @@ function App(): JSX.Element {
             <Route element={<RegRouter isAllowed={user.status !== 'authenticated'} />}>
               <Route path="/basket" element={<BasketPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
+              {/* <Route path="/orders/purchase" element={<OrderPage />} /> */}
             </Route>
           </Routes>
         </Container>

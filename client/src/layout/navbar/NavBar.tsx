@@ -13,6 +13,8 @@ import Burger from './components/burger/Burger';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutHandlerThunk } from '../../redux/slices/auth/authThunks';
 import GlobalSearch from './components/search/GlobalSearch';
+import { resetBaskets } from '../../redux/slices/baskets/basketSlice';
+import { resetFavorites } from '../../redux/slices/favorites/favoritesSlice';
 
 export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -79,7 +81,14 @@ export default function NavBar(): JSX.Element {
                     </IconButton>
                   </Tooltip>
 
-                  <Button color="inherit" onClick={() => void dispatch(logoutHandlerThunk())}>
+                  <Button
+                    color="inherit"
+                    onClick={() => {
+                      void dispatch(logoutHandlerThunk());
+                      void dispatch(resetBaskets());
+                      void dispatch(resetFavorites());
+                    }}
+                  >
                     Выйти
                   </Button>
                 </>

@@ -15,9 +15,9 @@ export default function GoodSoloPage(): JSX.Element {
   useEffect(() => {
     void dispatch(getOneGoodThunk(Number(id)));
 
-    return () => {
-      dispatch(resetGood());
-    };
+    // return () => {
+    //   dispatch(resetGood());
+    // };
   }, [dispatch, id]);
 
   if (!good)
@@ -35,7 +35,8 @@ export default function GoodSoloPage(): JSX.Element {
         alignItems: 'center',
         flexWrap: 'nowrap',
         gap: '40px',
-        mt: '150px',
+        mt: '100px',
+        border: '1px solid #e0e0e0',
       }}
     >
       <GoodSoloImage good={good} />

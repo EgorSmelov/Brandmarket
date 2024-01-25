@@ -7,6 +7,7 @@ const basketRouter = express.Router();
 basketRouter.get("/", async (req, res) => {
   try {
     const basketGoods = await Good.findAll({
+      order: [["id", "ASC"]],
       include: {
         as: "userBaskets",
         model: User,
@@ -39,7 +40,7 @@ basketRouter
         totalPrice: good.price,
         quantity: 1,
       });
-      return res.status(201).json(basket); // 201 - создание объекта
+      return res.status(200).json(basket); // 201 - создание объекта
     } catch (error) {
       console.error(error);
       return res.status(500).json(error);
