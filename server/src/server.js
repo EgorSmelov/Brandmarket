@@ -17,7 +17,7 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 app.use(
   cors({
     credentials: true,
@@ -27,7 +27,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static('public'));
 app.use(resLocals);
 
 app.use("/api/v1/auth", authRouter);

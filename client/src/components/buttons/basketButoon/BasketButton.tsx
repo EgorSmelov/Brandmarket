@@ -19,7 +19,7 @@ export default function BasketButton({ good, page }: FavoriteButtonPropsType): J
   const dispath = useAppDispatch();
 
   useEffect(() => {
-    if (good.userBaskets.length) {
+    if (good.userBaskets?.length) {
       setIsBasket(true);
     } else {
       setIsBasket(false);

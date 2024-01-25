@@ -21,6 +21,12 @@ class GoodsService {
     return [];
   }
 
+  static async getSearchedGoods(search: string): Promise<GoodType[]> {
+    const response = await apiGoodsService.get<GoodType[]>(`/search?searchText=${search}`);
+    if (response.status === 200) return response.data;
+    return [];
+  }
+
   static async getOneGood(id: GoodType['id']): Promise<GoodType> {
     const response = await apiGoodsService.get<GoodType>(`/${id}`);
     if (response.status === 200) return response.data;

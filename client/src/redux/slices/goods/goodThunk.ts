@@ -23,6 +23,14 @@ export const getAdminGoodsThunk = createAsyncThunk('goods/getGoodsThunk', async 
   return data;
 });
 
+export const getSearchGoodsThunk = createAsyncThunk(
+  'goods/getGoodsThunk',
+  async (search: string) => {
+    const data = await GoodsService.getSearchedGoods(search);
+    return data;
+  },
+);
+
 export const deleteGoodHandlerThunk = createAsyncThunk(
   'good/deleteGoodHandlerThunk',
   async (id: GoodType['id']) => {

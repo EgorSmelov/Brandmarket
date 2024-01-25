@@ -18,7 +18,7 @@ export default function FavoriteButton({ good, page }: FavoriteButtonPropsType):
   const dispath = useAppDispatch();
 
   useEffect(() => {
-    if (good.userFavorites.length) {
+    if (good.userFavorites?.length) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -45,7 +45,7 @@ export default function FavoriteButton({ good, page }: FavoriteButtonPropsType):
 
   if (page) {
     return (
-      <FavoriteStyledButton 
+      <FavoriteStyledButton
         aria-label="add to favorites"
         type="button"
         isFavorite={isFavorite}

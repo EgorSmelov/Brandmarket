@@ -31,6 +31,7 @@ import ThankYouPage from './pages/thankYouPage/ThankYouPage';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
+  const { goods } = useAppSelector((state) => state.goods);
 
   const dispatch = useAppDispatch();
 
