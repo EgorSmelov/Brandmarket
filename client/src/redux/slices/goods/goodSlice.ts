@@ -5,6 +5,7 @@ import {
   deleteGoodHandlerThunk,
   getOneGoodThunk,
   getSearchGoodsThunk,
+  getFilterThunk,
 } from './goodThunk';
 
 const initialState: GoodState = { goods: [], good: null };
@@ -28,6 +29,9 @@ export const goodSlice = createSlice({
       state.goods = state.goods.filter((good) => good.id !== action.payload);
     });
     builder.addCase(getSearchGoodsThunk.fulfilled, (state, action) => {
+      state.goods = action.payload;
+    });
+    builder.addCase(getFilterThunk.fulfilled, (state, action) => {
       state.goods = action.payload;
     });
   },

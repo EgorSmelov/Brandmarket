@@ -27,6 +27,16 @@ class GoodsService {
     return [];
   }
 
+  static async getFilters({ color, price, size }): Promise<GoodType[]> {
+    console.log(color, price, size);
+    const response = await apiGoodsService.get<GoodType[]>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/filter?color=${color}&price=${price}&size=${size}`,
+    );
+    if (response.status === 200) return response.data;
+    return [];
+  }
+
   static async getOneGood(id: GoodType['id']): Promise<GoodType> {
     const response = await apiGoodsService.get<GoodType>(`/${id}`);
     if (response.status === 200) return response.data;
