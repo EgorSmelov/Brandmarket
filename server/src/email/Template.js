@@ -119,7 +119,7 @@ function Template(title, price, color) {
               <table style="line-height: 28px; font-size: 14px;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
                   <td style="font-weight: 600; padding-top: 32px; color: #000000; font-size: 20px;" width="50%">Сумма заказа:</td>
-                  <td style="font-weight: 600; padding-top: 32px; color: #000000; font-size: 20px;" width="50%">${price}</td>
+                  <td style="font-weight: 600; padding-top: 32px; color: #000000; font-size: 20px;" width="50%">${price} ₽</td>
                 </tr>
               </table>
             </td>
