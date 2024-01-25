@@ -1,4 +1,4 @@
-function Template(user, guests, table, total) {
+function Template(title, price, color) {
   const string = `
 <!DOCTYPE html>
 <html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -94,11 +94,11 @@ function Template(user, guests, table, total) {
             <td align="left" class="sm-p-20 sm-dui17-b-t" style="border-radius: 2px; padding: 40px; position: relative; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05); vertical-align: top; z-index: 50;" bgcolor="#ffffff" valign="top">
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
               <tr width="100%" >
-                <img src="https://media.proglib.io/events/2020/06/05/139630d138c5138dcc0f1dfaf06b3846.jpg" object-fit="cover" width="100%" height="100%"/>
+                <img src="https://i.ibb.co/Q92LdGH/wiotqupl.png" object-fit="cover" width="100%" height="100%"/>
               </tr>
                 <tr>
                   <td width="80%">
-                    <h1 class="sm-text-lg all-font-roboto" style="font-weight: 700; line-height: 100%; margin: 0; margin-bottom: 4px; font-size: 24px;">El-Keeper Receipt</h1>
+                    <h1 class="sm-text-lg all-font-roboto" style="font-weight: 700; line-height: 100%; margin: 0; margin-bottom: 4px; font-size: 24px;">BrandMarket</h1>
                     <p class="sm-text-xs" style="margin: 0; color: #a0aec0; font-size: 14px;">Ваш чек сформирован</p>
                   </td>
                 </tr>
@@ -106,30 +106,20 @@ function Template(user, guests, table, total) {
               <div style="line-height: 32px;">&zwnj;</div>
               <table class="sm-leading-32" style="line-height: 28px; font-size: 14px;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
-                  <td class="sm-inline-block" style="color: #718096;" width="50%">Принял заказ сотрудник</td>
-                  <td class="sm-inline-block" style="font-weight: 600; text-align: right;" width="50%" align="right">${user}</td>
+                  <td class="sm-inline-block" style="color: #718096;" width="50%">Ваши покупки:</td>
+                  <td class="sm-inline-block" style="font-weight: 600; text-align: right;" width="50%" align="right">${title}</td>
                 </tr>
                 <tr>
-                  <td class="sm-inline-block" style="color: #718096;" width="50%">Количество посетителей</td>
-                  <td class="sm-inline-block" style="font-weight: 600; text-align: right;" width="50%" align="right">${guests}</td>
+                  <td class="sm-inline-block" style="color: #718096;" width="50%">Цвет:</td>
+                  <td class="sm-inline-block" style="font-weight: 600; text-align: right;" width="50%" align="right">${color}</td>
                 </tr>
                 <tr>
-                <td class="sm-inline-block" style="color: #718096;" width="50%">Номер столика</td>
-                <td class="sm-inline-block" style="font-weight: 600; text-align: right;" width="50%" align="right">${table}</td>
               </tr>
               </table>
               <table style="line-height: 28px; font-size: 14px;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
-                  <td style="color: #718096;" width="50%">Сумма счёта</td>
-                  <td style="font-weight: 600; text-align: right;" width="50%" align="right">₽  ${Number(total).toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td style="color: #718096;" width="50%">В т.ч. НДС 18%</td>
-                  <td style="font-weight: 600; text-align: right;" width="50%" align="right">₽  ${Number(total * 0.18).toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 600; padding-top: 32px; color: #000000; font-size: 20px;" width="50%">Итоговый счёт</td>
-                  <td style="font-weight: 600; padding-top: 32px; text-align: right; color: #68d391; font-size: 20px;" width="50%" align="right">₽  ${Number(total).toFixed(2)}</td>
+                  <td style="font-weight: 600; padding-top: 32px; color: #000000; font-size: 20px;" width="50%">Сумма заказа:</td>
+                  <td style="font-weight: 600; padding-top: 32px; color: #000000; font-size: 20px;" width="50%">${price}</td>
                 </tr>
               </table>
             </td>

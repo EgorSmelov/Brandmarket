@@ -52,4 +52,14 @@ moderationRouter.patch("/:userId", async (req, res) => {
   }
 });
 
+moderationRouter.delete("/:userId", async (req, res) => {
+  try {
+    await ModerationSeller.destroy({ where: { userId: req.params.userId } });
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
+
 module.exports = moderationRouter;
