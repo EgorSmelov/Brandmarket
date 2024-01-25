@@ -27,15 +27,11 @@ class GoodsService {
     return [];
   }
 
-  static async getFilters(
-    colorId: string | null,
-    brandId: string | null,
-    color: string | null,
-    size: string | null,
-  ): Promise<GoodType[]> {
+  static async getFilters({ color, price, size }): Promise<GoodType[]> {
+    console.log(color, price, size);
     const response = await apiGoodsService.get<GoodType[]>(
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    `/filter?colorId=${colorId}&brandId=${brandId}&color=${color}&=size${size}`,
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/filter?color=${color}&price=${price}&size=${size}`,
     );
     if (response.status === 200) return response.data;
     return [];

@@ -14,6 +14,7 @@ const moderationRouter = require("./routes/moderationRouter");
 const basketRouter = require("./routes/basketRouter");
 const apiOrdersRouter = require("./routes/apiOrdersRouter");
 const apiMailRouter = require("./routes/apiMailRouter");
+const attributesRouter = require("./routes/attributesRouter");
 require("dotenv").config();
 
 const app = express();
@@ -42,5 +43,6 @@ app.use("/api/v1/brands", brandsRouter);
 app.use("/api/v1/genders", gendersRouter);
 app.use("/api/v1/orders", apiOrdersRouter);
 app.use("/api/v1/mail", apiMailRouter);
+app.use("/api/v1/attributes", attributesRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

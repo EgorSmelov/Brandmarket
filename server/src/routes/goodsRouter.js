@@ -108,34 +108,29 @@ apiGoodsRouter.get("/search", async (req, res) => {
 apiGoodsRouter.get("/filter", async (req, res) => {
   try {
     const whereFilter = {};
-    const { categoryId, brandId, color, price } = req.query;
+    const { size, color, price } = req.query;
 
-    if (categoryId !== "null") {
-      whereFilter.categoryId = decodeURIComponent(categoryId);
+    if (size !== "") {
+      whereFilter.size = { [Op.iLike]: `%${decodeURIComponent(size)}%` };
     }
 
-    if (brandId !== "null") {
-      whereFilter.brandId = decodeURIComponent(brandId);
+    if (color !== "") {
+      whereFilter.color = { [Op.iLike]: `%${decodeURIComponent(color)}%` };
     }
 
-    if (color !== "null") {
-      whereFilter.color = decodeURIComponent(color);
+    if (price !== "") {
+      const startPrice = Number(price.split(",")[0]);
+      const endPrice = Number(price.split(",")[1]);
+      whereFilter.price = {
+        [Op.between]: [startPrice, endPrice],
+      };
     }
 
-    if (price !== "null") {
-      whereFilter.price = decodeURIComponent(price);
-    }
-
-    const findGoods = await Good.findAll({
-      where: {
-        [Op.or]: [
-          { title: { [Op.iLike]: `%${decodeURIComponent(searchText)}%` } },
-          { description: { [Op.iLike]: decodeURIComponent(searchText) } },
-        ],
-        quantity: { [Op.gt]: 0 },
-      },
+    const filterGoods = await Good.findAll({
+      where: { ...whereFilter, quantity: { [Op.gt]: 0 } },
     });
-    res.json(findGoods);
+
+    res.json(filterGoods);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -253,7 +248,7 @@ apiGoodsRouter
       const good = await Good.findByPk(req.params.id);
       good.title = title;
       good.price = Number(price);
-      good.image = req.file.path.replace("public", "");
+      good.image = req.file.path.replace("public", "") || good.image; // если файл не был загружен, то оставляем старое имя файла и оставляем
       good.description = description;
       good.color = color;
       good.categoryId = categoryId;

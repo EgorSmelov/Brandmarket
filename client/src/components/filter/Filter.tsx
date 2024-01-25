@@ -1,195 +1,105 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import {
   Button,
-  Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
+  Slider,
   Typography,
 } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import GoodsService from '../../services/goodsService';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getFilterThunk } from '../../redux/slices/goods/goodThunk';
+import {
+  getAllColorsThunk,
+  getAllSizesThunk,
+} from '../../redux/slices/attributes/attributesThunks';
 
 export default function Filter(): JSX.Element {
-  const { categories } = useAppSelector((state) => state.categories);
-  const { brands } = useAppSelector((state) => state.brands);
+  const dispatch = useAppDispatch();
 
-  const editHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const { colors, sizes } = useAppSelector((state) => state.goodAttributes);
+
+  useEffect(() => {
+    void dispatch(getAllColorsThunk());
+    void dispatch(getAllSizesThunk());
+  }, [dispatch]);
+
+  const [sliderPriceValue, setSliderPriceValue] = useState([1, 100000]);
+
+  const handleChange = (event, sliderPriceValue) => {
+    setSliderPriceValue(sliderPriceValue);
+  };
+
+  const filterHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    formData.append('price', sliderPriceValue);
     const data = Object.fromEntries(formData);
-    await GoodsService.getFilters(good.id, data);
+    const { color, price, size } = data;
+    void dispatch(getFilterThunk({ color, price, size })).finally(() => e.currentTarget.reset());
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Редактирование товара
-        </Typography>
-        <Box component="form" onSubmit={(e) => void editHandler(e)}>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="demo-simple-select-label">Бренд</InputLabel>
-            <Select
-              name="brandId"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Бренд"
-              required
-            >
-              {brands.map((brand) => (
-                <MenuItem key={brand.id} value={brand.id}>
-                  {brand.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="demo-simple-select-label">Категория</InputLabel>
-            <Select
-              name="categoryId"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Категории"
-              required
-            >
-              {categories.map((category) => (
-                <MenuItem key={category.id} value={category.id}>
-                  {category.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="demo-simple-select-label">Пол</InputLabel>
-            <Select
-              name="genderId"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Пол"
-              required
-            >
-              {genders.map((gender) => (
-                <MenuItem key={gender.id} value={gender.id}>
-                  {gender.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Название товара"
-            name="title"
-            autoComplete="title"
-            type="text"
-            autoFocus
-            defaultValue={good.title}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Цена"
-            name="price"
-            autoComplete="price"
-            type="number"
-            autoFocus
-            defaultValue={good.price}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="outlined-multiline-static"
-            label="Описание"
-            name="description"
-            autoComplete="description"
-            type="text"
-            autoFocus
-            multiline
-            rows={4}
-            defaultValue={good.description}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Цвет"
-            name="color"
-            autoComplete="color"
-            type="text"
-            autoFocus
-            defaultValue={good.color}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Размер"
+    <Box
+      sx={{
+        width: '300px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        ml: 10,
+      }}
+    >
+      <Typography component="h1" variant="h5">
+        Фильтр
+      </Typography>
+      <Box component="form" sx={{ width: '100%' }} onSubmit={(e) => filterHandler(e)}>
+        <Slider
+          min={1}
+          max={100000}
+          step={100}
+          getAriaLabel={() => 'Price range'}
+          value={sliderPriceValue}
+          onChange={handleChange}
+          valueLabelDisplay="on"
+          valueLabelFormat={(prev) => `${prev} ₽`}
+        />
+        <FormControl fullWidth margin="normal">
+          <InputLabel id="demo-simple-select-label">Размер</InputLabel>
+          <Select
             name="size"
-            autoComplete="size"
-            type="text"
-            autoFocus
-            defaultValue={good.size}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Количество"
-            name="quantity"
-            autoComplete="quantity"
-            type="number"
-            autoFocus
-            defaultValue={good.quantity}
-          />
-          <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
-            <Box
-              component="img"
-              sx={{
-                objectFit: 'cover',
-                height: 200,
-                width: 200,
-                borderRadius: 8,
-              }}
-              alt={img?.name}
-              src={imgPreview || `http://localhost:3000/${good.image}`}
-            />
-          </Box>
-          <Box sx={{ mt: 3, mb: 2 }} display="flex" justifyContent="center">
-            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-              Загрузить изображение
-              <VisuallyHiddenInput
-                type="file"
-                accept="image/*"
-                autoFocus
-                onChange={(e) => void setImg(e.target.files[0])}
-              />
-            </Button>
-          </Box>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Сохранить
-          </Button>
-        </Box>
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Размер"
+          >
+            {sizes.map((size) => (
+              <MenuItem key={size} value={size.size}>
+                {size.size}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth margin="normal">
+          <InputLabel id="demo-simple-select-label">Цвет</InputLabel>
+          <Select
+            name="color"
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Цвет"
+          >
+            {colors.map((color) => (
+              <MenuItem key={color} value={color.color}>
+                {color.color}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          Фильтровать
+        </Button>
       </Box>
-    </Container>
+    </Box>
   );
 }

@@ -10,8 +10,6 @@ export default function GoodEditPage(): JSX.Element {
   const { id } = useParams();
   const { good } = useAppSelector((state) => state.goods);
 
-  console.log(good);
-
   useEffect(() => {
     void dispatch(getOneGoodThunk(Number(id)));
 
