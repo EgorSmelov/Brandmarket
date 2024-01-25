@@ -49,6 +49,9 @@ export default function BasicMenu(): JSX.Element {
           'aria-labelledby': 'basic-button',
         }}
       >
+        <MenuItem onClick={handleClose} component={Link} to="/orders/">
+          Мои заказы
+        </MenuItem>
         {user.roleId === 2 && (
           <>
             <MenuItem onClick={handleClose} component={Link} to="/seller/add">

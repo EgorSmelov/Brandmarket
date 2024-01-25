@@ -29,6 +29,7 @@ import ModerationGoodsListPage from './pages/moderation/moderationPage/Moderatio
 import OrderPage from './pages/order/OrderPage';
 import ThankYouPage from './pages/thankYouPage/ThankYouPage';
 import Filter from './components/filter/Filter';
+import UserOrderPage from './pages/userOrder/UserOrderPage';
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
@@ -78,6 +79,7 @@ function App(): JSX.Element {
             <Route element={<PrivateRouter isAllowed={user.status === 'authenticated'} />}>
               <Route path="/orders/purchase" element={<OrderPage />} />
               <Route path="/orders/purchase/thankyou" element={<ThankYouPage />} />
+              <Route path="/orders/" element={<UserOrderPage />} />
               <Route element={<AdminRouter isSeller={user.roleId !== 1} />}>
                 <Route path="/good/:id/edit" element={<GoodEditPage />} />
                 <Route path="/seller/add" element={<GoodAddPage />} />
