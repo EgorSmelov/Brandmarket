@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import { useAppSelector } from '../../../../redux/hooks';
 import OrderButton from '../../../../components/buttons/OrderButton';
 
@@ -15,8 +16,6 @@ export default function OrderForm(): JSX.Element {
     e.preventDefault();
     navigate('/');
   };
-
-  const bankCard = /30[0-5]\d-\d{6}-\d{4}/g;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -32,18 +31,29 @@ export default function OrderForm(): JSX.Element {
           Оформление заказа
         </Typography>
         <Box component="form" onSubmit={(e) => void addHandler(e)}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="outlined-multiline-static"
-            label="Адрес доставки"
-            name="adress"
-            autoComplete="adress"
-            type="text"
-            autoFocus
-            multiline
-          />
+          <InputMask
+            mask="(0)999 999 99 99"
+            value={phone}
+            disabled={false}
+            maskChar=" "
+            onChange={(e) => setPhone(e.target.value)}
+          >
+            {() => (
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="outlined-multiline-static"
+                label="Адрес доставки"
+                name="adress"
+                autoComplete="adress"
+                type="text"
+                autoFocus
+                multiline
+              />
+            )}
+          </InputMask>
+
           <TextField
             margin="normal"
             required
