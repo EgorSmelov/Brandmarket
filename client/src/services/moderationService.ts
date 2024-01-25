@@ -21,6 +21,12 @@ class ModerationService {
     return [];
   }
 
+  static async deleteFormUser(id: UserType['id']): Promise<void> {
+    const response = await apiModerationService.delete(`/${id}`);
+    if (response.status === 200) return;
+    return Promise.reject(new Error(`Server error deleting good id ${id}`));
+  }
+
   static async addSellerData(formdata: SellerInputsFormType): Promise<SellerInputsType> {
     const response = await apiModerationService.post<SellerInputsType>('/', formdata);
     if (response.status === 200) return response.data;

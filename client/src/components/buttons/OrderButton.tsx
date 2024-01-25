@@ -15,14 +15,22 @@ export default function OrderButton(): JSX.Element {
     (accum, item) => accum + item.userBaskets[0].Baskets.totalPrice,
     0,
   );
+
+  const data = {
+    baskets,
+    totalprice,
+  };
   const handleFormSubmit = async (): Promise<void> => {
-    const orderGoods = baskets;
-    const price = totalprice;
     const response = await axios
-      .post('http://localhost:3000/api/v1/mail/sendorder', {
-        orderGoods,
-        price,
-      })
+      .post(
+        'http://localhost:3000/api/v1/mail/sendorder',
+        {
+          data,
+        },
+        {
+          withCredentials: true,
+        },
+      )
       .then((res) => console.log(res));
   };
 

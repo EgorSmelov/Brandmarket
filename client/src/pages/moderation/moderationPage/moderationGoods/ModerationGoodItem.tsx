@@ -15,8 +15,8 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import type { GoodType } from '../../../../types/good';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { deleteSellerGoodHandlerThunk } from '../../../../redux/slices/seller/sellerThunk';
 import { getAllUsersThunk } from '../../../../redux/slices/moderationSellers/moderationThunks';
+import { deleteGoodHandlerThunk } from '../../../../redux/slices/goods/goodThunk';
 
 type GoodAdminProps = {
   goods: GoodType[];
@@ -90,7 +90,7 @@ export default function ModerationGoodItem({ goods }: GoodAdminProps): JSX.Eleme
               </TableCell>
               <TableCell style={{ width: '22.5%' }} align="center">
                 <Tooltip title="Удалить">
-                  <IconButton onClick={() => void dispatch(deleteSellerGoodHandlerThunk(good.id))}>
+                  <IconButton onClick={() => void dispatch(deleteGoodHandlerThunk(good.id))}>
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>

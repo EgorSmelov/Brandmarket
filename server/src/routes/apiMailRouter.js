@@ -8,24 +8,37 @@ require("dotenv").config();
 
 apiMailRouter.route("/sendorder").post(async (req, res) => {
   const transporter = nodemailer.createTransport({
-    service: "mail",
+    pool: true,
+    host: "smtp.yandex.ru",
+    port: 465,
     auth: {
-      user: process.env.MAIL_EMAIL,
-      pass: process.env.MAIL_PASS,
+      user: "smelov909@yandex.ru",
+      pass: "rwumxjfoggyguayd",
     },
   });
   const { data } = req.body;
-  console.log(data, '<------------------');
+  console.log(data, "<---------------");
+  const price = data.totalprice;
+  const title = data.baskets.map((datas) => datas.title).join('\n');
+  const color = data.baskets.map((datas) => datas.color);
   if (data) {
-    const mail = Template(data.user, data.guests, data.table, data.total);
+    const mail = Template(title, price, color);
     const mailOptions = {
-      from: ' "BrandMarket ☕ 🥃 🍭" <brandmarket@gmail.com>',
-      to: "smelov909@mial.ru",
-      subject: "Brandmarket 🎟",
+      from: "smelov909@yandex.ru",
+      to: "smelov909@yandex.ru",
+      subject: "ЧЕК от Brandmarket 🎟",
       html: mail,
     };
-    transporter.sendMail(mailOptions);
-    return res.json("All right");
+    const send = () =>
+      new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            reject(error);
+          }
+          resolve(info);
+        });
+      });
+    await send(mailOptions);
   }
   return res.sendStatus(401);
 });

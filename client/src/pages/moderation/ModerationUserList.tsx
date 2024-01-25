@@ -15,11 +15,7 @@ export default function ModerationUserList(): JSX.Element {
 
   return (
     <TableContainer>
-      {users?.map((user) => (
-        <div key={user.id}>
-          <ModerationEditPage user={user} />
-        </div>
-      ))}
+      <ModerationEditPage users={users} />
     </TableContainer>
   );
 }
