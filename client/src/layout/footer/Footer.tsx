@@ -1,18 +1,5 @@
-import {
-  AppBar,
-  Box,
-  Card,
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 import React from 'react';
-import CopyrightIcon from '@mui/icons-material/Copyright';
-import { Link } from 'react-router-dom';
 
 export default function Footer(): JSX.Element {
   // return (
@@ -32,7 +19,7 @@ export default function Footer(): JSX.Element {
   return (
     <Box
       sx={{
-        backgroundColor: '#2F2B4A',
+        backgroundColor: '#1f1f1f',
         color: 'white',
         paddingTop: '20px',
         paddingBottom: '20px',
@@ -54,19 +41,19 @@ export default function Footer(): JSX.Element {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Меню компании</Typography>
+          <Typography variant="h6">О НАС</Typography>
           <List dense>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="О компании" />
+              <ListItemText primary="Магазины" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Реквизиты и информация" />
-            </ListItem>
-            <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Поставщикам" />
+              <ListItemText primary="Дистрибуция" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
               <ListItemText primary="Контакты" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="Стать продавцом" />
             </ListItem>
           </List>
         </Box>
@@ -76,7 +63,7 @@ export default function Footer(): JSX.Element {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Каталоги</Typography>
+          <Typography variant="h6">БРЕНДЫ</Typography>
           <List dense>
             <ListItem sx={{ padding: '0' }}>
               <ListItemText primary="Оригинальные запчасти" />
@@ -98,19 +85,28 @@ export default function Footer(): JSX.Element {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Помощь</Typography>
+          <Typography variant="h6">ПОМОЩЬ ПОКУПАТЕЛЮ</Typography>
           <List dense>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Часто задаваемые вопросы" />
+              <ListItemText primary="Доставка и оплата" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Оплата заказа" />
+              <ListItemText primary="Условия возврата товаров с Garage Sale" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Доставка заказа" />
+              <ListItemText primary="Условия возврата" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Возврат товара" />
+              <ListItemText primary="Публичная оферта" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="Таблица размеров" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="Программа лояльности" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="Продуктовые рекомендации" />
             </ListItem>
           </List>
         </Box>
@@ -121,16 +117,19 @@ export default function Footer(): JSX.Element {
             justifyContent: 'flex-start',
           }}
         >
-          <Typography variant="h6">Товары и бренды</Typography>
+          <Typography variant="h6">КОНТАКТЫ</Typography>
           <List dense sx={{ fontSize: '20px' }}>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Список брендов" />
+              <ListItemText primary="+7 (800) 555-35-35" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Популярные товары" />
+              <ListItemText primary="+7 (800) 555-35-35" />
             </ListItem>
             <ListItem sx={{ padding: '0' }}>
-              <ListItemText primary="Наличие на складах" />
+              <ListItemText primary="Ежедневно с 9:00 до 19:00" />
+            </ListItem>
+            <ListItem sx={{ padding: '0' }}>
+              <ListItemText primary="Email: online@brandmarket.com" />
             </ListItem>
           </List>
         </Box>
@@ -144,14 +143,11 @@ export default function Footer(): JSX.Element {
           alignItems: 'center',
         }}
       >
-        <Box>
-          <Typography>Copyright © 2024 - All right reserved</Typography>
+        <Box sx={{ color: '#ffffff8c' }}>
+          <Typography>Copyright © 2024 - BRANDMARKET</Typography>
         </Box>
-        <Box />
-        <Box sx={{ display: 'flex', gap: '20px' }}>
-          <Link href="https://t.me/marie_poplavskaya" />
-          <Link href="http://www.youtube.com/@mariepoplavskaya" />
-          <Link href="https://vk.com/" />
+        <Box sx={{ color: '#ffffff8c' }}>
+          <Typography sx={{ fontSize: '12px' }}>Пользовательское соглашение Условия</Typography>
         </Box>
       </Box>
     </Box>
