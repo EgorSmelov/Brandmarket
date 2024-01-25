@@ -10,6 +10,7 @@ import { Box, Container, Link } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import type { GoodType } from '../../../types/good';
 import FavoriteButton from '../../../components/buttons/FavoriteButton';
+import BasketButton from '../../../components/buttons/basketButoon/BasketButton';
 
 function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
   return { name, calories, fat, carbs, protein };
@@ -44,6 +45,9 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
               <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                 Размер
               </TableCell>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+                Корзина
+              </TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }} />
             </TableRow>
           </TableHead>
@@ -77,6 +81,9 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
                   />
                 </TableCell>
                 <TableCell align="center">{good.size}</TableCell>
+                <TableCell align="center">
+                  <BasketButton good={good} />
+                </TableCell>
                 <TableCell align="center">
                   <FavoriteButton good={good} />
                 </TableCell>
