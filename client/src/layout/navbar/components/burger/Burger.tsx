@@ -4,11 +4,13 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Typography } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import getAllCategoriesThunk from '../../../../redux/slices/categories/categoryThunks';
 import CategoryItem from './category-item/CategoryItem';
+import BrandItem from './brand-item/BrandItem';
 
 type Anchor = 'left';
 
@@ -31,6 +33,7 @@ export default function OneMoreBurger(): JSX.Element {
     };
 
   const { categories } = useAppSelector((stateForCategories) => stateForCategories.categories);
+  const { brands } = useAppSelector((stateForBransd) => stateForBransd.brands);
 
   const dispatch = useAppDispatch();
 
@@ -42,35 +45,61 @@ export default function OneMoreBurger(): JSX.Element {
 
   const list = (anchor: Anchor): JSX.Element => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 500 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List sx={{ display: 'flex', alignItems: 'center', paddingLeft: '5px' }}>
-        <Typography variant="h5">Женщины</Typography>
-        <ExpandMoreIcon />
-      </List>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <List sx={{ display: 'flex', alignItems: 'center', paddingLeft: '5px' }}>
+          <Typography variant="h5">Женщины</Typography>
+          <ExpandMoreIcon />
+        </List>
+        <List
+          sx={{ display: 'flex', alignItems: 'center', paddingLeft: '5px', marginRight: '28%' }}
+        >
+          <Typography variant="h5">Бренды</Typography>
+          <ExpandMoreIcon />
+        </List>
+      </Box>
       <Divider />
-      <List>
-        {categories?.map((category) => (
-          <div key={category.id}>
-            <CategoryItem category={category} />
-          </div>
-        ))}
-      </List>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <List>
+          {categories?.map((category) => (
+            <div key={category.id}>
+              <CategoryItem category={category} />
+            </div>
+          ))}
+        </List>
+        <List sx={{ marginRight: '26%' }}>
+          {brands?.map((brand) => (
+            <div key={brand.id}>
+              <BrandItem brand={brand} />
+            </div>
+          ))}
+        </List>
+      </Box>
+
       <List sx={{ display: 'flex', alignItems: 'center', paddingLeft: '5px' }}>
         <Typography variant="h5">Мужчины</Typography>
         <ExpandMoreIcon />
       </List>
+
       <Divider />
-      <List>
-        {menCategories?.map((category) => (
-          <div key={category.id}>
-            <CategoryItem category={category} />
-          </div>
-        ))}
-      </List>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <List>
+          {menCategories?.map((category) => (
+            <div key={category.id}>
+              <CategoryItem category={category} />
+            </div>
+          ))}
+        </List>
+      </Box>
     </Box>
   );
 
