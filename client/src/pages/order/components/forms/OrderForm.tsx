@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../redux/hooks';
 import OrderButton from '../../../../components/buttons/OrderButton';
@@ -16,6 +15,8 @@ export default function OrderForm(): JSX.Element {
     e.preventDefault();
     navigate('/');
   };
+
+  const bankCard = /30[0-5]\d-\d{6}-\d{4}/g;
 
   return (
     <Container component="main" maxWidth="xs">
