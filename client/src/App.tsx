@@ -29,6 +29,7 @@ import ModerationGoodsListPage from './pages/moderation/moderationPage/Moderatio
 
 function App(): JSX.Element {
   const { user } = useAppSelector((state) => state.auth);
+  const { goods } = useAppSelector((state) => state.goods);
 
   const dispatch = useAppDispatch();
 

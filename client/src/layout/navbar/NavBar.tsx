@@ -8,11 +8,11 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Badge, Grid, IconButton, Link, Tooltip } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-
 import DropDownList from './components/drop-down-list/DropDownList';
 import Burger from './components/burger/Burger';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutHandlerThunk } from '../../redux/slices/auth/authThunks';
+import GlobalSearch from './components/search/GlobalSearch';
 
 export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -41,8 +41,8 @@ export default function NavBar(): JSX.Element {
                 />
               </Link>
             </Grid>
-
             <Grid display="flex" alignItems="center">
+              <GlobalSearch />
               {user.status === 'authenticated' && <DropDownList />}
 
               {user.status !== 'authenticated' && (

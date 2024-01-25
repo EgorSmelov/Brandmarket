@@ -13,6 +13,10 @@ export default function GoodTableList(): JSX.Element {
     void dispatch(getAllSellerGoodsThunk());
   }, [dispatch]);
 
+  if (sellerGoods.length === 0) {
+    return <div>Товыры не найдены</div>;
+  }
+
   return (
     <TableContainer component={Paper}>
       {sellerGoods?.map((sellerGood, index) => (
