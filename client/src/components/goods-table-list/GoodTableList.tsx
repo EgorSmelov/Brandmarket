@@ -14,7 +14,7 @@ export default function GoodTableList(): JSX.Element {
   }, [dispatch]);
 
   if (sellerGoods.length === 0) {
-    return <div>Товыры не найдены</div>;
+    return <div>Товары не найдены</div>;
   }
 
   return (

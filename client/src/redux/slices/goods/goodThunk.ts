@@ -31,6 +31,14 @@ export const getSearchGoodsThunk = createAsyncThunk(
   },
 );
 
+export const getFilterThunk = createAsyncThunk(
+  'goods/getFilterThunk',
+  async ({ color, price, size }) => {
+    const data = await GoodsService.getFilters({ color, price, size });
+    return data;
+  },
+);
+
 export const deleteGoodHandlerThunk = createAsyncThunk(
   'good/deleteGoodHandlerThunk',
   async (id: GoodType['id']) => {

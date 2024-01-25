@@ -5,6 +5,7 @@ import GoodCardItem from './good-card/GoodCardItem';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getAllGoodsThunk } from '../../redux/slices/goods/goodThunk';
 import BrendsLogo from '../../layout/brendsComponent/BrendsLogo';
+import Filter from '../filter/Filter';
 
 export default function GoodCardsList(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,12 +21,14 @@ export default function GoodCardsList(): JSX.Element {
       <Box>
         <BrendsLogo />
       </Box>
-      <Box>
+      <Box />
+      <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
         <Grid container spacing={4}>
           {goods.map((good) => (
             <GoodCardItem key={good.id} good={good} />
           ))}
         </Grid>
+        <Filter />
       </Box>
     </Box>
   );
