@@ -74,7 +74,7 @@ export default function Filter(): JSX.Element {
             label="Размер"
           >
             <MenuItem aria-label="None" value="">
-              По умолчанию
+              Все
             </MenuItem>
             {sizes.map((size) => (
               <MenuItem key={size} value={size.size}>
@@ -93,7 +93,7 @@ export default function Filter(): JSX.Element {
             label="Цвет"
           >
             <MenuItem aria-label="None" value="">
-              По умолчанию
+              Все
             </MenuItem>
             {colors.map((color) => (
               <MenuItem key={color} value={color.color}>
