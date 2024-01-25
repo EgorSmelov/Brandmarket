@@ -20,7 +20,6 @@ export default function BusketCountButton({
 }: BusketCountButtonPropsType): JSX.Element {
   const dispatch = useDispatch();
   const { baskets } = useAppSelector((state) => state.baskets);
-  console.log(baskets);
 
   return (
     <>
