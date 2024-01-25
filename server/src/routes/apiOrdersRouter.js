@@ -1,12 +1,23 @@
 const express = require("express");
-const { Basket, Good, Purchase } = require("../../db/models");
+const { Basket, Good, Purchase, User } = require("../../db/models");
 
 const apiOrdersRouter = express.Router();
 
 apiOrdersRouter.get("/", async (req, res) => {
   try {
-    const genders = await Gender.findAll({
-      order: [["name", "ASC"]],
+    const genders = await Good.findAll({
+      include: [
+        {
+          as: "userPurchases",
+          model: User,
+          required: true,
+          where: { id: res.locals.user ? res.locals.user?.id : null },
+          attributes: ["id"],
+          through: {
+            model: Purchase,
+          },
+        },
+      ],
     });
     return res.json(genders);
   } catch (error) {

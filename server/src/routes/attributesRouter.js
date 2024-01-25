@@ -8,7 +8,7 @@ attributesRouter.get("/sizes", async (req, res) => {
     const sizes = await Good.findAll({
       attributes: ["size"],
       group: ["size"],
-      order: ["size", "ASC"],
+      order: [["size", "ASC"]],
     });
     return res.json(sizes);
   } catch (error) {
@@ -20,8 +20,8 @@ attributesRouter.get("/colors", async (req, res) => {
   try {
     const colors = await Good.findAll({
       attributes: ["color"],
-      order: ["color", "ASC"],
       group: ["color"],
+      order: [["color", "ASC"]],
     });
     return res.json(colors);
   } catch (error) {
