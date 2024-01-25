@@ -1,11 +1,14 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import type { SellerInputsFormType } from '../../../types/seller';
 import ModerationService from '../../../services/moderationService';
 
 export default function ModerationSellerForm(): JSX.Element {
   const navigate = useNavigate();
+  const [inn, setInn] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const addHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -31,28 +34,45 @@ export default function ModerationSellerForm(): JSX.Element {
           Введите информацию о себе!
         </Typography>
         <Box component="form" onSubmit={(e) => void addHandler(e)}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="ИНН"
-            name="inn"
-            autoComplete="title"
-            type="text"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="standard-textarea"
-            label="Телефон"
-            name="phone"
-            autoComplete="size"
-            type="text"
-            autoFocus
-          />
+          <InputMask
+            mask="9999999999999999"
+            value={inn}
+            disabled={false}
+            maskChar="X"
+            onChange={(e) => setInn(e.target.value)}
+          >
+            {() => (
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="standard-textarea"
+                label="ИНН"
+                name="inn"
+                autoComplete="title"
+                autoFocus
+              />
+            )}
+          </InputMask>
+          <InputMask
+            mask="+7 (999) 999-99-99"
+            value={phoneNumber}
+            disabled={false}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          >
+            {() => (
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="standard-textarea"
+                label="Телефон"
+                name="phone"
+                autoComplete="phone"
+                autoFocus
+              />
+            )}
+          </InputMask>
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Добавить
           </Button>

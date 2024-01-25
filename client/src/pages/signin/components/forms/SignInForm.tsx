@@ -54,6 +54,7 @@ export default function SignInForm(): JSX.Element {
             type="password"
             id="password"
             autoComplete="current-password"
+            inputProps={{ minLength: 5 }}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Войти
