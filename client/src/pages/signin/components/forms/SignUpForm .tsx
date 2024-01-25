@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../../../redux/hooks';
 import { registrationHandlerThunk } from '../../../../redux/slices/auth/authThunks';
+import { NavLink } from 'react-router-dom';
 
 export default function SignUpForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -78,7 +79,7 @@ export default function SignUpForm(): JSX.Element {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="/auth/login" variant="body2">
+              <Link to="/auth/login" component={NavLink} variant="body2">
                 Уже есть аккаунт? Войдите
               </Link>
             </Grid>

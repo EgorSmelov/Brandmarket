@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../../redux/hooks';
 import { loginHandlerThunk } from '../../../../redux/slices/auth/authThunks';
 
@@ -61,7 +62,7 @@ export default function SignInForm(): JSX.Element {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="/auth/registration" variant="body2">
+              <Link to="/auth/registration" component={NavLink} variant="body2">
                 Нет аккаунта? Зарегистрируйтесь
               </Link>
             </Grid>
