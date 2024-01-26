@@ -2,8 +2,10 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { Box } from '@mui/material';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useAppDispatch } from '../../../../redux/hooks';
-import { getSearchGoodsThunk } from '../../../../redux/slices/goods/goodThunk';
+import { getAllGoodsThunk, getSearchGoodsThunk } from '../../../../redux/slices/goods/goodThunk';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

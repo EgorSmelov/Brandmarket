@@ -44,7 +44,7 @@ export default function BusketCountButton({
         variant="contained"
         size="small"
         onClick={() => void dispatch(incrementCountBasketThunk(good.id))}
-        disabled={quantity >= good.quantity}
+        disabled={quantity === good.quantity}
       >
         +
       </Button>
