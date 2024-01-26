@@ -65,7 +65,7 @@ export default function BasicMenu(): JSX.Element {
         {user.roleId === 3 && (
           <>
             <MenuItem color="inherit" component={Link} to="/moderation">
-              Пользователи
+              Модерация продавцов
             </MenuItem>
             <MenuItem color="inherit" component={Link} to="/moderation/goods">
               Все товары

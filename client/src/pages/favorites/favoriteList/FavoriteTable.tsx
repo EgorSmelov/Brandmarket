@@ -45,9 +45,6 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
               <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                 Размер
               </TableCell>
-              <TableCell align="center" sx={{ fontWeight: 'bold' }}>
-                Корзина
-              </TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }} />
             </TableRow>
           </TableHead>
@@ -81,9 +78,6 @@ export default function FavoriteTable({ favoriteGoods }: BasketTablePropsType): 
                   />
                 </TableCell>
                 <TableCell align="center">{good.size}</TableCell>
-                <TableCell align="center">
-                  <BasketButton good={good} />
-                </TableCell>
                 <TableCell align="center">
                   <FavoriteButton good={good} />
                 </TableCell>

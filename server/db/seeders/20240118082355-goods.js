@@ -16,7 +16,7 @@ module.exports = {
           genderId: 1,
           brandId: 1,
           size: "M",
-          quantity: 1,
+          quantity: 2,
         },
         {
           title: "Мужская футболка Lord Santa Pocket",
@@ -29,7 +29,7 @@ module.exports = {
           genderId: 1,
           brandId: 2,
           size: "S",
-          quantity: 1,
+          quantity: 3,
         },
         {
           title: "Мужские джинсы Family Tree Denim ",
@@ -42,7 +42,7 @@ module.exports = {
           genderId: 1,
           brandId: 2,
           size: "M",
-          quantity: 1,
+          quantity: 2,
         },
         {
           title: "Мужские джинсы Chain Link Denim ",
@@ -68,7 +68,7 @@ module.exports = {
           genderId: 2,
           brandId: 4,
           size: "XS",
-          quantity: 1,
+          quantity: 2,
         },
         {
           title: "Мужской пуховик Evisukuro Paisley Printed Down",
@@ -81,7 +81,7 @@ module.exports = {
           genderId: 1,
           brandId: 1,
           size: "M",
-          quantity: 1,
+          quantity: 3,
         },
         {
           title: "Мужской пуховик Reversible Plaid Puffer",
@@ -94,7 +94,7 @@ module.exports = {
           genderId: 1,
           brandId: 3,
           size: "M",
-          quantity: 1,
+          quantity: 10,
         },
         {
           title: "Юбка Brown Plaid Pleated",
@@ -107,7 +107,7 @@ module.exports = {
           genderId: 2,
           brandId: 5,
           size: "XS",
-          quantity: 1,
+          quantity: 11,
         },
         {
           title: "Юбка Plaid Pleated",
@@ -132,7 +132,7 @@ module.exports = {
           genderId: 1,
           brandId: 3,
           size: "L",
-          quantity: 1,
+          quantity: 2,
         },
         {
           title: "Мужская рубашка Madison Cord",
@@ -145,7 +145,7 @@ module.exports = {
           genderId: 1,
           brandId: 6,
           size: "M",
-          quantity: 1,
+          quantity: 2,
         },
         {
           title: "Женский Кардиган Black Tie Front Frill Crochet Crop",
